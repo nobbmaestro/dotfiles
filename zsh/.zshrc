@@ -1,6 +1,5 @@
 # Set Git language to English
 alias git='LANG=en_US git'
-alias vim='nvim'
 
 export LC_CTYPE="en_US.UTF-8"
 
@@ -116,51 +115,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias brew="arch -x86_64 brew"
+source ~/.zsh_profile
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-export PATH="/usr/local/sbin:$PATH"
-export PATH=/usr/local/mysql/bin:$PATH
-export PATH="/usr/local/Homebrew/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
- eval "$(pyenv init -)"
-fi
-
-# Run local venv on cd 
-function cd() {
-  builtin cd "$@"
-
-  if [[ -z "$VIRTUAL_ENV" ]] ; then
-    ## If env folder is found then activate the vitualenv
-      if [[ -d ./.venv ]] ; then
-        source ./.venv/bin/activate
-      fi
-  else
-    ## check the current folder belong to earlier VIRTUAL_ENV folder
-    # if yes then do nothing
-    # else deactivate
-      parentdir="$(dirname "$VIRTUAL_ENV")"
-      if [[ "$PWD"/ != "$parentdir"/* ]] ; then
-        deactivate
-      fi
-  fi
-}
-
-export PATH="/usr/local/opt/influxdb@1/bin:$PATH"
-export INFLUXDB_CONFIG_PATH="/usr/local/etc/influxdb.conf"
-
-
-addToPathFront() {
-    if [[ "$PATH" != *"$1"* ]]; then
-        export PATH=$1:$PATH
-    fi
-}
-
-addToPathFront $HOME/.dotfiles/bin/scripts

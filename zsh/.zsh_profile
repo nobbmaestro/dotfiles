@@ -1,0 +1,19 @@
+
+# imports 
+source ~/.zsh_functions 
+source ~/.zsh_aliases
+
+# set PATH
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export PYENV_ROOT="$HOME/.pyenv"
+if command -v pyenv 1>/dev/null 2>&1; then
+ eval "$(pyenv init -)"
+fi
+export INFLUXDB_CONFIG_PATH="/usr/local/etc/influxdb.conf"
+
+addToPathFront $HOME/bin/scripts
+addToPathFront /usr/local/sbin
+addToPathFront /usr/local/Homebrew/bin
+addToPath $PYENV_ROOT/bin

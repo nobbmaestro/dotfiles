@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+
+addToPath() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$PATH:$1
+    fi
+}
+
+addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
+# Run local venv on cd to repo 
+function cd() {
+  builtin cd "$@"
+
+  if [[ -z "$VIRTUAL_ENV" ]] ; then
+    ## If venv folder is found then activate the vitualenv
+      if [[ -d ./.venv ]] ; then
+        source ./.venv/bin/activate
+      fi
+  else
+    ## check the current folder belong to earlier VIRTUAL_ENV folder
+    # if yes then do nothing
+    # else deactivate
+      parentdir="$(dirname "$VIRTUAL_ENV")"
+      if [[ "$PWD"/ != "$parentdir"/* ]] ; then
+        deactivate
+      fi
+  fi
+}

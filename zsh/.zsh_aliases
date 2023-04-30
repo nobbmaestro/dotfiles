@@ -1,0 +1,5 @@
+#!/usr/local/bin/zsh
+
+alias git='LANG=en_US git'
+alias brew="arch -x86_64 brew"
+alias vim="nvim"
