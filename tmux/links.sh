@@ -1,7 +1,9 @@
 #!/usr/local/bin/zsh
 
-rm -rf ~/.tmux.conf ~/.tmux-cht-command ~/.tmux-cht-languages
-ln -sv $(pwd)/.tmux.conf ~/.tmux.conf
-ln -sv $(pwd)/.tmux-cht-command ~/.tmux-cht-command
-ln -sv $(pwd)/.tmux-cht-languages ~/.tmux-cht-languages
+target_path=$HOME
+target_files=(".tmux.conf" ".tmux-cht-command" ".tmux-cht-languages")
 
+for target_file in ${target_files[@]}; do
+    rm -rf $target_path/$target_file 
+    ln -sv $(pwd)/$target_file $target_path/$target_file
+done
