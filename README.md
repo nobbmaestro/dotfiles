@@ -1,3 +1,6 @@
 # Dotfiles
 
-Tbd.
+## Prerequsite
+
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+
