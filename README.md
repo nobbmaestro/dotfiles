@@ -2,5 +2,13 @@
 
 ## Prerequsite
 
-- [ripgrep](https://github.com/BurntSushi/ripgrep)
+Tbd.
+
+## Install
+
+To configure complete env setup, run following command:
+
+```sh
+./install all
+```
 
