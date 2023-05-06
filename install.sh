@@ -156,7 +156,7 @@ case "$1" in
         backup_runner 
         ;;
     brew)
-        setup_brew
+        setup_homebrew
         ;;
     shell)
         setup_shell
@@ -166,7 +166,7 @@ case "$1" in
         ;;
     all)
         backup_runner
-        setup_brew
+        setup_homebrew
         setup_shell
         link_runner
         ;;
