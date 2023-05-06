@@ -19,22 +19,19 @@ alias vim="nvim"
 # alias gla=pretty_git_log_all
 
 # FUNCTIONS -------------------------------------------------------------------
-addToPath() {
+function add_to_path() {
     if [[ "$PATH" != *"$1"* ]]; then
         export PATH=$PATH:$1
     fi
 }
 
-addToPathFront() {
+function add_to_path_front() {
     if [[ "$PATH" != *"$1"* ]]; then
         export PATH=$1:$PATH
     fi
 }
 
-# run local venv on cd to repo
-function cd() {
-  builtin cd "$@"
-
+function activate_venv() {
   if [[ -z "$VIRTUAL_ENV" ]] ; then
     ## If venv folder is found then activate the vitualenv
       if [[ -d ./.venv ]] ; then
@@ -50,9 +47,15 @@ function cd() {
       fi
  fi
 }
+# run local venv on cd to repo
+function cd() {
+  builtin cd "$@"
+
+  activate_venv
+}
 
 # benchmark zsh performance
-benchmark_zsh() {
+function benchmark_zsh() {
    shell=${1-$SHELL}
    for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }

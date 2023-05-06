@@ -10,7 +10,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 export INFLUXDB_CONFIG_PATH="/usr/local/etc/influxdb.conf"
 
-addToPathFront $HOME/.local/bin
-addToPathFront /usr/local/sbin
-addToPathFront /usr/local/Homebrew/bin
-addToPath $PYENV_ROOT/bin
+add_to_path_front $HOME/.local/bin
+add_to_path_front /usr/local/sbin
+add_to_path_front /usr/local/Homebrew/bin
+add_to_path $PYENV_ROOT/bin
