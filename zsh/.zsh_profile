@@ -1,16 +1,29 @@
 source ~/.zsh_aliases
 
-# set PATH
+# Setup PATH
+add_to_path_front /opt/homebrew/bin
+add_to_path_front $HOME/.local/bin
+add_to_path_front /usr/local/bin/
+add_to_path_front /usr/local/sbin/
+add_to_path $PYENV_ROOT/bin
+
+# Homebrew
+eval $(/opt/homebrew/bin/brew shellenv)
+
+# Shell packages
+source $ZSH/oh-my-zsh.sh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Other
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
-export PYENV_ROOT="$HOME/.pyenv"
-if command -v pyenv 1>/dev/null 2>&1; then
- eval "$(pyenv init -)"
-fi
-export INFLUXDB_CONFIG_PATH="/usr/local/etc/influxdb.conf"
 
-add_to_path_front $HOME/.local/bin
-add_to_path_front /usr/local/sbin
-add_to_path_front /usr/local/Homebrew/bin
-add_to_path $PYENV_ROOT/bin
+# Python
+eval "$(pyenv init -)"
+export PYENV_ROOT="$HOME/.pyenv" 
+export PATH="$PYENV_ROOT/bin:$PATH" 
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
