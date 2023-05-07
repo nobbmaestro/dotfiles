@@ -85,7 +85,9 @@ setup_homebrew() {
     if test ! "$(command -v brew)"; then
         info "Homebrew not installed. Installing."
         # Run as a login shell (non-interactive) so that the script doesn't pause for user input
-        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
+        # curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bash_profile && source ~/.bash_profile
     fi
 
     # if [ "$(uname)" == "Linux" ]; then
@@ -147,6 +149,19 @@ setup_shell() {
     if [[ "$SHELL" != "$zsh_path" ]]; then
         chsh -s "$zsh_path"
         info "default shell changed to $zsh_path"
+    
+        if [ ! -d $HOME/.oh-my-zsh ]; then
+            info "fetching oh-my-zsh"
+            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        fi
+
+        info "cloning powerlevel10k"
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k        
+
+    fi
+    if [ ! -f $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+        info "fetching packer.nvim"
+        git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     fi
 }
 
