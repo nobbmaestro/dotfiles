@@ -1,5 +1,4 @@
 # ALIASES ---------------------------------------------------------------------
-# alias brew="arch -x86_64 brew"
 alias vim="nvim"
 
 # GIT ALIASES -----------------------------------------------------------------
@@ -12,7 +11,8 @@ alias vim="nvim"
 # alias gcp='git cherry-pick'
 # alias gd='git diff -w'
 # alias gds='git diff -w --staged'
-# alias grs='git restore --staged'alias gu='git reset --soft HEAD~1'
+# alias grs='git restore --staged'
+# alias gu='git reset --soft HEAD~1'
 # alias gcan='gc --amend --no-edit'
 # alias gpf='git push --force-with-lease'
 # alias gl=pretty_git_log
