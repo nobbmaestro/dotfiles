@@ -163,6 +163,10 @@ setup_shell() {
         info "fetching packer.nvim"
         git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     fi
+    
+    if [ ! -d $HOME/tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
 }
 
 # Only run if you pass in parameters. Wont't run everything by defualt, unless you pass in: './install.sh all'
