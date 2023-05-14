@@ -1,4 +1,8 @@
 source ~/.zsh_aliases
+# source ~/.zsh_env
+
+# Default programs
+export EDITOR="nvim"
 
 # Setup PATH
 add_to_path_front /opt/homebrew/bin

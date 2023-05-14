@@ -114,3 +114,6 @@ export ARCHFLAGS="-arch arm64"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+# To customize prompt, run `p10k configure` or edit ~/repos/dev-dotfiles/zsh/.p10k.zsh.
+[[ ! -f ~/repos/dev-dotfiles/zsh/.p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/.p10k.zsh
