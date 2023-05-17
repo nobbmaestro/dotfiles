@@ -79,6 +79,15 @@ backup_runner() {
     done
 }
 
+setup_ubuntu_reqs() {
+    if [ "$(uname)" == "Linux" ]; then
+        title "Setting up Ubuntu"
+        
+        sudo apt-get update
+        sudo apt-get install build-essential procps curl file git
+    fi
+}
+
 setup_homebrew() {
     title "Setting up Homebrew"
 
@@ -87,14 +96,18 @@ setup_homebrew() {
         # Run as a login shell (non-interactive) so that the script doesn't pause for user input
         # curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bash_profile && source ~/.bash_profile
     fi
 
-    # if [ "$(uname)" == "Linux" ]; then
-    #      test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-    #     test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    #     test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-    # fi
+    if [ "$(uname)" == "Linux" ]; then
+        setup_ubuntu_reqs
+
+        test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+        test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
+        echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
+    else
+        echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bash_profile && source ~/.bash_profile
+    fi
 
     # install brew dependencies from Brewfile
     brew bundle
