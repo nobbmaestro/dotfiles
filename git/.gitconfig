@@ -1,3 +1,5 @@
 [user]
 	email = norbert@batiuk.se
 	name = Norbert Batiuk
+[pull]
+	rebase = true

@@ -1,5 +1,4 @@
 source ~/.zsh_aliases
-# source ~/.zsh_env
 
 # Default programs
 export EDITOR="nvim"
