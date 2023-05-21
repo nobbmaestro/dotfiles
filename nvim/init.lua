@@ -1,2 +1,2 @@
 require("nobbmaestro.init")
-vim.cmd('language en_US')
+vim.cmd("language en_US")
