@@ -180,6 +180,13 @@ setup_shell() {
     if [ ! -d $HOME/tmux/plugins/tpm ]; then
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
+
+    if [ -d $(pwd)/terminfo/files]; then
+        into "configuring terminfo"
+        tic xterm-256color-italic.terminfo
+        tic -x tmux-256color.terminfo
+    fi
+
 }
 
 # Only run if you pass in parameters. Wont't run everything by defualt, unless you pass in: './install.sh all'
