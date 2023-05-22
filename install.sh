@@ -181,10 +181,10 @@ setup_shell() {
         git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     fi
 
-    if [ -d $(pwd)/terminfo/files]; then
-        into "configuring terminfo"
-        tic xterm-256color-italic.terminfo
-        tic -x tmux-256color.terminfo
+    if [ -d $(pwd)/terminfo/files ]; then
+        info "configuring terminfo"
+        tic $(pwd)/terminfo/files/xterm-256color-italic.terminfo
+        tic -x $(pwd)/terminfo/files/tmux-256color.terminfo
     fi
 
 }
