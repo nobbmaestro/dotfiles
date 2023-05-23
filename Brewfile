@@ -29,6 +29,7 @@ brew "pyenv"
 brew "pypy"
 brew "ripgrep"
 brew "tree"
+brew "direnv"
 
 ## Casks - actual visual software 
 cask "aldente"
