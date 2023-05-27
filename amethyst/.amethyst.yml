@@ -1,0 +1,31 @@
+layouts:
+  - floating
+  - column
+  - fullscreen
+
+mod1:
+    - option
+    - shift
+mod2:
+    - option
+    - shift
+    - control
+
+relaunch-amethyst:
+    mod: mod2
+    key: x
+
+floating:
+  - com.apple.systempreferences
+  - com.logitech.Logi-Options
+  - com.apple.ActivityMonitor
+  - com.apple.finder
+  - com.koingosw.alarmclockpro
+
+display-layout-when-changing-layouts: true
+display-layout-when-changing-spaces: false
+ignore-menu-bars: true
+smart-window-margins: true
+restore-layouts-on-launch: true
+window-margins: true
+window-margin-size: 8
