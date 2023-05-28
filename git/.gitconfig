@@ -3,3 +3,8 @@
 	name = Norbert Batiuk
 [pull]
 	rebase = true
+
+[core]
+    autocrlf = false
+    filemode = false
+	excludefile = /Users/norbertbatiuk/.config/git/.gitignore

@@ -1,0 +1,9 @@
+# Enviroment
+.envrc
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
