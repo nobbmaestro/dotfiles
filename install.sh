@@ -177,8 +177,9 @@ setup_shell() {
         git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     fi
     
-    if [ ! -d $HOME/tmux/plugins/tpm ]; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    if [ ! -d $HOME/.config/tmux/plugins/tpm ]; then
+        info "fetching tmux tpm"
+        git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
     fi
 
     if [ -d $(pwd)/terminfo/files ]; then
