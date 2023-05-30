@@ -33,6 +33,7 @@ return require("packer").startup(function(use)
 		"christoomey/vim-tmux-navigator",
 		lazy = false,
 	})
+	use("xiyaowong/transparent.nvim")
 	use({
 		"VonHeikemen/lsp-zero.nvim",
 		requires = {
