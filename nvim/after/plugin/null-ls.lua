@@ -1,6 +1,10 @@
 require("null-ls").setup({
     sources = {
+        -- lua
         require("null-ls").builtins.formatting.stylua,
-        require("null-ls").builtins.formatting.black,
+
+        -- python
+        require("null-ls").builtins.formatting.yapf,
+        require("null-ls").builtins.formatting.isort,
     }
 })
