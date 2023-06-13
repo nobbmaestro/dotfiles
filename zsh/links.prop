@@ -1,4 +1,4 @@
-$DOTFILES/zsh/.zshrc=$HOME/.zshrc
-$DOTFILES/zsh/.zsh_profile=$HOME/.zsh_profile
-$DOTFILES/zsh/.zsh_aliases=$HOME/.zsh_aliases
-$DOTFILES/zsh/.p10k.zsh=$HOME/.p10k.zsh
+$DOTFILES/zsh/zshrc=$HOME/.zshrc
+$DOTFILES/zsh/zsh_profile=$HOME/.zsh_profile
+$DOTFILES/zsh/zsh_aliases=$HOME/.zsh_aliases
+$DOTFILES/zsh/p10k.zsh=$HOME/.p10k.zsh
