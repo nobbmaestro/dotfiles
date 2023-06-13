@@ -13,7 +13,6 @@ return require("packer").startup(function(use)
 		-- or                            , branch = '0.1.x',
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
-
 	use({
 		"nobbmaestro/nvim-andromeda",
 		requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
@@ -25,6 +24,7 @@ return require("packer").startup(function(use)
 	use("tpope/vim-fugitive")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("airblade/vim-gitgutter")
+	use("terrortylor/nvim-comment")
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "nvim-tree/nvim-web-devicons", opt = true },
