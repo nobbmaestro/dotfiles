@@ -1,9 +1,15 @@
 #!/bin/bash
+#
+# Tmux Sessionizer
+#
+# This script will deploy fuzzy-find on selected root directory and search for repositories. 
+# On selected repository, the script will open the target repo as a new session in tmux.
+#
+# Credit: ThePrimeagen
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    #selected=$(find ~/work/builds ~/projects ~/ ~/work ~/personal ~/personal/yt -mindepth 1 -maxdepth 1 -type d | fzf)
     selected=$(find ~/repos -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 

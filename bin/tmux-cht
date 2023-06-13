@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#
+# Tmux Cheatsheets
+#
+# This script will execute ´curl cht.sh´ will prompted search keys as temporary tmux session.
+# Dependencies: tmux-cht-command, tmux-cht-languages
+#
+# Credit: ThePrimeagen
 
 selected=`cat ~/.config/tmux/.tmux-cht-languages ~/.config/tmux/.tmux-cht-command | fzf`
 if [[ -z $selected ]]; then
