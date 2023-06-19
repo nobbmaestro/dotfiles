@@ -1,2 +1,3 @@
 $DOTFILES/iterm2/com.googlecode.iterm2.plist=$HOME/.config/iterm2/com.googlecode.iterm2.plist
 $DOTFILES/iterm2/nobbmaestro_andromeda_2023.json=$HOME/.config/iterm2/nobbmaestro_andromeda_2023.json
+$DOTFILES/iterm2/andromeda_colorscheme.itermcolors=$HOME/.config/iterm2/andromeda_colorscheme.itermcolors
