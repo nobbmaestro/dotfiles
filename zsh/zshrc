@@ -118,3 +118,5 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # To customize prompt, run `p10k configure` or edit ~/repos/dev-dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/repos/dev-dotfiles/zsh/.p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/.p10k.zsh
 
+# To customize prompt, run `p10k configure` or edit ~/repos/dev-dotfiles/zsh/p10k.zsh.
+[[ ! -f ~/repos/dev-dotfiles/zsh/p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/p10k.zsh
