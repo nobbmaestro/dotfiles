@@ -24,6 +24,7 @@ return require("packer").startup(function(use)
 	use("tpope/vim-fugitive")
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("airblade/vim-gitgutter")
+	use("f-person/git-blame.nvim")
 	use("terrortylor/nvim-comment")
 	use({
 		"nvim-lualine/lualine.nvim",
