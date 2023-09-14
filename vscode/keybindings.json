@@ -14,18 +14,11 @@
 		"key": "ctrl+c",
 		"command": "workbench.action.terminal.toggleTerminal"
 	},
-	// On escape, close sidebar and enter "normal" vim mode
+	// On escape, abort explorer (leader+p+v) and in files search (leader+p+s) 
 	{
 		"key": "escape",
-		"command": "runCommands",
-		"args": {
-			"commands": ["workbench.action.closeSidebar", "extension.vim_escape"]
-		}
-	},
-	// Split screen
-	{
-		"key": "ctrl+v",
-		"command": "workbench.action.splitEditor"
+		"command": "workbench.action.closeSidebar",
+		"when": "(filesExplorerFocus && !inputFocus) || searchInputBoxFocus"
 	},
 	// Navigation between splits
 	{
@@ -60,39 +53,30 @@
 		"command": "deleteFile",
 		"when": "filesExplorerFocus && !inputFocus"
 	},
+	{
+		"key": "d",
+		"command": "explorer.newFolder",
+		"when": "filesExplorerFocus && !inputFocus"
+	},
 	// Harpoon
 	{
 		"key": "ctrl+e",
 		"command": "vscode-harpoon.editorQuickPick"
 	},
 	{
-		"key": "ctrl+t",
+		"key": "ctrl+,",
 		"command": "vscode-harpoon.gotoEditor1"
 	},
 	{
-		"key": "ctrl+h",
+		"key": "ctrl+.",
 		"command": "vscode-harpoon.gotoEditor2"
 	},
 	{
-		"key": "ctrl+n",
+		"key": "ctrl+-",
 		"command": "vscode-harpoon.gotoEditor3"
 	},
 	{
-		"key": "ctrl+s",
-		"command": "vscode-harpoon.gotoEditor4"
-	},
-	{
 		"key": "cmd+i",
-		"command": "-editor.action.triggerSuggest",
-		"when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
-	},
-	{
-		"key": "alt+escape",
-		"command": "-editor.action.triggerSuggest",
-		"when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
-	},
-	{
-		"key": "ctrl+space",
 		"command": "-editor.action.triggerSuggest",
 		"when": "editorHasCompletionItemProvider && textInputFocus && !editorReadonly && !suggestWidgetVisible"
 	}
