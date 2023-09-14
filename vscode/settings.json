@@ -1,105 +1,143 @@
 {
-    // Appereance
-    "settingsSync.ignoredSettings": [
-        "editor.fontSize",
-        "editor.fontWeight",
-        "editor.letterSpacing",
-        "editor.lineHeight"
-    ],
-    "editor.fontFamily": "JetBrains Mono",
-    "editor.fontSize": 13,
-    "editor.fontLigatures": true,
-    "editor.semanticHighlighting.enabled": true,
+	// General editor settings
+	"settingsSync.ignoredSettings": [
+		"editor.fontSize",
+		"editor.fontWeight",
+		"editor.letterSpacing",
+		"editor.lineHeight"
+	],
+	"editor.fontFamily": "JetBrainsMono Nerd Font",
+	"editor.fontSize": 13,
+	"editor.fontLigatures": true,
+	"editor.semanticHighlighting.enabled": true,
+	"workbench.iconTheme": "vscode-icons",
+	"diffEditor.ignoreTrimWhitespace": false,
+	"files.exclude": {
+		"**/.git": false,
+		"**/__pycache__": true,
+		"**/.pytest_cache": true
+	},
+	"editor.mouseWheelZoom": false,
+	"workbench.colorTheme": "Andromeda Italic",
+	"editor.minimap.enabled": false,
+	"editor.lineNumbers": "relative",
+	"editor.glyphMargin": true,
+	"editor.tabSize": 4,
+	"prettier.useTabs": true,
+	"editor.quickSuggestions": {
+		"strings": "on"
+	},
 
-    "workbench.iconTheme": "vscode-icons",
-    "diffEditor.ignoreTrimWhitespace": false,
-    "files.exclude": {
-        "**/.git": false,
-        "**/__pycache__": true,
-        "**/.pytest_cache": true
-    },
-    
-    // Extensions
-    "[html]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "vscode.html-language-features"
-    },
-    
-    // Extension: todo-tree
-    "todo-tree.highlights.defaultHighlight": {
-        "icon": "alert",
-        "type": "text",
-        // "foreground": "red",
-        // "background": "white",
-        // "opacity": 50,
-        // "iconColour": "blue"
-    },
-    "todo-tree.highlights.customHighlight": {
-        "TODO": {
-            "icon": "check",
-            "type": "text",
-            "foreground": "white",
-            "fontWeight": "bold",
-            "fontStyle": "italic",
-            "gutterIcon": true
-        },
-        "FIXME": {
-            "foreground": "yellow",
-            "iconColour": "yellow",
-            "fontWeight": "bold",
-            "fontStyle": "italic",
-            "gutterIcon": true
-        },
-    },
-    "[markdown]": {
-        "editor.formatOnSave": true,
-        "editor.formatOnPaste": true
-    },
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
-        "source.fixAll.markdownlint": true
-    },
-    "editor.mouseWheelZoom": false,
-    "terminal.external.windowsExec": "C:\\Program Files\\Git\\bin\\bash.exe",
-    "workbench.colorTheme": "Andromeda Italic",
-    "terminal.integrated.defaultProfile.windows": "Git Bash",
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
-            "icon": "terminal-powershell"
-        },
-        "Command Prompt": {
-            "path": [
-                "${env:windir}\\Sysnative\\cmd.exe",
-                "${env:windir}\\System32\\cmd.exe"
-            ],
-            "args": [],
-            "icon": "terminal-cmd"
-        },
-        "Git Bash": {
-            "source": "Git Bash"
-        },
-        "Windows PowerShell": {
-            "path": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
-        }
-    },
-    "editor.minimap.enabled": false,
-    "[python]": {
-        "editor.formatOnType": true
-    },
-    "settingsSync.ignoredExtensions": [
-        "vscodevim.vim"
-    ],
-    "editor.lineNumbers": "relative",
-    "editor.glyphMargin": true,
-    "todo-tree.general.tags": [
-        "BUG",
-        "HACK",
-        "FIXME",
-        "TODO",
-        "XXX",
-        "[ ]",
-        "[x]",
-        "NOTE"
-    ],
+	// Formatters
+	"[python]": {
+		"editor.defaultFormatter": "ms-python.autopep8"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features"
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+
+	// Extensions
+	// Extension: ProjectManager
+	"projectManager.git.baseFolders": ["$home/repos"],
+	"projectManager.sortList": "Name",
+
+	// Extension: Vim
+	"vim.leader": "<space>",
+	"vim.useSystemClipboard": true,
+	"vim.highlightedyank.enable": true,
+	"vim.highlightedyank.color": "#7cb7ff",
+	"vim.highlightedyank.textColor": "#d5ced9",
+	"vim.inserModeKeyBindings": [
+		{
+			"before": ["<C-c>"],
+			"command": ["extension.vim_escape"]
+		}
+	],
+	"vim.normalModeKeyBindingsNonRecursive": [
+		{
+			"before": ["leader", "p", "v"],
+			"commands": ["workbench.view.explorer"]
+		},
+		{
+			"before": ["leader", "p", "f"],
+			"commands": ["workbench.action.quickOpen"]
+		},
+		{
+			"before": ["leader", "p", "s"],
+			"commands": ["workbench.action.findInFiles"]
+		},
+		{
+			"before": ["<C-d>"],
+			"after": ["<C-d>", "z", "z"]
+		},
+		{
+			"before": ["<C-u>"],
+			"after": ["<C-u>", "z", "z"]
+		},
+		{
+			"before": ["leader", "s"],
+			"commands": ["editor.action.rename"]
+		},
+		{
+			"before": ["leader", "a"],
+			"commands": ["vscode-harpoon.addEditor"]
+		},
+		{
+			"before": ["leader", "f"],
+			"commands": ["editor.action.formatDocument"]
+		}
+	],
+	"vim.visualModeKeyBindings": [
+		{
+			"before": ["J"],
+			"commands": ["editor.action.moveLinesUpAction"]
+		},
+		{
+			"before": ["K"],
+			"commands": ["editor.action.moveLinesDownAction"]
+		}
+	],
+
+	// Exteinsion: Scrolloff (emulates Noevim Scroll)
+	"scrolloff.scrolloff": 8,
+	"scrolloff.alwaysCenter": false,
+
+	// Extension: todo-tree
+	"todo-tree.highlights.defaultHighlight": {
+		"icon": "alert",
+		"type": "text"
+	},
+	"todo-tree.highlights.customHighlight": {
+		"TODO": {
+			"icon": "check",
+			"type": "text",
+			"foreground": "white",
+			"fontWeight": "bold",
+			"fontStyle": "italic",
+			"gutterIcon": true
+		},
+		"FIXME": {
+			"foreground": "yellow",
+			"iconColour": "yellow",
+			"fontWeight": "bold",
+			"fontStyle": "italic",
+			"gutterIcon": true
+		}
+	},
+	"todo-tree.general.tags": [
+		"BUG",
+		"HACK",
+		"FIXME",
+		"TODO",
+		"XXX",
+		"[ ]",
+		"[x]",
+		"NOTE"
+	]
 }
