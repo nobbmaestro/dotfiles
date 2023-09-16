@@ -1,7 +1,8 @@
 layouts:
     - floating
-    - column
     - fullscreen
+    - column
+    - tall
 
 select-fullscreen-layout:
     mod: mod1
