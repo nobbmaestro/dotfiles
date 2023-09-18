@@ -91,6 +91,14 @@
 		{
 			"before": ["leader", "f"],
 			"commands": ["editor.action.formatDocument"]
+		},
+		{
+			"before": ["tab"],
+			"commands": ["workbench.action.nextEditor"]
+		},
+		{
+			"before": ["shift+tab"],
+			"commands": ["workbench.action.previousEditor"]
 		}
 	],
 	"vim.visualModeKeyBindings": [
@@ -139,5 +147,8 @@
 		"[ ]",
 		"[x]",
 		"NOTE"
-	]
+	],
+	"extensions.experimental.affinity": {
+		"asvetliakov.vscode-neovim": 1
+	}
 }

@@ -4,22 +4,34 @@
 		"key": "alt+space",
 		"command": "editor.action.triggerSuggest"
 	},
-	// Open project
+
+	// Project and file navigation 
 	{
 		"key": "ctrl+f",
 		"command": "projectManager.listGitProjects#sideBarGit"
 	},
+	{
+		"key": "ctrl+p",
+		"command": "workbench.action.quickOpen"
+	},
+	{
+		"key": "cmd+p",
+		"command": "-workbench.action.quickOpen"
+	},
+
 	// Open and toggle terminal
 	{
 		"key": "ctrl+c",
 		"command": "workbench.action.terminal.toggleTerminal"
 	},
-	// On escape, abort explorer (leader+p+v) and in files search (leader+p+s) 
+
+	// On escape, abort explorer (leader+p+v) and in files search (leader+p+s)
 	{
 		"key": "escape",
 		"command": "workbench.action.closeSidebar",
 		"when": "(filesExplorerFocus && !inputFocus) || searchInputBoxFocus"
 	},
+
 	// Navigation between splits
 	{
 		"key": "ctrl+h",
@@ -37,14 +49,20 @@
 		"key": "ctrl+j",
 		"command": "workbench.action.navigateDown"
 	},
-	// Explorer bindings
+
+	// Explorer file manipulation
 	{
 		"key": "shift+5",
 		"command": "explorer.newFile",
 		"when": "filesExplorerFocus && !inputFocus"
 	},
 	{
-		"key": "shift+r",
+		"key": "d",
+		"command": "explorer.newFolder",
+		"when": "filesExplorerFocus && !inputFocus"
+	},
+	{
+		"key": "shift+R",
 		"command": "renameFile",
 		"when": "filesExplorerFocus && !inputFocus"
 	},
@@ -54,10 +72,26 @@
 		"when": "filesExplorerFocus && !inputFocus"
 	},
 	{
-		"key": "d",
-		"command": "explorer.newFolder",
+		"key": "y",
+		"command": "filesExplorer.copy",
 		"when": "filesExplorerFocus && !inputFocus"
 	},
+	{
+		"key": "x",
+		"command": "filesExplorer.cut",
+		"when": "filesExplorerFocus && !inputFocus"
+	},
+	{
+		"key": "p",
+		"command": "filesExplorer.paste",
+		"when": "filesExplorerFocus && !inputFocus"
+	},
+	{
+		"key": "v",
+		"command": "explorer.openToSide",
+		"when": "filesExplorerFocus && !inputFocus"
+	},
+
 	// Harpoon
 	{
 		"key": "ctrl+e",
