@@ -7,34 +7,43 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
+	-- Colorscheme
+	use({
+		"nobbmaestro/nvim-andromeda",
+		branch = "development",
+		requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
+	})
+
+	-- Navigation
 	use({
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
-		-- or                            , branch = '0.1.x',
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
-	use({
-		"nobbmaestro/nvim-andromeda",
-		requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
-	})
-	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-	use("nvim-treesitter/playground")
 	use("theprimeagen/harpoon")
-	use("folke/flash.nvim")
-	use("mbbill/undotree")
-	use("tpope/vim-fugitive")
-	use("jose-elias-alvarez/null-ls.nvim")
-	use("airblade/vim-gitgutter")
-	use("f-person/git-blame.nvim")
-	use("terrortylor/nvim-comment")
-	use({
-		"nvim-lualine/lualine.nvim",
-		requires = { "nvim-tree/nvim-web-devicons", opt = true },
-	})
 	use({
 		"christoomey/vim-tmux-navigator",
 		lazy = false,
 	})
+
+	-- Git
+	use("tpope/vim-fugitive")
+	use("airblade/vim-gitgutter") -- indicates changes to the file
+	use("f-person/git-blame.nvim") -- display inline git blame
+
+	-- Utilities
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "nvim-tree/nvim-web-devicons", opt = true },
+	})
+	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
+	use("nvim-treesitter/playground")
+	use("folke/flash.nvim")
+	use("mbbill/undotree")
+	use("jose-elias-alvarez/null-ls.nvim")
+	use("terrortylor/nvim-comment")
+
+	-- LSP packages
 	use({
 		"VonHeikemen/lsp-zero.nvim",
 		requires = {
