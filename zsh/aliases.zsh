@@ -17,22 +17,3 @@ alias vim="nvim"
 # alias gpf='git push --force-with-lease'
 # alias gl=pretty_git_log
 # alias gla=pretty_git_log_all
-
-# FUNCTIONS -------------------------------------------------------------------
-function add_to_path() {
-    if [[ "$PATH" != *"$1"* ]]; then
-        export PATH=$PATH:$1
-    fi
-}
-
-function add_to_path_front() {
-    if [[ "$PATH" != *"$1"* ]]; then
-        export PATH=$1:$PATH
-    fi
-}
-
-# benchmark zsh performance
-function benchmark_zsh() {
-   shell=${1-$SHELL}
-   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
-}

@@ -1,3 +1,4 @@
+source ~/.zsh_helpers
 source ~/.zsh_aliases
 
 # Default programs
