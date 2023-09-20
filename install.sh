@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES="$(pwd)"
+DOTFILES="$(pwd -P)"
 
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
@@ -133,7 +133,7 @@ link_file() {
     fi
 }
 
-link_runner() {
+create_symlinks() {
     title "Creating symlinks"
 
     find -H "$DOTFILES" -maxdepth 3 -name '*.prop' | while read linkfile
@@ -202,16 +202,16 @@ case "$1" in
         setup_shell
         ;;
     link)
-        link_runner
+        create_symlinks
         ;;
     all)
         backup_runner
         setup_homebrew
         setup_shell
-        link_runner
+        create_symlinks
         ;;
     *)
-        echo -e $"\nUsage: $(basename "$0") {backup|brew|shell|link|all}\n"
+        echo -e $"\nUsage: $(basename "$0") [backup|brew|shell|link|env|zshenv|all]\n"
         exit 1
         ;;
 esac
