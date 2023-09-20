@@ -16,20 +16,22 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
 # miscs
-brew "fzf" # fuzzy-finder https://github.com/junegunn/fzf
-brew "curl" # https://github.com/curl/curl
-brew "neovim"
-brew "tmux"
-brew "mas" # Mac automation https://github.com/mas-cli/mas
+brew "bat"      # modern cat https://github.com/sharkdp/bat
+brew "curl"     # https://github.com/curl/curl
+brew "direnv"
+brew "exa"      # ls replacement https://github.com/ogham/exa
+brew "fd"       # modern find https://github.com/sharkdp/fd
+brew "fzf"      # fuzzy-finder https://github.com/junegunn/fzf
 brew "git"
 brew "htop"
-brew "nvm"
+brew "mas"      # Mac automation https://github.com/mas-cli/mas
+brew "neovim"
 brew "npm"
+brew "nvm"
 brew "pyenv"
 brew "pypy"
 brew "ripgrep"
-brew "tree"
-brew "direnv"
+brew "tmux"
 
 ## Casks - actual visual software 
 cask "aldente"
@@ -51,6 +53,3 @@ cask "spotify"
 cask "steam"
 cask "the-unarchiver"
 cask "visual-studio-code"
-
-# Mac App Store Installations
-# mas "Xcode", id: 497799835
