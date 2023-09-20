@@ -84,9 +84,17 @@ plugins=(
 )
 
 # User configuration
-source ~/.zsh_profile
+source_if_exists () {
+    if test -r "$1"; then
+        source "$1"
+    else
+        echo "zshrc: file not found: $1"
+    fi
+}
 
-# export MANPATH="/usr/local/man:$MANPATH"
+source_if_exists $ZDOTDIR/.zsh_helpers
+source_if_exists $ZDOTDIR/.zsh_profile
+source_if_exists $ZDOTDIR/.zsh_aliases
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -99,26 +107,17 @@ export LANG=en_US.UTF-8
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
 export ARCHFLAGS="-arch arm64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source_if_exists $ZDOTDIR/p10k.zsh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # To customize prompt, run `p10k configure` or edit ~/repos/dev-dotfiles/zsh/.p10k.zsh.
-[[ ! -f ~/repos/dev-dotfiles/zsh/.p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/.p10k.zsh
+# [[ ! -f ~/repos/dev-dotfiles/zsh/.p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/.p10k.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/repos/dev-dotfiles/zsh/p10k.zsh.
-[[ ! -f ~/repos/dev-dotfiles/zsh/p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/p10k.zsh
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
+# [[ ! -f ~/repos/dev-dotfiles/zsh/p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/p10k.zsh
+# export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+# export PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"

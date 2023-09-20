@@ -1,15 +1,11 @@
-source ~/.zsh_helpers
-source ~/.zsh_aliases
-
-# Default programs
-export EDITOR="nvim"
-
 # Setup PATH
 add_to_path_front /opt/homebrew/bin
 add_to_path_front $HOME/.local/bin
 add_to_path_front /usr/local/bin/
 add_to_path_front /usr/local/sbin/
 add_to_path $PYENV_ROOT/bin
+add_to_path /opt/homebrew/opt/ruby/bin
+add_to_path /opt/homebrew/opt/ruby@2.7/bin
 
 # Homebrew
 eval $(/opt/homebrew/bin/brew shellenv)

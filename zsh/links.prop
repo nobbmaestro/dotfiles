@@ -1,5 +1,6 @@
-$DOTFILES/zsh/rc.zsh=$HOME/.zshrc
-$DOTFILES/zsh/profile.zsh=$HOME/.zsh_profile
-$DOTFILES/zsh/aliases.zsh=$HOME/.zsh_aliases
-$DOTFILES/zsh/helpers.zsh=$HOME/.zsh_helpers
-$DOTFILES/zsh/p10k.zsh=$HOME/.p10k.zsh
+$DOTFILES/zsh/env.zsh=$HOME/.zshenv
+$DOTFILES/zsh/rc.zsh=$ZDOTDIR/.zshrc
+$DOTFILES/zsh/profile.zsh=$ZDOTDIR/.zsh_profile
+$DOTFILES/zsh/aliases.zsh=$ZDOTDIR/.zsh_aliases
+$DOTFILES/zsh/helpers.zsh=$ZDOTDIR/.zsh_helpers
+$DOTFILES/zsh/p10k.zsh=$ZDOTDIR/p10k.zsh
