@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 DOTFILES="$(pwd -P)"
+BACKUP_DIR=$HOME/dotfiles-backup
 ZDOTDIR="$HOME/.config/zsh"
 ZSH="$ZDOTDIR/.oh-my-zsh"
 
@@ -13,231 +14,290 @@ COLOR_YELLOW="\033[1;33m"
 COLOR_NONE="\033[0m"
 
 title() {
-    echo -e "\n${COLOR_PURPLE}$1${COLOR_NONE}"
-    echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
+	echo -e "\n${COLOR_PURPLE}$1${COLOR_NONE}"
+	echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
 }
 
 error() {
-    echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
-    exit 1
+	echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
+	exit 1
 }
 
 warning() {
-    echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
+	echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
 }
 
 info() {
-    echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
+	echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
 }
 
 success() {
-    echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
+	echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
 }
 
-
-backup_file() {
-    local file=$1 
-    local rdir=$(echo "$(dirname $file)" | sed "s|^$HOME/||")
-
-    # set target directory
-    if [ $rdir != $HOME ]; then
-        target_dir="$BACKUP_DIR"/"$rdir"
-    else
-        target_dir="$BACKUP_DIR"
-    fi
-
-    # check whether target directory exist, create if not
-    if [ ! -d "$target_dir" ]; then
-        mkdir -p "$target_dir"
-    fi
-
-    # check if source file/directory exist and make copy on true
-    if [ -f "$file" ]; then
-        info "backing up file: $file"
-        cp "$file" "$target_dir"
-    elif [ -d "$file" ]; then
-        info "backing up directory: $file"
-        cp -rf "$file" "$target_dir"
-    fi
+install_oh_my_zsh_helper() {
+	if [ ! -d "$ZSH" ]; then
+		info "installing: oh-my-zsh"
+		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+	else
+		info "utility already installed: oh-my-zsh"
+	fi
 }
 
-backup_runner() {
-    BACKUP_DIR=$HOME/dotfiles-backup
+install_powerlevel10k_helper() {
+	if [ ! -d "$ZSH/custom/themes/powerlevel10k" ]; then
+		info "installing: powerlevel10k"
+		git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k
+	else
+		info "utility already installed: powerlevel10k"
+	fi
+}
 
-    title "Creating backup directory at $BACKUP_DIR"
-    mkdir -p "$BACKUP_DIR"
+install_zsk_autosuggestions_helper() {
+	if [[ ! -e "$ZSH/custom/plugins/zsh-autosuggestions" ]]; then
+		info "installing: zsh-autosuggestions"
+		git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions
+	else
+		info "utility already installed: zsh-autosuggestions"
+	fi
+}
 
-    find -H "$DOTFILES" -maxdepth 3 -name '*.prop' | while read linkfile
-    do
-        cat "$linkfile" | while read line
-        do
-            local src dst dir
-            src=$(eval echo "$line" | cut -d '=' -f 1)
-            dst=$(eval echo "$line" | cut -d '=' -f 2)
-            dir=$(dirname $dst)
+install_zsh_syntax_highlighting_helper() {
+	if [[ ! -e "$ZSH/custom/plugins/zsh-syntax-highlighting" ]]; then
+		info "installing: zsh-syntax-highlighting"
+		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting
+	else
+		info "utility already installed: zsh-syntax-highlighting"
+	fi
+}
 
-            backup_file "$dst"
-        done
-    done
+install_packer_nvim_helper() {
+	if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
+		info "installing: packer.nvim"
+		git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	else
+		info "utility already installed: packer.nvim"
+	fi
+}
+
+install_tmux_package_manager_helper() {
+	if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
+		info "installing: tmux tpm"
+		git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+	else
+		info "utility already installed: tpm"
+	fi
+}
+
+install_shell_utils() {
+	title "Installing shell utilities"
+
+	# Install shell utilities
+	install_oh_my_zsh_helper
+	install_powerlevel10k_helper
+	install_zsk_autosuggestions_helper
+	install_zsh_syntax_highlighting_helper
+	install_tmux_package_manager_helper
+	install_packer_nvim_helper
+}
+
+backup_target_file() {
+	local file=$1
+	local rdir=$(echo "$(dirname $file)" | sed "s|^$HOME/||")
+
+	# set target directory
+	if [ $rdir != $HOME ]; then
+		target_dir="$BACKUP_DIR"/"$rdir"
+	else
+		target_dir="$BACKUP_DIR"
+	fi
+
+	# check whether target directory exist, create if not
+	if [ ! -d "$target_dir" ]; then
+		mkdir -p "$target_dir"
+	fi
+
+	# check if source file/directory exist and make copy on true
+	if [ -f "$file" ]; then
+		info "backing up file: $file"
+		cp "$file" "$target_dir"
+	elif [ -d "$file" ]; then
+		info "backing up directory: $file"
+		cp -rf "$file" "$target_dir"
+	fi
+}
+
+create_backup() {
+	title "Creating backup directory at: $BACKUP_DIR"
+	mkdir -p "$BACKUP_DIR"
+
+	find -H "$DOTFILES" -maxdepth 3 -name '*.prop' | while read linkfile; do
+		cat "$linkfile" | while read line; do
+			local src dst dir
+			src=$(eval echo "$line" | cut -d '=' -f 1)
+			dst=$(eval echo "$line" | cut -d '=' -f 2)
+			dir=$(dirname $dst)
+
+			backup_target_file "$dst"
+		done
+	done
 }
 
 setup_ubuntu_reqs() {
-    if [ "$(uname)" == "Linux" ]; then
-        title "Setting up Ubuntu"
-        
-        sudo apt-get update
-        sudo apt-get install build-essential procps curl file git
-    fi
+	if [ "$(uname)" == "Linux" ]; then
+		title "Setting up Ubuntu"
+
+		sudo apt-get update
+		sudo apt-get install build-essential procps curl file git
+	fi
 }
 
 setup_homebrew() {
-    title "Setting up Homebrew"
+	title "Setting up Homebrew"
 
-    if test ! "$(command -v brew)"; then
-        info "Homebrew not installed. Installing."
-        # Run as a login shell (non-interactive) so that the script doesn't pause for user input
-        # curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
+	if test ! "$(command -v brew)"; then
+		info "installing: homebrew"
+		# Run as a login shell (non-interactive) so that the script doesn't pause for user input
+		# curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh | bash --login
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	else
+		info "utility already installed: homebrew"
+	fi
 
-    if [ "$(uname)" == "Linux" ]; then
-        setup_ubuntu_reqs
+	if [ "$(uname)" == "Linux" ]; then
+		setup_ubuntu_reqs
 
-        test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-        test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-        test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bash_profile
-        echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.profile
-    else
-        echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bash_profile && source ~/.bash_profile
-    fi
+		test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+		test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+		test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.bash_profile
+		echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.profile
+	else
+		echo "export PATH=/opt/homebrew/bin:$PATH" >>~/.bash_profile && source ~/.bash_profile
+	fi
 
-    # install brew dependencies from Brewfile
-    brew bundle
-    brew bundle cleanup
+	# install brew dependencies from Brewfile
+	brew bundle
+	brew bundle cleanup
 }
 
-link_file() {
-    local src=$1 dst=$2 dir=$3
-    
-    # check whether source is a directory
-    if [ -d "$src" ]; then
-        info "linking directory: $src -> $dst"
-        rm -rf $dst
-        ln -s $src $dst
-    else
-        # check whether directory exists
-        if [ ! -d "$dir" ]; then
-            mkdir -p "$dir"
-        fi
-        info "linking file: $src -> $dst" 
-        rm -rf $dst
-        ln -s $src $dst
-    fi
+symlink_target_file() {
+	local src=$1 dst=$2 dir=$3
+
+	# check whether source is a directory
+	if [ -d "$src" ]; then
+		info "linking directory: $src -> $dst"
+		rm -rf $dst
+		ln -s $src $dst
+	else
+		# check whether directory exists
+		if [ ! -d "$dir" ]; then
+			mkdir -p "$dir"
+		fi
+		info "linking file: $src -> $dst"
+		rm -rf $dst
+		ln -s $src $dst
+	fi
 }
 
 create_symlinks() {
-    title "Creating symlinks"
+	local path=""
 
-    find -H "$DOTFILES" -maxdepth 3 -name '*.prop' | while read linkfile
-    do
-        cat "$linkfile" | while read line
-        do
-            local src dst dir
-            src=$(eval echo "$line" | cut -d '=' -f 1)
-            dst=$(eval echo "$line" | cut -d '=' -f 2)
-            dir=$(dirname $dst)
-            
-            link_file "$src" "$dst" "$dir"
-        done
-    done
+	# check if argument is given
+	if [ -z "$1" ]; then
+		warning "argument not specified"
+
+	# check if argument is 'all'
+	elif [[ "$1" == "all" ]]; then
+		path="$DOTFILES"
+
+	# check if argument is an existing path
+	elif [ -d "$1" ]; then
+		path="$1"
+
+	else
+		warning "invalid argument: $1"
+	fi
+
+	# Do nothing if path is empty
+	if [ ! -z "$path" ]; then
+		title "Creating symlinks from: $path"
+		find -H "$path" -maxdepth 3 -name '*.prop' | while read linkfile; do
+			cat "$linkfile" | while read line; do
+				local src dst dir
+				src=$(eval echo "$line" | cut -d '=' -f 1)
+				dst=$(eval echo "$line" | cut -d '=' -f 2)
+				dir=$(dirname $dst)
+
+				symlink_target_file "$src" "$dst" "$dir"
+			done
+		done
+	fi
 }
 
 setup_shell() {
-    title "Configuring shell"
+	title "Configuring shell"
 
-    [[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
+	[[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
 
-    # Add zsh to /etc/shells
-    if ! grep -q "$zsh_path" /etc/shells; then
-        info "adding $zsh_path to /etc/shells"
-        echo "$zsh_path" | sudo tee -a /etc/shells
-    fi
+	# Add zsh to /etc/shells
+	if ! grep -q "$zsh_path" /etc/shells; then
+		info "adding $zsh_path to /etc/shells"
+		echo "$zsh_path" | sudo tee -a /etc/shells
+	else
+		info "/etc/shells already contains: $zsh_path"
+	fi
 
-    # Setup defualt shell (zsh) 
-    if [[ "$SHELL" != "$zsh_path" ]]; then
-        info "changing default shell to: $zsh_path"
-        # chsh -s "$zsh_path" # not allowed because it is a non-standard shell
-    fi
-   
-    # Install oh-my-zsh 
-    if [ ! -d $ZSH ]; then
-        info "fetching: oh-my-zsh"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    fi
-    
-    # Install powerlevel10k
-    if [ ! -d $ZSH/custom/themes/powerlevel10k ]; then
-        info "fetching: powerlevel10k"
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k        
-    fi
+	# Setup defualt shell to zsh
+	if [[ "$SHELL" != "$zsh_path" ]]; then
+		info "changing default shell to: $zsh_path"
+		if [[ "$zsh_path" == "/opt/homebrew/bin/zsh" ]]; then
+			warning "given shell is non-standard shell. Skipping..."
+		else
+			chsh -s "$zsh_path" # not allowed because it is a non-standard shell
+		fi
+	fi
 
-    # Install zsh-autosuggestions
-	if [[ ! -e $ZSH/custom/plugins/zsh-autosuggestions ]]; then
-        info "fetching: zsh-autosuggestions"
-        git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions
-    fi
-
-    # Install zsh-syntax-highlighting
-    if [[ ! -e $ZSH/custom/plugins/zsh-syntax-highlighting ]]; then
-        info "fetching: zsh-syntax-highlighting"
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting
-    fi
-
-    # Setup packer.nvim 
-    if [ ! -d $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
-        info "fetching: packer.nvim"
-        git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-    fi
-    
-    # Setup tmux tpm (Tmux Package Manager)
-    if [ ! -d $HOME/.config/tmux/plugins/tpm ]; then
-        info "fetching: tmux tpm"
-        git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-    fi
-    
-    # Setup terminfo
-    if [ -d $(pwd)/terminfo/files ]; then
-        info "configuring terminfo"
-        tic $(pwd)/terminfo/files/xterm-256color-italic.terminfo
-        tic -x $(pwd)/terminfo/files/tmux-256color.terminfo
-    fi
+	# Setup terminfo
+	if [ -d $(pwd)/terminfo/files ]; then
+		info "configuring terminfo"
+		tic $(pwd)/terminfo/files/xterm-256color-italic.terminfo
+		tic -x $(pwd)/terminfo/files/tmux-256color.terminfo
+	fi
 
 }
 
 # Only run if you pass in parameters. Wont't run everything by defualt, unless you pass in: './install.sh all'
 case "$1" in
-    backup)
-        backup_runner 
-        ;;
-    brew)
-        setup_homebrew
-        ;;
-    shell)
-        setup_shell
-        ;;
-    link)
-        create_symlinks
-        ;;
-    all)
-        backup_runner
-        setup_homebrew
-        setup_shell
-        create_symlinks
-        ;;
-    *)
-        echo -e $"\nUsage: $(basename "$0") [backup|brew|shell|link|env|zshenv|all]\n"
-        exit 1
-        ;;
+backup)
+	create_backup
+	;;
+brew)
+	setup_homebrew
+	;;
+shell)
+	setup_shell
+	install_shell_utils
+	create_symlinks $DOTFILES/zsh
+	;;
+symlink)
+	create_symlinks all
+	;;
+nvim)
+    title "Configuring Neovim"
+	install_packer_nvim_helper
+	create_symlinks $DOTFILES/nvim
+	;;
+all)
+	create_backup
+	setup_homebrew
+	setup_shell
+	install_shell_utils
+	create_symlinks all
+	;;
+*)
+	echo -e $"\nUsage: $(basename "$0") [backup|brew|shell|symlink|nvim|all]\n"
+	exit 1
+	;;
 esac
 
 echo -e
