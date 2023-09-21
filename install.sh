@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 DOTFILES="$(pwd -P)"
+ZDOTDIR="$HOME/.config/zsh"
+ZSH="$ZDOTDIR/.oh-my-zsh"
 
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
@@ -168,27 +170,27 @@ setup_shell() {
     fi
    
     # Install oh-my-zsh 
-    if [ ! -d $HOME/.oh-my-zsh ]; then
+    if [ ! -d $ZSH ]; then
         info "fetching: oh-my-zsh"
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     fi
     
     # Install powerlevel10k
-    if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]; then
+    if [ ! -d $ZSH/custom/themes/powerlevel10k ]; then
         info "fetching: powerlevel10k"
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k        
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k        
     fi
 
     # Install zsh-autosuggestions
-	if [[ ! -e $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
+	if [[ ! -e $ZSH/custom/plugins/zsh-autosuggestions ]]; then
         info "fetching: zsh-autosuggestions"
-        git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions
     fi
 
     # Install zsh-syntax-highlighting
-    if [[ ! -e $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
+    if [[ ! -e $ZSH/custom/plugins/zsh-syntax-highlighting ]]; then
         info "fetching: zsh-syntax-highlighting"
-        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting
     fi
 
     # Setup packer.nvim 
