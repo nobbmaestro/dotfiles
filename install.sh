@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+export ZDOTDIR="$HOME/.config/zsh"
+export ZSH="$ZDOTDIR/.oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
+
 DOTFILES="$(pwd -P)"
-BACKUP_DIR=$HOME/dotfiles-backup
-ZDOTDIR="$HOME/.config/zsh"
-ZSH="$ZDOTDIR/.oh-my-zsh"
+BACKUP_DIR="$HOME/dotfiles-backup"
 
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
@@ -36,7 +38,7 @@ success() {
 }
 
 install_oh_my_zsh_helper() {
-	if [ ! -d "$ZSH" ]; then
+	if [ ! -d "$ZSH" ] || [ ! -e "$ZSH/oh-my-zsh.sh" ]; then
 		info "installing: oh-my-zsh"
 		sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 	else
@@ -71,14 +73,14 @@ install_zsh_syntax_highlighting_helper() {
 	fi
 }
 
-install_packer_nvim_helper() {
-	if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
-		info "installing: packer.nvim"
-		git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-	else
-		info "utility already installed: packer.nvim"
-	fi
-}
+# install_packer_nvim_helper() {
+# 	if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
+# 		info "installing: packer.nvim"
+# 		git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+# 	else
+# 		info "utility already installed: packer.nvim"
+# 	fi
+# }
 
 install_tmux_package_manager_helper() {
 	if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
@@ -89,16 +91,14 @@ install_tmux_package_manager_helper() {
 	fi
 }
 
-install_shell_utils() {
-	title "Installing shell utilities"
+install_zsh_utils() {
+	title "Installing zsh utilities"
 
-	# Install shell utilities
+	# Install zsh utilities
 	install_oh_my_zsh_helper
 	install_powerlevel10k_helper
 	install_zsk_autosuggestions_helper
 	install_zsh_syntax_highlighting_helper
-	install_tmux_package_manager_helper
-	install_packer_nvim_helper
 }
 
 backup_target_file() {
@@ -234,8 +234,8 @@ create_symlinks() {
 	fi
 }
 
-setup_shell() {
-	title "Configuring shell"
+setup_zsh() {
+	title "Setting up zsh"
 
 	[[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
 
@@ -264,6 +264,38 @@ setup_shell() {
 		tic -x $(pwd)/terminfo/files/tmux-256color.terminfo
 	fi
 
+	install_zsh_utils
+	create_symlinks $DOTFILES/zsh
+}
+
+setup_tmux() {
+	if [[ "$(command -v tmux)" ]]; then
+		create_symlinks $DOTFILES/tmux
+	fi
+
+	title "Setting up Tmux"
+	if [[ "$(command -v tmux)" ]]; then
+		install_tmux_package_manager_helper
+		info "downloading tmux plugins..."
+		sh -c "$HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh" "" --unattended
+	else
+		warning "command not found: tmux"
+	fi
+}
+
+setup_neovim() {
+	if [[ "$(command -v nvim)" ]]; then
+		create_symlinks $DOTFILES/nvim
+	fi
+
+	title "Setting up Neovim"
+	if [[ "$(command -v nvim)" ]]; then
+		info "downloading neovim plugins..."
+		# Neovim will download packer and packages by itself
+		sh -c "nvim --headless --noplugin -c 'autocmd User PackerComplete quitall' -c 'PackerSync'" "" --unattended
+	else
+		warning "command not found: nvim"
+	fi
 }
 
 # Only run if you pass in parameters. Wont't run everything by defualt, unless you pass in: './install.sh all'
@@ -274,28 +306,28 @@ backup)
 brew)
 	setup_homebrew
 	;;
-shell)
-	setup_shell
-	install_shell_utils
-	create_symlinks $DOTFILES/zsh
+zsh)
+	setup_zsh
+	;;
+tmux)
+	setup_tmux
 	;;
 symlink)
 	create_symlinks all
 	;;
 nvim)
-    title "Configuring Neovim"
-	install_packer_nvim_helper
-	create_symlinks $DOTFILES/nvim
+	setup_neovim
 	;;
 all)
 	create_backup
 	setup_homebrew
-	setup_shell
-	install_shell_utils
+	setup_zsh
+	setup_tmux
+    setup_neovim	
 	create_symlinks all
 	;;
 *)
-	echo -e $"\nUsage: $(basename "$0") [backup|brew|shell|symlink|nvim|all]\n"
+	echo -e $"\nUsage: $(basename "$0") [backup|brew|zsh|tmux|symlink|nvim|all]\n"
 	exit 1
 	;;
 esac
