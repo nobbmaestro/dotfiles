@@ -9,11 +9,9 @@ add_to_path /opt/homebrew/opt/ruby@2.7/bin
 
 # Homebrew
 eval $(/opt/homebrew/bin/brew shellenv)
-
-# Shell packages
-source $ZSH/oh-my-zsh.sh
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ 
+# Source shell packages
+source_if_exists $ZSH/oh-my-zsh.sh
 
 # Other
 export NVM_DIR="$HOME/.nvm"

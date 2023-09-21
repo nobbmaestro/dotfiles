@@ -12,8 +12,8 @@ tap "homebrew/services"
 
 # Shell
 brew "zsh"
-brew "zsh-autosuggestions"
-brew "zsh-syntax-highlighting"
+# brew "zsh-autosuggestions"
+# brew "zsh-syntax-highlighting"
 
 # miscs
 brew "bat"      # modern cat https://github.com/sharkdp/bat

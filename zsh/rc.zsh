@@ -85,7 +85,7 @@ plugins=(
 
 # User configuration
 source_if_exists () {
-    if test -r "$1"; then
+    if test -e "$1"; then
         source "$1"
     else
         echo "zshrc: file not found: $1"

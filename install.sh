@@ -154,34 +154,56 @@ setup_shell() {
     title "Configuring shell"
 
     [[ -n "$(command -v brew)" ]] && zsh_path="$(brew --prefix)/bin/zsh" || zsh_path="$(which zsh)"
-    if ! grep "$zsh_path" /etc/shells; then
+
+    # Add zsh to /etc/shells
+    if ! grep -q "$zsh_path" /etc/shells; then
         info "adding $zsh_path to /etc/shells"
         echo "$zsh_path" | sudo tee -a /etc/shells
     fi
 
+    # Setup defualt shell (zsh) 
     if [[ "$SHELL" != "$zsh_path" ]]; then
-        chsh -s "$zsh_path"
-        info "default shell changed to $zsh_path"
-    
-        if [ ! -d $HOME/.oh-my-zsh ]; then
-            info "fetching oh-my-zsh"
-            sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-        fi
-
-        info "cloning powerlevel10k"
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k        
-
+        info "changing default shell to: $zsh_path"
+        # chsh -s "$zsh_path" # not allowed because it is a non-standard shell
     fi
-    if [ ! -f $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
-        info "fetching packer.nvim"
+   
+    # Install oh-my-zsh 
+    if [ ! -d $HOME/.oh-my-zsh ]; then
+        info "fetching: oh-my-zsh"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    fi
+    
+    # Install powerlevel10k
+    if [ ! -d $HOME/.oh-my-zsh/custom/themes/powerlevel10k ]; then
+        info "fetching: powerlevel10k"
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k        
+    fi
+
+    # Install zsh-autosuggestions
+	if [[ ! -e $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
+        info "fetching: zsh-autosuggestions"
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    fi
+
+    # Install zsh-syntax-highlighting
+    if [[ ! -e $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
+        info "fetching: zsh-syntax-highlighting"
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    fi
+
+    # Setup packer.nvim 
+    if [ ! -d $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+        info "fetching: packer.nvim"
         git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
     fi
     
+    # Setup tmux tpm (Tmux Package Manager)
     if [ ! -d $HOME/.config/tmux/plugins/tpm ]; then
-        info "fetching tmux tpm"
+        info "fetching: tmux tpm"
         git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
     fi
-
+    
+    # Setup terminfo
     if [ -d $(pwd)/terminfo/files ]; then
         info "configuring terminfo"
         tic $(pwd)/terminfo/files/xterm-256color-italic.terminfo
