@@ -73,15 +73,6 @@ install_zsh_syntax_highlighting_helper() {
 	fi
 }
 
-# install_packer_nvim_helper() {
-# 	if [ ! -d "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim" ]; then
-# 		info "installing: packer.nvim"
-# 		git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-# 	else
-# 		info "utility already installed: packer.nvim"
-# 	fi
-# }
-
 install_tmux_package_manager_helper() {
 	if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
 		info "installing: tmux tpm"
@@ -283,21 +274,6 @@ setup_tmux() {
 	fi
 }
 
-setup_neovim() {
-	if [[ "$(command -v nvim)" ]]; then
-		create_symlinks $DOTFILES/nvim
-	fi
-
-	title "Setting up Neovim"
-	if [[ "$(command -v nvim)" ]]; then
-		info "downloading neovim plugins..."
-		# Neovim will download packer and packages by itself
-		sh -c "nvim --headless --noplugin -c 'autocmd User PackerComplete quitall' -c 'PackerSync'" "" --unattended
-	else
-		warning "command not found: nvim"
-	fi
-}
-
 # Only run if you pass in parameters. Wont't run everything by defualt, unless you pass in: './install.sh all'
 case "$1" in
 backup)
@@ -315,19 +291,15 @@ tmux)
 symlink)
 	create_symlinks all
 	;;
-nvim)
-	setup_neovim
-	;;
 all)
 	create_backup
 	setup_homebrew
 	setup_zsh
 	setup_tmux
-    setup_neovim	
 	create_symlinks all
 	;;
 *)
-	echo -e $"\nUsage: $(basename "$0") [backup|brew|zsh|tmux|symlink|nvim|all]\n"
+	echo -e $"\nUsage: $(basename "$0") [backup|brew|zsh|tmux|symlink|all]\n"
 	exit 1
 	;;
 esac
