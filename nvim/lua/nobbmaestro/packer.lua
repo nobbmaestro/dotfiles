@@ -1,63 +1,54 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
-local packer_bootstrap = ensure_packer()
-
--- Only required if you have packer configured as `opt`
-vim.cmd([[packadd packer.nvim]])
-
-return require("packer").startup(function(use)
-	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
-
+local plugins = {
 	-- Colorscheme
-	use({
+	{
 		"nobbmaestro/nvim-andromeda",
 		branch = "development",
-		requires = { "tjdevries/colorbuddy.nvim", branch = "dev" },
-	})
+		dependencies = { "tjdevries/colorbuddy.nvim", branch = "dev" },
+	},
 
 	-- Navigation
-	use({
+	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
-	use("theprimeagen/harpoon")
-	use("folke/flash.nvim")
-	use({
-		"christoomey/vim-tmux-navigator",
-		-- lazy = false,
-	})
+		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
+	"theprimeagen/harpoon",
+	"folke/flash.nvim",
+	"christoomey/vim-tmux-navigator",
 
 	-- Git
-	use("tpope/vim-fugitive")
-	use("airblade/vim-gitgutter") -- indicates changes to the file
-	use("f-person/git-blame.nvim") -- display inline git blame
+	"tpope/vim-fugitive",
+	"airblade/vim-gitgutter", -- indicates changes to the file
+	"f-person/git-blame.nvim", -- display inline git blame
 
 	-- Utilities
-	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-	use("nvim-treesitter/playground")
-	use("mbbill/undotree")
-	use("terrortylor/nvim-comment")
-	use({
+	"nvim-treesitter/nvim-treesitter",
+	"nvim-treesitter/playground",
+	"mbbill/undotree",
+	"terrortylor/nvim-comment",
+	{
 		"nvim-lualine/lualine.nvim",
-		requires = { "nvim-tree/nvim-web-devicons", opt = true },
-	})
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 
 	-- LSP packages
-	use({
+	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v1.x",
-		requires = {
+		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
 			{ "williamboman/mason.nvim" },
@@ -78,10 +69,9 @@ return require("packer").startup(function(use)
 			{ "L3MON4D3/LuaSnip" },
 			{ "rafamadriz/friendly-snippets" },
 		},
-	})
+	},
+}
 
-	-- Automatically set up configuration after cloning packer.nvim
-	if packer_boostrap then
-		require("packer").sync()
-	end
-end)
+local opts = {}
+
+require("lazy").setup(plugins, opts)
