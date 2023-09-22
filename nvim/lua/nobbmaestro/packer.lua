@@ -1,12 +1,12 @@
 local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+	local fn = vim.fn
+	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	if fn.empty(fn.glob(install_path)) > 0 then
+		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+		vim.cmd([[packadd packer.nvim]])
+		return true
+	end
+	return false
 end
 
 local packer_bootstrap = ensure_packer()
@@ -32,9 +32,10 @@ return require("packer").startup(function(use)
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use("theprimeagen/harpoon")
+	use("folke/flash.nvim")
 	use({
 		"christoomey/vim-tmux-navigator",
-		lazy = false,
+		-- lazy = false,
 	})
 
 	-- Git
@@ -43,25 +44,27 @@ return require("packer").startup(function(use)
 	use("f-person/git-blame.nvim") -- display inline git blame
 
 	-- Utilities
+	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
+	use("nvim-treesitter/playground")
+	use("mbbill/undotree")
+	use("terrortylor/nvim-comment")
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "nvim-tree/nvim-web-devicons", opt = true },
 	})
-	use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
-	use("nvim-treesitter/playground")
-	use("folke/flash.nvim")
-	use("mbbill/undotree")
-	use("jose-elias-alvarez/null-ls.nvim")
-	use("terrortylor/nvim-comment")
 
 	-- LSP packages
 	use({
 		"VonHeikemen/lsp-zero.nvim",
+		branch = "v1.x",
 		requires = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
 			{ "williamboman/mason.nvim" },
 			{ "williamboman/mason-lspconfig.nvim" },
+
+			-- null-ls
+			{ "jose-elias-alvarez/null-ls.nvim" },
 
 			-- Autocompletion
 			{ "hrsh7th/nvim-cmp" },
