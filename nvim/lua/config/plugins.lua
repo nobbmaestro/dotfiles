@@ -26,27 +26,26 @@ local plugins = {
 		dependencies = { { "nvim-lua/plenary.nvim" } },
 	},
 	"theprimeagen/harpoon",
-	"folke/flash.nvim",
 	"christoomey/vim-tmux-navigator",
+	"folke/flash.nvim",
 	"/nvim-tree/nvim-tree.lua",
+	"nvim-tree/nvim-web-devicons",
+
+	-- Git
+	{ "tpope/vim-fugitive", event = { "BufReadPost", "BufNewFile" } },
+	{ "airblade/vim-gitgutter", event = { "BufReadPost", "BufNewFile" } }, -- indicates changes to the file
+	{ "f-person/git-blame.nvim", event = { "BufReadPost", "BufNewFile" } }, -- display inline git blame
+
+	-- Utilities
+	{ "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
+	{ "mbbill/undotree", event = { "BufReadPost", "BufNewFile" } },
+	{ "terrortylor/nvim-comment", event = { "BufReadPost", "BufNewFile" } },
+	{ "nvim-lualine/lualine.nvim", event = { "VeryLazy" } },
+
+	-- UI Utilities
 	{ "goolord/alpha-nvim", event = "VimEnter" },
 	{ "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
 	{ "HiPhish/rainbow-delimiters.nvim", event = { "BufReadPost", "BufNewFile" } },
-
-	-- Git
-	"tpope/vim-fugitive",
-	"airblade/vim-gitgutter", -- indicates changes to the file
-	"f-person/git-blame.nvim", -- display inline git blame
-
-	-- Utilities
-	"nvim-treesitter/nvim-treesitter",
-	"nvim-treesitter/playground",
-	"mbbill/undotree",
-	"terrortylor/nvim-comment",
-	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
 
 	-- LSP packages
 	{
