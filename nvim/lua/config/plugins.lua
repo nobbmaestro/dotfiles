@@ -30,6 +30,7 @@ local plugins = {
 	"christoomey/vim-tmux-navigator",
 	"/nvim-tree/nvim-tree.lua",
 	{ "goolord/alpha-nvim", event = "VimEnter" },
+	{ "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
 
 	-- Git
 	"tpope/vim-fugitive",
