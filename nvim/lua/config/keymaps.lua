@@ -1,5 +1,4 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open project explorer" })
 
 -- allow movement of multiple lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move down the selected text" })

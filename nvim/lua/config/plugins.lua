@@ -28,6 +28,7 @@ local plugins = {
 	"theprimeagen/harpoon",
 	"folke/flash.nvim",
 	"christoomey/vim-tmux-navigator",
+	"/nvim-tree/nvim-tree.lua",
 
 	-- Git
 	"tpope/vim-fugitive",
