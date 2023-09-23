@@ -29,6 +29,7 @@ local plugins = {
 	"folke/flash.nvim",
 	"christoomey/vim-tmux-navigator",
 	"/nvim-tree/nvim-tree.lua",
+	{ "goolord/alpha-nvim", event = "VimEnter" },
 
 	-- Git
 	"tpope/vim-fugitive",
