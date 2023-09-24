@@ -27,10 +27,20 @@ local setup = {
 	sections = {
 		lualine_a = { "mode" },
 		lualine_b = { "branch", "diff", { "diagnostics" } },
-		lualine_c = { "filename" },
-		lualine_x = { "encoding", { "filetype", colored = true } },
-		lualine_y = { "progress" },
-		lualine_z = { "location" },
+		lualine_c = {
+			{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+			{ "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+		},
+		lualine_x = { "encoding" },
+		lualine_y = {
+			{ "progress", separator = " ", padding = { left = 1, right = 0 } },
+			{ "location", padding = { left = 0, right = 1 } },
+		},
+		lualine_z = {
+			function()
+				return " " .. os.date("%R")
+			end,
+		},
 	},
 	inactive_sections = {
 		lualine_a = {},
