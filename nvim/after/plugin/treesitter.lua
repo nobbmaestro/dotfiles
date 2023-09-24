@@ -1,4 +1,9 @@
-require("nvim-treesitter.configs").setup({
+local status_ok, plugin = pcall(require, "nvim-treesitter.configs")
+if not status_ok then
+	return
+end
+
+local setup = {
 	-- A list of parser names, or "all" (the five listed parsers should always be installed)
 	ensure_installed = { "python", "c", "lua" },
 
@@ -21,4 +26,6 @@ require("nvim-treesitter.configs").setup({
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
 	},
-})
+}
+
+plugin.setup(setup)

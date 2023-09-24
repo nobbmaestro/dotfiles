@@ -1,15 +1,20 @@
-local builtins = require("null-ls.builtins")
+local status_ok, plugin = pcall(require, "null-ls")
+if not status_ok then
+	return
+end
 
-require("null-ls").setup({
+local setup = {
 	sources = {
 		-- lua
-		builtins.formatting.stylua,
+		plugin.builtins.formatting.stylua,
 
 		-- bash
-		builtins.formatting.shfmt,
+		plugin.builtins.formatting.shfmt,
 
 		-- python
-		builtins.formatting.yapf,
-		builtins.formatting.isort,
+		plugin.builtins.formatting.yapf,
+		plugin.builtins.formatting.isort,
 	},
-})
+}
+
+plugin.setup(setup)

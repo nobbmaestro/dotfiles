@@ -1,6 +1,11 @@
+local status_ok, plugin = pcall(require, "lualine")
+if not status_ok then
+	return
+end
+
 local andromeda_lualine = require("andromeda.plugins.lualine")
 
-require("lualine").setup({
+local setup = {
 	options = {
 		icons_enabled = true,
 		theme = andromeda_lualine.theme,
@@ -39,4 +44,6 @@ require("lualine").setup({
 	winbar = {},
 	inactive_winbar = {},
 	extensions = {},
-})
+}
+
+plugin.setup(setup)

@@ -1,6 +1,11 @@
+local status_ok, plugin = pcall(require, "indent_blankline")
+if not status_ok then
+	return
+end
+
 vim.opt.list = true
 
-require("indent_blankline").setup({
+local setup = {
 	char = "▏",
 	context_char = "▏",
 	filetype_exclude = {
@@ -15,5 +20,7 @@ require("indent_blankline").setup({
 		"toggleterm",
 		"lazyterm",
 	},
-    show_current_context = true,
-})
+	show_current_context = true,
+}
+
+plugin.setup(setup)

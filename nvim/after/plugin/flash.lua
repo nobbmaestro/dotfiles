@@ -1,4 +1,9 @@
-require("flash").setup({
+local status_ok, plugin = pcall(require, "flash")
+if not status_ok then
+	return
+end
+
+local setup = {
 	keys = {
 		{
 			"s",
@@ -41,4 +46,6 @@ require("flash").setup({
 			desc = "Toggle Flash Search",
 		},
 	},
-})
+}
+
+plugin.setup(setup)
