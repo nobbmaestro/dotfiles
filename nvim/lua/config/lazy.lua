@@ -23,13 +23,11 @@ local plugins = {
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.1",
-        dependencies = { { "nvim-lua/plenary.nvim" } },
+        dependencies = { "nvim-lua/plenary.nvim" },
     },
     "theprimeagen/harpoon",
     "christoomey/vim-tmux-navigator",
     "folke/flash.nvim",
-    "/nvim-tree/nvim-tree.lua",
-    "nvim-tree/nvim-web-devicons",
 
     -- Git
     { "tpope/vim-fugitive",                  event = { "BufReadPost", "BufNewFile" } },
@@ -46,6 +44,12 @@ local plugins = {
     { "goolord/alpha-nvim",                  event = "VimEnter" },
     { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
     { "HiPhish/rainbow-delimiters.nvim",     event = { "BufReadPost", "BufNewFile" } },
+    { "nvim-tree/nvim-web-devicons" },
+    {
+        "/nvim-neo-tree/neo-tree.nvim",
+        branch = "v3.x",
+        dependencies = "MunifTanjim/nui.nvim",
+    },
 
     -- LSP
     {
