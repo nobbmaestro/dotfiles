@@ -16,6 +16,8 @@ local plugins = {
     {
         "nobbmaestro/nvim-andromeda",
         branch = "development",
+        -- dev = true,
+        -- dir = "~/repos/dev-nvim-andromeda",
         dependencies = { "tjdevries/colorbuddy.nvim", branch = "dev" },
     },
 
@@ -25,9 +27,9 @@ local plugins = {
         tag = "0.1.1",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
-    "theprimeagen/harpoon",
-    "christoomey/vim-tmux-navigator",
-    "folke/flash.nvim",
+    { "folke/flash.nvim" },
+    { "theprimeagen/harpoon" },
+    { "christoomey/vim-tmux-navigator" },
 
     -- Git
     { "tpope/vim-fugitive",                  event = { "BufReadPost", "BufNewFile" } },
@@ -41,7 +43,7 @@ local plugins = {
     { "nvim-lualine/lualine.nvim",           event = { "VeryLazy" } },
 
     -- UI Utilities
-    { "goolord/alpha-nvim",                  event = "VimEnter" },
+    { "goolord/alpha-nvim",                  event = { "VimEnter" } },
     { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
     { "HiPhish/rainbow-delimiters.nvim",     event = { "BufReadPost", "BufNewFile" } },
     { "nvim-tree/nvim-web-devicons" },
