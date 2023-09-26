@@ -12,12 +12,12 @@ require("neo-tree").setup({
     enable_diagnostics = true,
     default_component_configs = {
         icon = {
-            folder_closed = "",
-            folder_open = "",
+            folder_closed = "",
+            folder_open = "",
             folder_empty = "󰜌",
         },
         name = {
-            trailing_slash = false,
+            trailing_slash = true,
             use_git_status_colors = false,
             highlight = "NeoTreeFileName",
         },
