@@ -13,3 +13,5 @@ vim.keymap.set("n", "<C-t>", function() ui.nav_file(1) end, { desc = "Harpoon: N
 vim.keymap.set("n", "<C-h>", function() ui.nav_file(2) end, { desc = "Harpoon: Navigate to 2nd file" })
 vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end, { desc = "Harpoon: Navigate to 3rd file" })
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Harpoon: Navigate to 4th file" })
+vim.keymap.set("n", "<Tab>", function() ui.nav_next() end, { desc = "Harpoon: Navigate to next mark" })
+vim.keymap.set("n", "<S-Tab>", function() ui.nav_prev() end, { desc = "Harpoon: Navigate to previous mark" })
