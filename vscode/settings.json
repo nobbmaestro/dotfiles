@@ -61,15 +61,15 @@
 	],
 	"vim.normalModeKeyBindingsNonRecursive": [
 		{
-			"before": ["leader", "p", "v"],
+			"before": ["leader", "e"],
 			"commands": ["workbench.view.explorer"]
 		},
 		{
-			"before": ["leader", "p", "f"],
+			"before": ["leader", "s", "f"],
 			"commands": ["workbench.action.quickOpen"]
 		},
 		{
-			"before": ["leader", "p", "s"],
+			"before": ["leader", "s", "g"],
 			"commands": ["workbench.action.findInFiles"]
 		},
 		{
