@@ -37,6 +37,11 @@ success() {
 	echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
 }
 
+truncate_path() {
+	local path="$1"
+	echo "${path/#$HOME/~}"
+}
+
 install_oh_my_zsh_helper() {
 	if [ ! -d "$ZSH" ] || [ ! -e "$ZSH/oh-my-zsh.sh" ]; then
 		info "installing: oh-my-zsh"
@@ -174,19 +179,25 @@ setup_homebrew() {
 symlink_target_file() {
 	local src=$1 dst=$2 dir=$3
 
-	# check whether source is a directory
-	if [ -d "$src" ]; then
-		info "linking directory: $src -> $dst"
-		rm -rf $dst
-		ln -s $src $dst
+	# check whether symlink exists and is working properly
+	if [ -L "$dst" ] && [ -e "$dst" ] && [ $(readlink "$dst") == "$src" ]; then
+		info "symlink already exists: $(truncate_path $dst)"
+
 	else
-		# check whether directory exists
-		if [ ! -d "$dir" ]; then
-			mkdir -p "$dir"
+		# check whether source is a directory
+		if [ -d "$src" ]; then
+			info "creating symlink to directory: $(truncate_path $src) -> $(truncate_path $dst)"
+			rm -rf $dst
+			ln -s $src $dst
+		else
+			# check whether directory exists
+			if [ ! -d "$dir" ]; then
+				mkdir -p "$dir"
+			fi
+			info "creating symlink to file: $(truncate_path $src) -> $(truncate_path $dst)"
+			rm -f $dst
+			ln -s $src $dst
 		fi
-		info "linking file: $src -> $dst"
-		rm -rf $dst
-		ln -s $src $dst
 	fi
 }
 
