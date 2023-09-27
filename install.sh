@@ -115,10 +115,10 @@ backup_target_file() {
 
 	# check if source file/directory exist and make copy on true
 	if [ -f "$file" ]; then
-		info "backing up file: $file"
+        info "backing up file: \t$(truncate_path $file)"
 		cp "$file" "$target_dir"
 	elif [ -d "$file" ]; then
-		info "backing up directory: $file"
+        info "backing up dir: \t$(truncate_path $file)"
 		cp -rf "$file" "$target_dir"
 	fi
 }
@@ -181,12 +181,12 @@ symlink_target_file() {
 
 	# check whether symlink exists and is working properly
 	if [ -L "$dst" ] && [ -e "$dst" ] && [ $(readlink "$dst") == "$src" ]; then
-		info "symlink already exists: $(truncate_path $dst)"
+		info "symlink already exists:   $(truncate_path $dst)"
 
 	else
 		# check whether source is a directory
 		if [ -d "$src" ]; then
-			info "creating symlink to directory: $(truncate_path $src) -> $(truncate_path $dst)"
+			info "creating symlink to dir:  $(truncate_path $src) -> $(truncate_path $dst)"
 			rm -rf $dst
 			ln -s $src $dst
 		else
