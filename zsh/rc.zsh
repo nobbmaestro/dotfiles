@@ -119,10 +119,8 @@ export ARCHFLAGS="-arch arm64"
 source_if_exists $ZDOTDIR/p10k.zsh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-# To customize prompt, run `p10k configure` or edit ~/repos/dev-dotfiles/zsh/.p10k.zsh.
-# [[ ! -f ~/repos/dev-dotfiles/zsh/.p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh.
+[[ ! -f ~/.config/zsh/p10k.zsh ]] || source ~/.config/zsh/p10k.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/repos/dev-dotfiles/zsh/p10k.zsh.
-# [[ ! -f ~/repos/dev-dotfiles/zsh/p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/p10k.zsh
-# export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-# export PATH="/opt/homebrew/opt/ruby@2.7/bin:$PATH"
+[[ ! -f ~/repos/dev-dotfiles/zsh/p10k.zsh ]] || source ~/repos/dev-dotfiles/zsh/p10k.zsh
