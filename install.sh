@@ -54,7 +54,7 @@ install_oh_my_zsh_helper() {
 install_powerlevel10k_helper() {
 	if [ ! -d "$ZSH/custom/themes/powerlevel10k" ]; then
 		info "installing: powerlevel10k"
-		git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k"
+		git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k
 	else
 		info "utility already installed: powerlevel10k"
 	fi
@@ -63,7 +63,7 @@ install_powerlevel10k_helper() {
 install_zsk_autosuggestions_helper() {
 	if [[ ! -e "$ZSH/custom/plugins/zsh-autosuggestions" ]]; then
 		info "installing: zsh-autosuggestions"
-		git clone https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions"
+		git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions
 	else
 		info "utility already installed: zsh-autosuggestions"
 	fi
@@ -72,7 +72,7 @@ install_zsk_autosuggestions_helper() {
 install_zsh_syntax_highlighting_helper() {
 	if [[ ! -e "$ZSH/custom/plugins/zsh-syntax-highlighting" ]]; then
 		info "installing: zsh-syntax-highlighting"
-		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting"
+		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting
 	else
 		info "utility already installed: zsh-syntax-highlighting"
 	fi
@@ -98,11 +98,11 @@ install_zsh_utils() {
 }
 
 backup_target_file() {
-	local rdir file=$1
-	rdir=$("$(dirname "$file")" | sed "s|^$HOME/||")
+	local file=$1
+	local rdir=$(echo "$(dirname $file)" | sed "s|^$HOME/||")
 
 	# set target directory
-	if [ "$rdir" != "$HOME" ]; then
+	if [ $rdir != $HOME ]; then
 		target_dir="$BACKUP_DIR"/"$rdir"
 	else
 		target_dir="$BACKUP_DIR"
@@ -115,10 +115,10 @@ backup_target_file() {
 
 	# check if source file/directory exist and make copy on true
 	if [ -f "$file" ]; then
-		info "backing up file: \t$(truncate_path "$file")"
+        info "backing up file: \t$(truncate_path $file)"
 		cp "$file" "$target_dir"
 	elif [ -d "$file" ]; then
-		info "backing up dir: \t$(truncate_path "$file")"
+        info "backing up dir: \t$(truncate_path $file)"
 		cp -rf "$file" "$target_dir"
 	fi
 }
@@ -127,15 +127,15 @@ create_backup() {
 	title "Creating backup directory at: $BACKUP_DIR"
 	mkdir -p "$BACKUP_DIR"
 
-	find -H "$DOTFILES" -maxdepth 3 -name '*.prop' | while read -r linkfile; do
-		while read -r line; do
+	find -H "$DOTFILES" -maxdepth 3 -name '*.prop' | while read linkfile; do
+		cat "$linkfile" | while read line; do
 			local src dst dir
 			src=$(eval echo "$line" | cut -d '=' -f 1)
 			dst=$(eval echo "$line" | cut -d '=' -f 2)
-			dir=$(dirname "$dst")
+			dir=$(dirname $dst)
 
 			backup_target_file "$dst"
-		done <"$linkfile"
+		done
 	done
 }
 
@@ -168,8 +168,7 @@ setup_homebrew() {
 		test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.bash_profile
 		echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.profile
 	else
-		echo "export PATH=/opt/homebrew/bin:$PATH" >>~/.bash_profile
-		source "$HOME/.bash_profile"
+		echo "export PATH=/opt/homebrew/bin:$PATH" >>~/.bash_profile && source ~/.bash_profile
 	fi
 
 	# install brew dependencies from Brewfile
@@ -181,23 +180,23 @@ symlink_target_file() {
 	local src=$1 dst=$2 dir=$3
 
 	# check whether symlink exists and is working properly
-	if [ -L "$dst" ] && [ -e "$dst" ] && [ "$(readlink "$dst")" == "$src" ]; then
-		info "symlink already exists:   $(truncate_path "$dst")"
+	if [ -L "$dst" ] && [ -e "$dst" ] && [ $(readlink "$dst") == "$src" ]; then
+		info "symlink already exists:   $(truncate_path $dst)"
 
 	else
 		# check whether source is a directory
 		if [ -d "$src" ]; then
-			info "creating symlink to dir:  $(truncate_path "$src") -> $(truncate_path "$dst")"
-			rm -rf "$dst"
-			ln -s "$src" "$dst"
+			info "creating symlink to dir:  $(truncate_path $src) -> $(truncate_path $dst)"
+			rm -rf $dst
+			ln -s $src $dst
 		else
 			# check whether directory exists
 			if [ ! -d "$dir" ]; then
 				mkdir -p "$dir"
 			fi
-			info "creating symlink to file: $(truncate_path "$src") -> $(truncate_path "$dst")"
-			rm -f "$dst"
-			ln -s "$src" "$dst"
+			info "creating symlink to file: $(truncate_path $src) -> $(truncate_path $dst)"
+			rm -f $dst
+			ln -s $src $dst
 		fi
 	fi
 }
@@ -222,17 +221,17 @@ create_symlinks() {
 	fi
 
 	# Do nothing if path is empty
-	if [ -n "$path" ]; then
+	if [ ! -z "$path" ]; then
 		title "Creating symlinks from: $path"
-		find -H "$path" -maxdepth 3 -name '*.prop' | while read -r linkfile; do
-			while read -r line; do
+		find -H "$path" -maxdepth 3 -name '*.prop' | while read linkfile; do
+			cat "$linkfile" | while read line; do
 				local src dst dir
 				src=$(eval echo "$line" | cut -d '=' -f 1)
 				dst=$(eval echo "$line" | cut -d '=' -f 2)
-				dir=$(dirname "$dst")
+				dir=$(dirname $dst)
 
 				symlink_target_file "$src" "$dst" "$dir"
-			done <"$linkfile"
+			done
 		done
 	fi
 }
@@ -261,19 +260,19 @@ setup_zsh() {
 	fi
 
 	# Setup terminfo
-	if [ -d "$(pwd)/terminfo/files" ]; then
+	if [ -d $(pwd)/terminfo/files ]; then
 		info "configuring terminfo"
-		tic "$(pwd)/terminfo/files/xterm-256color-italic.terminfo"
-		tic -x "$(pwd)/terminfo/files/tmux-256color.terminfo"
+		tic $(pwd)/terminfo/files/xterm-256color-italic.terminfo
+		tic -x $(pwd)/terminfo/files/tmux-256color.terminfo
 	fi
 
 	install_zsh_utils
-	create_symlinks "$DOTFILES/zsh"
+	create_symlinks $DOTFILES/zsh
 }
 
 setup_tmux() {
 	if [[ "$(command -v tmux)" ]]; then
-		create_symlinks "$DOTFILES/tmux"
+		create_symlinks $DOTFILES/tmux
 	fi
 
 	title "Setting up Tmux"
@@ -311,7 +310,7 @@ all)
 	create_symlinks all
 	;;
 *)
-	echo -e "\nUsage: $(basename "$0") [backup|brew|zsh|tmux|symlink|all]\n"
+	echo -e $"\nUsage: $(basename "$0") [backup|brew|zsh|tmux|symlink|all]\n"
 	exit 1
 	;;
 esac
