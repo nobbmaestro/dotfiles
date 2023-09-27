@@ -1,15 +1,15 @@
 #!/bin/zsh
 #
-# Tmux nvim-zsh toggler  
+# Tmux nvim-zsh toggler
 #
-# This script will toggle between nvim-window and zsh-window. 
+# This script will toggle between nvim-window and zsh-window.
 # Will create new window if zsh does not exist
 
 # Make sure tmux is running
 tmux_running=$(pgrep tmux)
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    echo "tmux needs to be running"
-    exit 1
+if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
+	echo "tmux needs to be running"
+	exit 1
 fi
 
 list_windows=$(tmux list-windows)
@@ -18,16 +18,16 @@ curr_window=$(tmux display-message -p "#W")
 
 # Make sure 'nvim' window exists
 if [[ "$list_windows" != *"nvim"* ]]; then
-    echo "nothing to switch to"
-    exit 1
+	echo "nothing to switch to"
+	exit 1
 fi
 
-if [[ $curr_window == "nvim" ]]; then
-    if [[ "$list_windows" == *"term"* ]]; then
-        tmux switch-client -t "$session_name"":term"
-    else
-        tmux new-window -n term
-    fi
+if [[ "$curr_window" == "nvim" ]]; then
+	if [[ "$list_windows" == *"term"* ]]; then
+		tmux switch-client -t "$session_name"":term"
+	else
+		tmux new-window -n term
+	fi
 else
-    tmux switch-client -t "$session_name"":nvim"
+	tmux switch-client -t "$session_name"":nvim"
 fi
