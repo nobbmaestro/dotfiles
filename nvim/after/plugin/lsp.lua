@@ -14,19 +14,33 @@ require("lspconfig").lua_ls.setup({
     },
 })
 
-lsp_zero.on_attach(function(client, bufnr)
-    local opts = { buffer = bufnr, remap = false }
+lsp_zero.on_attach(function(_, bufnr)
+    local nmap = function(mode, keys, func, desc)
+        if desc then
+            desc = "LSP: " .. desc
+        end
 
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+        vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
+    end
+
+    -- General LSP keymaps
+    nmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
+    nmap("n", "gr", require("telescope.builtin").lsp_references, "Go to references")
+    nmap("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace symbols")
+
+    -- Diagnostics keymaps
+    nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
+    nmap("n", "<leader>dl", vim.diagnostic.setloclist, "Open diagnostics list")
+    nmap("n", "<leader>dn", vim.diagnostic.goto_next, "Go to next diagnostic message")
+    nmap("n", "<leader>dp", vim.diagnostic.goto_prev, "Go to previous diagnosti message")
+
+    -- Refactoring keymaps
+    nmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
+    nmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename reference")
+
+    -- Help and documentation keymaps
+    nmap("n", "K", vim.lsp.buf.hover, "Hover documentation")
+    nmap("i", "<C-h>", vim.lsp.buf.signature_help, "Signature documentations")
 end)
 
 lsp_zero.set_sign_icons({
@@ -37,9 +51,16 @@ lsp_zero.set_sign_icons({
 })
 
 vim.diagnostic.config({
-    virtual_text = true,
+    virtual_text = {
+        prefix = "●",
+        source = "always",
+        severity = {
+            -- min = vim.diagnostic.severity.ERROR,
+        },
+    },
     severity_sort = true,
     float = {
+        focusable = true,
         style = "minimal",
         border = "rounded",
         source = "always",
