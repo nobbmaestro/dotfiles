@@ -3,8 +3,6 @@ if not status_ok then
 	return
 end
 
-vim.opt.list = true
-
 local setup = {
 	char = "▏",
 	context_char = "▏",

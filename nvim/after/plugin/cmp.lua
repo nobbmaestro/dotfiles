@@ -5,8 +5,6 @@ end
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
-vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
-
 local cmp = require("cmp")
 local cmp_action = lsp_zero.cmp_action()
 local cmp_format = lsp_zero.cmp_format()
