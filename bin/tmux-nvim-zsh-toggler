@@ -1,33 +1,79 @@
 #!/bin/bash
 #
-# Tmux nvim-zsh toggler  
+# Tmux nvim-zsh toggler
 #
-# This script will toggle between nvim-window and zsh-window. 
+# This script will toggle between nvim-window and zsh-window.
 # Will create new window if zsh does not exist
+
+init_cache() {
+	if [ -e "$cache" ]; then
+		rm "$cache"
+	fi
+	mkdir -p "$(dirname "$cache")" && touch "$cache"
+}
+
+update_cache() {
+	local idx=$1 name=$2
+
+	# Cache only if the caller has changed
+	if [[ "$(tail -1 "$cache")" != "$idx:$name" ]]; then
+		echo "$idx:$name" >>"$cache"
+	fi
+}
+
+get_cached_caller() {
+	local matches
+
+	# Obtain all cached window associated with window name, i.e., '$1'
+	matches="$(grep "$1" "$cache" | sort --unique | sort -r)"
+
+	# Find the most recent cached window that is still active
+	while read -r line; do
+		if [[ "$list_windows" == *"$line"* ]]; then
+			cached_caller="$line"
+			break
+		fi
+	done <<<"$matches"
+}
 
 # Make sure tmux is running
 tmux_running="$(pgrep tmux)"
 if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
-    echo "tmux needs to be running"
-    exit 1
+	echo "tmux needs to be running"
+	exit 1
 fi
 
-list_windows="$(tmux list-windows)"
+list_windows="$(tmux list-windows -F "#I:#W")"
 session_name="$(tmux display-message -p "#S")"
-curr_window="$(tmux display-message -p "#W")"
+window_name="$(tmux display-message -p "#W")"
+window_idx="$(tmux display-message -p "#I")"
+
+cache="$HOME/.cache/tmux/tmux-nvim-zsh-toggler/$session_name.cache"
 
 # Make sure 'nvim' window exists
 if [[ "$list_windows" != *"nvim"* ]]; then
-    echo "nothing to switch to"
-    exit 1
-fi
+	init_cache
+	update_cache "$window_idx" "$window_name"
+	tmux neww bash -c "nvim"
 
-if [[ "$curr_window" == "nvim" ]]; then
-    if [[ "$list_windows" == *"term"* ]]; then
-        tmux switch-client -t "$session_name"":term"
-    else
-        tmux new-window -n term
-    fi
+# Make sure 'zsh' window exists
+elif [[ "$list_windows" != *"zsh"* ]]; then
+	update_cache "$window_idx" "$window_name"
+	tmux new-window
+
 else
-    tmux switch-client -t "$session_name"":nvim"
+	update_cache "$window_idx" "$window_name"
+
+    # Select destination based on current window
+	case "$window_name" in
+	nvim)
+		get_cached_caller "zsh"
+		;;
+	*)
+		get_cached_caller "nvim"
+		;;
+	esac
+
+	idx=$(eval echo "$cached_caller" | cut -d ':' -f 1)
+	tmux switch-client -t "$session_name"":$idx"
 fi
