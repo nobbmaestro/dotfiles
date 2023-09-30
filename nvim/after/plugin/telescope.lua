@@ -6,7 +6,7 @@ end
 local builtin = require("telescope.builtin")
 
 vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Telescope: Search files (git)" })
-vim.keymap.set("n", "<leader>t", vim.cmd.Telescope, { desc = "Telescope: Open telescope" })
+vim.keymap.set("n", "<leader>t", builtin.builtin, { desc = "Telescope: Open telescope" })
 vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Telescope: Search files" })
 vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope: Search help" })
 vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Telescope: Search by grep" })
@@ -21,6 +21,10 @@ local setup = {
     pickers = {
         git_files = {
             theme = "dropdown",
+            previewer = false,
+        },
+        diagnostics = {
+            theme = "ivy",
             previewer = false,
         },
     },

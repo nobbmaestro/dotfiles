@@ -30,9 +30,8 @@ lsp_zero.on_attach(function(_, bufnr)
 
     -- Diagnostics keymaps
     nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
-    nmap("n", "<leader>dl", vim.diagnostic.setloclist, "Open diagnostics list")
     nmap("n", "<leader>dn", vim.diagnostic.goto_next, "Go to next diagnostic message")
-    nmap("n", "<leader>dp", vim.diagnostic.goto_prev, "Go to previous diagnosti message")
+    nmap("n", "<leader>dp", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
 
     -- Refactoring keymaps
     nmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions")

@@ -6,11 +6,14 @@ end
 require("mason").setup()
 require("null-ls").setup({
     sources = {
+        -- bash
+        null_ls.builtins.formatting.shfmt,
+
         -- lua
         null_ls.builtins.formatting.stylua,
 
-        -- bash
-        null_ls.builtins.formatting.shfmt,
+        -- markdown
+        null_ls.builtins.formatting.prettier,
 
         -- python
         null_ls.builtins.formatting.yapf,
@@ -20,11 +23,12 @@ require("null-ls").setup({
 require("mason-null-ls").setup({
     ensure_installed = {
         "isort",
+        "prettier",
         "pyright",
+        "shellcheck",
         "shfmt",
         "stylua",
         "yapf",
-        "shellcheck",
     },
     automatic_installation = true,
 })
