@@ -1,3 +1,4 @@
 $DOTFILES/bin/tmux-cht=$HOME/.local/bin/tmux-cht
-$DOTFILES/bin/tmux-sessionizer=$HOME/.local/bin/tmux-sessionizer
 $DOTFILES/bin/tmux-nvim-zsh-toggler=$HOME/.local/bin/tmux-nvim-zsh-toggler
+$DOTFILES/bin/tmux-sessionizer=$HOME/.local/bin/tmux-sessionizer
+$DOTFILES/bin/truecolor-test=/$HOME/.local/bin/truecolor-test
