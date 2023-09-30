@@ -3,6 +3,13 @@ if not status_ok then
     return
 end
 
+local function fmt(diagnostic)
+  if diagnostic.code then
+    return ("[%s] %s"):format(diagnostic.code, diagnostic.message)
+  end
+  return diagnostic.message
+end
+
 -- Fix undefined global `vim`
 require("lspconfig").lua_ls.setup({
     settings = {
@@ -53,6 +60,7 @@ vim.diagnostic.config({
     virtual_text = {
         prefix = "●",
         source = "always",
+        format = fmt,
         severity = {
             -- min = vim.diagnostic.severity.ERROR,
         },
