@@ -1,8 +1,8 @@
 # ALIASES ---------------------------------------------------------------------
-safe_alias vim nvim
-safe_alias cat bat
-safe_alias find fd
-safe_alias ls exa
+alias vim='nvim'
+alias cat='bat'
+alias find='fd'
+alias ls='exa --icons'
 
 # GIT ALIASES -----------------------------------------------------------------
 # alias gc='git commit'
