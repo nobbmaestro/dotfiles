@@ -41,6 +41,7 @@ local plugins = {
     { "mbbill/undotree",                     event = { "BufReadPost", "BufNewFile" } },
     { "terrortylor/nvim-comment",            event = { "BufReadPost", "BufNewFile" } },
     { "nvim-lualine/lualine.nvim",           event = { "VeryLazy" } },
+    { "m4xshen/autoclose.nvim" },
 
     -- UI Utilities
     { "goolord/alpha-nvim",                  event = { "VimEnter" } },
