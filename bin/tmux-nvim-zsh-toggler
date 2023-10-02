@@ -64,7 +64,7 @@ elif [[ "$list_windows" != *"zsh"* ]]; then
 else
 	update_cache "$window_idx" "$window_name"
 
-    # Select destination based on current window
+	# Select destination based on current window
 	case "$window_name" in
 	nvim)
 		get_cached_caller "zsh"
@@ -74,6 +74,16 @@ else
 		;;
 	esac
 
-	idx=$(eval echo "$cached_caller" | cut -d ':' -f 1)
-	tmux switch-client -t "$session_name"":$idx"
+	# Verify that cache did non yield empty destination
+	if [[ -n "$cached_caller" ]]; then
+		window_dst=$(eval echo "$cached_caller" | cut -d ':' -f 1)
+
+	else
+        if [ "$window_name" == "nvim" ]; then
+            window_dst="zsh"
+        else
+            window_dst="nvim"
+        fi
+	fi
+	tmux switch-client -t "$session_name"":$window_dst"
 fi
