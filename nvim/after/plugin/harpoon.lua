@@ -15,3 +15,11 @@ vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu, { desc = "Harpoon: Toggle exp
 -- vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end, { desc = "Harpoon: Navigate to 4th file" })
 vim.keymap.set("n", "<Tab>", function() ui.nav_next() end, { desc = "Harpoon: Navigate to next mark" })
 vim.keymap.set("n", "<S-Tab>", function() ui.nav_prev() end, { desc = "Harpoon: Navigate to previous mark" })
+
+require("harpoon").setup({
+    tabline = false,
+    menu = {
+        width = 80,
+        height = 10,
+    }
+})
