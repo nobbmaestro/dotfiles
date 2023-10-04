@@ -17,7 +17,7 @@ local setup = {
             col = "50%",
         },
         size = {
-            width = "50%",
+            width = "25%",
         },
         border = {
             style = "rounded",
