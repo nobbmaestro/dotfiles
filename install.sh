@@ -167,9 +167,10 @@ setup_homebrew() {
 		test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 		test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.bash_profile
 		echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.profile
-	else
-		echo "export PATH=/opt/homebrew/bin:$PATH" >>~/.bash_profile
-		source "$HOME/.bash_profile"
+	# else
+        # TODO This else-statement should probably be removed...
+		# echo "export PATH=/opt/homebrew/bin:$PATH" >>~/.bash_profile
+		# source "$HOME/.bash_profile"
 	fi
 
 	# install brew dependencies from Brewfile

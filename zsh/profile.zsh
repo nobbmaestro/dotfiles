@@ -3,7 +3,6 @@ add_to_path_front /opt/homebrew/bin
 add_to_path_front $HOME/.local/bin
 add_to_path_front /usr/local/bin/
 add_to_path_front /usr/local/sbin/
-add_to_path $PYENV_ROOT/bin
 add_to_path /opt/homebrew/opt/ruby/bin
 add_to_path /opt/homebrew/opt/ruby@2.7/bin
 
@@ -21,7 +20,7 @@ alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 # Python
 eval "$(pyenv init -)"
 export PYENV_ROOT="$HOME/.pyenv" 
-export PATH="$PYENV_ROOT/bin:$PATH" 
+add_to_path $PYENV_ROOT/bin
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
