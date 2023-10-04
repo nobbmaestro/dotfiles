@@ -45,7 +45,7 @@ local plugins = {
 
     -- UI Utilities
     { "goolord/alpha-nvim",                  event = { "VimEnter" } },
-    { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
+    { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" }, version = "2.20.8" },
     { "HiPhish/rainbow-delimiters.nvim",     event = { "BufReadPost", "BufNewFile" } },
     { "nvim-tree/nvim-web-devicons" },
     { "VonHeikemen/fine-cmdline.nvim" },
