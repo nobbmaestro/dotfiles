@@ -2,7 +2,7 @@
 alias vim='nvim'
 alias cat='bat'
 alias find='fd'
-alias ls='exa --icons'
+alias ls='exa --icons --classify'
 
 # GIT ALIASES -----------------------------------------------------------------
 # alias gc='git commit'
