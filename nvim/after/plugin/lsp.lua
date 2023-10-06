@@ -3,6 +3,9 @@ if not status_ok then
     return
 end
 
+-- Add border to LspInfo float window
+require('lspconfig.ui.windows').default_options.border = 'single'
+
 local function fmt(diagnostic)
     if diagnostic.code then
         return ("[%s] %s"):format(diagnostic.code, diagnostic.message)
