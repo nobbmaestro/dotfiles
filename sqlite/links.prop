@@ -1,0 +1,2 @@
+$DOTFILES/sqlite/rc.sqlite=$HOME/.sqliterc
+$DOTFILES/sqlite/sql_formatter.json=$HOME/.config/sql_formatter/sql_formatter.json
