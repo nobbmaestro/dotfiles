@@ -163,10 +163,13 @@ setup_homebrew() {
 	if [ "$(uname)" == "Linux" ]; then
 		setup_ubuntu_reqs
 
+		# TODO Remove writing to bash_profile, zsh_profile is already taking care of this
 		test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
 		test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 		test -r ~/.bash_profile && echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.bash_profile
 		echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >>~/.profile
+	else
+		export PATH=/opt/homebrew/bin:$PATH
 	fi
 
 	# install brew dependencies from Brewfile
