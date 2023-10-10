@@ -9,7 +9,7 @@ require("mason").setup()
 require("null-ls").setup({
     sources = {
         -- bash
-        null_ls.builtins.formatting.shfmt,
+        null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "zsh", "bash" } }),
 
         -- lua
         null_ls.builtins.formatting.stylua,
@@ -22,7 +22,6 @@ require("null-ls").setup({
         null_ls.builtins.formatting.isort,
 
         -- sql
-        -- null_ls.builtins.formatting.sql_formatter,
         null_ls.builtins.formatting.sql_formatter.with({ extra_args = { "--config", sql_formatter_config_file } }),
     },
 })
