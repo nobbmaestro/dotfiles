@@ -38,6 +38,7 @@ local plugins = {
 
     -- Utilities
     { "nvim-treesitter/nvim-treesitter",     event = { "BufReadPost", "BufNewFile" } },
+    { "nvim-treesitter/playground",          event = { "BufReadPost", "BufNewFile" } },
     { "mbbill/undotree",                     event = { "BufReadPost", "BufNewFile" } },
     { "terrortylor/nvim-comment",            event = { "BufReadPost", "BufNewFile" } },
     { "nvim-lualine/lualine.nvim",           event = { "VeryLazy" } },
