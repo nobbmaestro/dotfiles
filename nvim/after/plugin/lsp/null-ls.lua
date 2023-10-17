@@ -14,8 +14,18 @@ require("null-ls").setup({
         -- lua
         null_ls.builtins.formatting.stylua,
 
-        -- markdown
-        null_ls.builtins.formatting.prettier,
+        -- html, markdown, js and more
+        null_ls.builtins.formatting.prettier.with({
+            filetypes = { "css", "html", "json", "yaml", "markdown", "javascript", "typescript" },
+            extra_args = function(params)
+                return params.options
+                    and params.options.tabSize
+                    and {
+                        "--tab-width",
+                        params.options.tabSize,
+                    }
+            end,
+        }),
 
         -- python
         null_ls.builtins.formatting.yapf,
