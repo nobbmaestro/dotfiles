@@ -21,12 +21,14 @@ relaunch-amethyst:
     key: x
 
 # Ignore following by default
+# Example for how to find process id: osascript -e 'id of app "System Preferences"'
 floating:
-  - com.apple.systempreferences
-  - com.logitech.Logi-Options
   - com.apple.ActivityMonitor
+  - com.apple.MobileSMS
   - com.apple.finder
+  - com.apple.systempreferences
   - com.koingosw.alarmclockpro
+  - com.logitech.Logi-Options
 
 # General
 restore-layouts-on-launch: true
