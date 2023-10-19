@@ -5,6 +5,6 @@
 	rebase = true
 
 [core]
-    autocrlf = false
+	autocrlf = input
     filemode = false
 	excludefile = /Users/norbertbatiuk/.config/git/.gitignore
