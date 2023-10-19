@@ -49,6 +49,7 @@ require("neo-tree").setup({
             never_show = {
                 ".DS_Store",
                 "thumbs.db",
+                "__pycache__",
             },
         },
         follow_current_file = {
