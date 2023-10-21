@@ -2,8 +2,9 @@
 #
 # Tmux nvim-zsh toggler
 #
-# This script will toggle between nvim-window and zsh-window.
-# Will create new window if zsh does not exist
+# This script will toggle between nvim and zsh window.
+# If nvim is not running, the script will run nvim as new window from current path with loaded .envrc if applicable.
+# If zsh is not running (as separate window), the script will initialize zsh in a new window.
 
 init_cache() {
 	if [ -e "$cache" ]; then
@@ -36,6 +37,19 @@ get_cached_caller() {
 	done <<<"$matches"
 }
 
+init_nvim() {
+	if [ ! -d "$1" ]; then
+		exit 1
+	fi
+
+	# if direnv is installed, load env prior to running nvim
+	if type "direnv" >/dev/null 2>&1; then
+		tmux neww -c "$1" zsh -c "direnv exec /'$1' zsh -c nvim"
+	else
+		tmux neww -c "$1" zsh -c "nvim"
+	fi
+}
+
 # Make sure tmux is running
 tmux_running="$(pgrep tmux)"
 if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
@@ -54,7 +68,9 @@ cache="$HOME/.cache/tmux/tmux-nvim-zsh-toggler/$session_name.cache"
 if [[ "$list_windows" != *"nvim"* ]]; then
 	init_cache
 	update_cache "$window_idx" "$window_name"
-	tmux neww bash -c "nvim"
+	pane_id="$(tmux display-message -p "#I")"
+	pane_path="$(tmux display-message -p -t "$pane_id" '#{pane_current_path}')"
+	init_nvim "$pane_path"
 
 # Make sure 'zsh' window exists
 elif [[ "$list_windows" != *"zsh"* ]]; then
@@ -79,11 +95,11 @@ else
 		window_dst=$(eval echo "$cached_caller" | cut -d ':' -f 1)
 
 	else
-        if [ "$window_name" == "nvim" ]; then
-            window_dst="zsh"
-        else
-            window_dst="nvim"
-        fi
+		if [ "$window_name" == "nvim" ]; then
+			window_dst="zsh"
+		else
+			window_dst="nvim"
+		fi
 	fi
 	tmux switch-client -t "$session_name"":$window_dst"
 fi
