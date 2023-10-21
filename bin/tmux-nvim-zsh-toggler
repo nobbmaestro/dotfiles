@@ -2,9 +2,13 @@
 #
 # Tmux nvim-zsh toggler
 #
-# This script will toggle between nvim and zsh window.
-# If nvim is not running, the script will run nvim as new window from current path with loaded .envrc if applicable.
-# If zsh is not running (as separate window), the script will initialize zsh in a new window.
+# This script will toggle between nvim and zsh window. If nvim is not running, the script will run nvim as new window 
+# from current path with loaded .envrc if applicable. If zsh is not running (as separate window), the script will 
+# initialize zsh in a new window.
+#
+# Dependencies: 
+#   required: tmux, nvim
+#   optional: direnv
 
 init_cache() {
 	if [ -e "$cache" ]; then
