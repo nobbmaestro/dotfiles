@@ -49,7 +49,6 @@ local plugins = {
     { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" }, version = "2.20.8" },
     { "HiPhish/rainbow-delimiters.nvim",     event = { "BufReadPost", "BufNewFile" } },
     { "nvim-tree/nvim-web-devicons" },
-    { "VonHeikemen/fine-cmdline.nvim" },
 
     {
         "/nvim-neo-tree/neo-tree.nvim",
