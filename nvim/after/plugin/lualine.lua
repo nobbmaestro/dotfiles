@@ -48,10 +48,10 @@ local setup = {
             },
         },
         lualine_y = {
-            { "progress", padding = { left = 1, right = 0 } },
+            { "progress", padding = { left = 1, right = 1 } },
         },
         lualine_z = {
-            { "location", padding = { left = 0, right = 1 } },
+            { "location", padding = { left = 1, right = 1 } },
         },
     },
     inactive_sections = {
