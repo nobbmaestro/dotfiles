@@ -25,7 +25,6 @@ The script will:
 
 ## Final words
 
-This very repository is primarily intended to be used on MacOS, hence heavy dependence on Homebrew. However, it shall work just fine on any Unix distro.
-If not, please feel free to create an issue with the bug description.
+This very repository is primarily intended to be used on MacOS, hence, the heavy dependence on Homebrew. However, it shall work just fine on any Unix distro.
 
 Enjoy!
