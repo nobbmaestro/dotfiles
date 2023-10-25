@@ -14,6 +14,28 @@ local function harpoon_component()
     return string.format(" %d", mark_idx)
 end
 
+local function lsp_server_component()
+    local buf_clients = vim.lsp.buf_get_clients()
+    local null_ls_installed, null_ls = pcall(require, "null-ls")
+    local buf_client_names = {}
+    for _, client in pairs(buf_clients) do
+        if client.name == "null-ls" then
+            if null_ls_installed then
+                for _, source in ipairs(null_ls.get_source({ filetype = vim.bo.filetype })) do
+                    table.insert(buf_client_names, source.name)
+                end
+            end
+        else
+            table.insert(buf_client_names, client.name)
+        end
+    end
+    if next(buf_client_names) == nil then
+        return ""
+    else
+        return string.format("(%s)", table.concat(buf_client_names, ", "))
+    end
+end
+
 local setup = {
     options = {
         icons_enabled = true,
@@ -39,7 +61,7 @@ local setup = {
         lualine_c = {
             { harpoon_component },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 0, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
         },
         lualine_x = {
             {
@@ -49,9 +71,11 @@ local setup = {
         },
         lualine_y = {
             { "progress", padding = { left = 1, right = 1 } },
+            { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
-            { "location", padding = { left = 1, right = 1 } },
+            { "filetype", icon_only = false, separator = "", padding = { left = 1, right = 0 } },
+            { lsp_server_component },
         },
     },
     inactive_sections = {
