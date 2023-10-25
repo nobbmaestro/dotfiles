@@ -28,8 +28,11 @@ require("null-ls").setup({
         }),
 
         -- python
-        null_ls.builtins.formatting.yapf,
+        null_ls.builtins.formatting.black.with({ extra_args = { "--line-length", 120 } }),
         null_ls.builtins.formatting.isort,
+        null_ls.builtins.formatting.djlint.with({
+            extra_args = { "--blank-line-after-tag", "load,extends,include,endblock" },
+        }),
 
         -- sql
         null_ls.builtins.formatting.sql_formatter.with({ extra_args = { "--config", sql_formatter_config_file } }),
@@ -37,6 +40,8 @@ require("null-ls").setup({
 })
 require("mason-null-ls").setup({
     ensure_installed = {
+        "black",
+        "djlint",
         "isort",
         "prettier",
         "pyright",
@@ -44,7 +49,6 @@ require("mason-null-ls").setup({
         "shfmt",
         "sql-formatter",
         "stylua",
-        "yapf",
     },
     automatic_installation = true,
 })
