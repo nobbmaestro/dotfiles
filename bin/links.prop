@@ -1,3 +1,4 @@
+$DOTFILES/bin/opacity=$HOME/.local/bin/opacity
 $DOTFILES/bin/tmux-cht=$HOME/.local/bin/tmux-cht
 $DOTFILES/bin/tmux-nvim-zsh-toggler=$HOME/.local/bin/tmux-nvim-zsh-toggler
 $DOTFILES/bin/tmux-sessionizer=$HOME/.local/bin/tmux-sessionizer
