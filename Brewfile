@@ -33,6 +33,7 @@ brew "pypy"
 brew "ripgrep"
 brew "tmux"
 brew "tree"
+brew "zoxide"  # smarter cd command https://github.com/ajeetdsouza/zoxide
 
 ## Casks - actual visual software 
 cask "aldente"

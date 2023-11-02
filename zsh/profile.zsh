@@ -42,3 +42,8 @@ fi
 if type "direnv" >/dev/null 2>&1; then
 	eval "$(direnv hook zsh)"
 fi
+
+# Zoxide
+if type "zoxide" >/dev/null 2>&1; then
+	eval "$(zoxide init zsh)"
+fi
