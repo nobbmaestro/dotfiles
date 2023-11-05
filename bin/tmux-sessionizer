@@ -2,31 +2,54 @@
 #
 # Tmux Sessionizer
 #
-# This script will deploy fuzzy-find on selected root directory and search for repositories. 
+# This script will deploy fuzzy-find on selected root directory and search for repositories.
 # On selected repository, the script will open the target repo as a new session in tmux.
-#
-# Credit: ThePrimeagen
+
+TARGET_PATH=$HOME/repos
+ALL_DIR_ROOT=1
+ALL_GIT_DIRS=1
+FZF_PREVIEW=0
 
 if [[ $# -eq 1 ]]; then
-    selected=$1
+	selected=$1
 else
-    selected=$(find ~/repos -mindepth 1 -maxdepth 1 -type d | fzf)
+	result=""
+	# Add all directories in root path
+	if [ $ALL_DIR_ROOT -eq 1 ]; then
+		result+="\n"
+		result+=$(find "$TARGET_PATH" -mindepth 1 -maxdepth 1 -type d)
+	fi
+	# Add all git directories
+	if [ $ALL_GIT_DIRS -eq 1 ]; then
+		result+="\n"
+		result+=$(find "$TARGET_PATH" -mindepth 1 -maxdepth 4 -type d -name .git -exec dirname {} \;)
+	fi
+
+	# Purge dublicates and sort
+	result=$(echo -e "$result" | sort -ur)
+
+	# Pipe the list to fzf command
+	if [ $FZF_PREVIEW -eq 1 ]; then
+		selected=$(echo -e "$result" | fzf --preview 'tree --dirsfirst -I __pycache__ -C {}' "$@")
+	else
+		selected=$(echo -e "$result" | fzf)
+	fi
 fi
 
 if [[ -z $selected ]]; then
-    exit 0
+	exit 0
 fi
 
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
 if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
-    exit 0
+	tmux new-session -s "$selected_name" -c "$selected"
+	exit 0
 fi
 
-if ! tmux has-session -t="$selected_name" 2> /dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
+if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+	tmux new-session -ds "$selected_name" -c "$selected"
 fi
 
 tmux switch-client -t "$selected_name"
