@@ -17,6 +17,9 @@ vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Telescope: Search re
 local setup = {
     defaults = {
         sorting_strategy = "ascending",
+        prompt_prefix = "  ",
+        selection_caret = " ",
+        multi_icon = " ",
     },
     pickers = {
         git_files = {
