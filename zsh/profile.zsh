@@ -25,6 +25,11 @@ fi
 source_if_exists $ZSH/oh-my-zsh.sh
 
 # Source zsh plugins
+if [[ -d $(brew --prefix)/opt/zsh-vi-mode ]]; then
+	source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+	bindkey -v
+fi
+
 if [[ -d $(brew --prefix)/opt/zsh-autosuggestions ]]; then
 	source $(brew --prefix)/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi

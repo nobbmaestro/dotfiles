@@ -12,6 +12,7 @@ tap "homebrew/services"
 
 # Shell
 brew "zsh"
+brew "zsh-vi-mode"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
