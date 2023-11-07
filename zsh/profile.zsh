@@ -13,30 +13,20 @@ elif [[ "$OSTYPE" == 'linux'* ]]; then
 fi
 
 if (type "brew" >/dev/null 2>&1); then
-	# check for OS type
-	if [[ "$OSTYPE" == 'darwin'* ]]; then
-		eval $(/opt/homebrew/bin/brew shellenv)
-	elif [[ "OSTYPE" == 'linux'* ]]; then
-		eval $($(brew --prefix)/bin/brew shellenv)
-	fi
+    eval $($(brew --prefix)/bin/brew shellenv)
 fi
 
 # Source shell packages
 source_if_exists $ZSH/oh-my-zsh.sh
 
 # Source zsh plugins
-if [[ -d $(brew --prefix)/opt/zsh-vi-mode ]]; then
-	source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-	bindkey -v
-fi
+source_if_exists $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source_if_exists $(brew --prefix)/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source_if_exists $(brew --prefix)/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-if [[ -d $(brew --prefix)/opt/zsh-autosuggestions ]]; then
-	source $(brew --prefix)/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+# Enable vi-mode
+bindkey -v
 
-if [[ -d $(brew --prefix)/opt/zsh-syntax-highlighting ]]; then
-	source $(brew --prefix)/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
 
 # Node Version Manager (JS)
 if type "nvm" >/dev/null 2>&1; then
