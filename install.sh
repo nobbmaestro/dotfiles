@@ -60,24 +60,6 @@ install_powerlevel10k_helper() {
 	fi
 }
 
-install_zsk_autosuggestions_helper() {
-	if [[ ! -e "$ZSH/custom/plugins/zsh-autosuggestions" ]]; then
-		info "installing: zsh-autosuggestions"
-		git clone https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-autosuggestions"
-	else
-		info "utility already installed: zsh-autosuggestions"
-	fi
-}
-
-install_zsh_syntax_highlighting_helper() {
-	if [[ ! -e "$ZSH/custom/plugins/zsh-syntax-highlighting" ]]; then
-		info "installing: zsh-syntax-highlighting"
-		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$ZSH/custom}/plugins/zsh-syntax-highlighting"
-	else
-		info "utility already installed: zsh-syntax-highlighting"
-	fi
-}
-
 install_tmux_package_manager_helper() {
 	if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
 		info "installing: tmux tpm"
@@ -93,8 +75,6 @@ install_zsh_utils() {
 	# Install zsh utilities
 	install_oh_my_zsh_helper
 	install_powerlevel10k_helper
-	install_zsk_autosuggestions_helper
-	install_zsh_syntax_highlighting_helper
 }
 
 backup_target_file() {

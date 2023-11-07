@@ -24,6 +24,15 @@ fi
 # Source shell packages
 source_if_exists $ZSH/oh-my-zsh.sh
 
+# Source zsh plugins
+if [[ -d $(brew --prefix)/opt/zsh-autosuggestions ]]; then
+	source $(brew --prefix)/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+if [[ -d $(brew --prefix)/opt/zsh-syntax-highlighting ]]; then
+	source $(brew --prefix)/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
 # Node Version Manager (JS)
 if type "nvm" >/dev/null 2>&1; then
 	export NVM_DIR="$HOME/.nvm"
