@@ -2,8 +2,6 @@
 add_to_path_front $HOME/.local/bin
 add_to_path_front /usr/local/bin/
 add_to_path_front /usr/local/sbin/
-add_to_path /opt/homebrew/opt/ruby/bin
-add_to_path /opt/homebrew/opt/ruby@2.7/bin
 
 # Homebrew
 if [[ "$OSTYPE" == 'darwin'* ]]; then
@@ -13,7 +11,7 @@ elif [[ "$OSTYPE" == 'linux'* ]]; then
 fi
 
 if (type "brew" >/dev/null 2>&1); then
-    eval $($(brew --prefix)/bin/brew shellenv)
+	eval $($(brew --prefix)/bin/brew shellenv)
 fi
 
 # Source shell packages
@@ -27,15 +25,14 @@ source_if_exists $(brew --prefix)/opt/zsh-syntax-highlighting/share/zsh-syntax-h
 # Enable vi-mode
 bindkey -v
 
-
-# Node Version Manager (JS)
+# Node (JS) Version Manager (JS)
 if type "nvm" >/dev/null 2>&1; then
 	export NVM_DIR="$HOME/.nvm"
 	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 	alias nvm="unalias nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm $@"
 fi
 
-# Python
+# Python Version Manager
 if type "pyenv" >/dev/null 2>&1; then
 	export PYENV_ROOT="$HOME/.pyenv"
 	add_to_path $PYENV_ROOT/bin
@@ -45,6 +42,11 @@ fi
 # Python: Set up direnv hook (for activating local dir venv)
 if type "direnv" >/dev/null 2>&1; then
 	eval "$(direnv hook zsh)"
+fi
+
+# Ruby Version Manager
+if type "rbenv" >/dev/null 2>&1; then
+	eval "$(rbenv init - zsh)"
 fi
 
 # Zoxide
