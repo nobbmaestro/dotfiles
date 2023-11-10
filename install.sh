@@ -5,7 +5,8 @@ export ZSH="$ZDOTDIR/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
 DOTFILES="$(pwd -P)"
-BACKUP_DIR="$HOME/dotfiles-backup"
+BACKUP_SUBDIR="$(date +%Y%m%d%H%M%S)"
+BACKUP_DIR="$HOME/dotfiles-backup"/$BACKUP_SUBDIR
 
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
@@ -40,6 +41,11 @@ success() {
 truncate_path() {
 	local path="$1"
 	echo "${path/#$HOME/~}"
+}
+
+purge_home_from_path() {
+	local path="$1"
+	echo "${path/#$HOME\//}"
 }
 
 install_oh_my_zsh_helper() {
@@ -79,7 +85,8 @@ install_zsh_utils() {
 
 backup_target_file() {
 	local root_dir file=$1
-	root_dir="$(truncate_path "$file")"
+    root_dir=$(dirname "$(purge_home_from_path "$file")")
+
 
 	# set target directory
 	if [ "$root_dir" != "$HOME" ]; then
