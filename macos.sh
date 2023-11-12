@@ -230,16 +230,21 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 title 'Dock, Dashboard and hot corners'
 
 # Enable highlight hover effect for the grid view of a stack (Dock)
-# defaults write com.apple.dock mouse-over-hilite-stack -bool true
+defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
-# Set the icon size of Dock items to 36 pixels
-# defaults write com.apple.dock tilesize -int 36
+# Set the icon size of Dock items
+defaults write com.apple.dock tilesize -int 41
+defaults write com.apple.dock largesize -int 70
+defaults write com.apple.dock magnification -bool true
+
+# Remove the recent open apps section from Dock
+defaults write com.apple.dock show-recents -bool false
 
 # Change minimize/maximize window effect
-# defaults write com.apple.dock mineffect -string "scale"
+defaults write com.apple.dock mineffect -string "genie"
 
 # Show indicator lights for open applications in the Dock
-# defaults write com.apple.dock show-process-indicators -bool true
+defaults write com.apple.dock show-process-indicators -bool true
 
 # Don’t animate opening applications from the Dock
 # defaults write com.apple.dock launchanim -bool false
@@ -254,7 +259,7 @@ title 'Dock, Dashboard and hot corners'
 # defaults write com.apple.dock autohide-time-modifier -float 0
 
 # Automatically hide and show the Dock
-# defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool true
 
 # Make Dock icons of hidden applications translucent
 # defaults write com.apple.dock showhidden -bool true
