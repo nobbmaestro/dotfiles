@@ -100,6 +100,7 @@ source_if_exists () {
 
 source_if_exists $ZDOTDIR/.zsh_helpers
 source_if_exists $ZDOTDIR/.zsh_profile
+source_if_exists $ZDOTDIR/.zsh_git
 source_if_exists $ZDOTDIR/.zsh_aliases
 
 # You may need to manually set your language environment

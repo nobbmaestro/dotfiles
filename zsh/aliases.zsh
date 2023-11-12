@@ -1,23 +1,34 @@
 # ALIASES ---------------------------------------------------------------------
-alias vim='nvim'
+alias c='clear'
 alias cat='bat'
 alias find='fd'
-alias ls='exa --icons --classify'
 alias rm='rm -i'
+alias vim='nvim'
+alias count='ls -a1 | wc -l'
+
+# LS (EXA) ALIASES ------------------------------------------------------------
+alias la='ls -al'
+alias ll='ls -l'
+alias ls='exa --icons --classify --group-directories-first'
+
+# BREW ALIASES ----------------------------------------------------------------
+alias clean="sh -c 'brew autoremove; brew cleanup --prune=all'"
+alias update="sh -c 'brew update; brew upgrade'; clean"
 
 # GIT ALIASES -----------------------------------------------------------------
-# alias gc='git commit'
-# alias gco='git checkout'
-# alias ga='git add'
-# alias gb='git branch'
+alias ga='git add'
+alias gb=pretty_git_branch_sorted
 # alias gba='git branch --all'
 # alias gbd='git branch -D'
-# alias gcp='git cherry-pick'
-# alias gd='git diff -w'
-# alias gds='git diff -w --staged'
-# alias grs='git restore --staged'
-# alias gu='git reset --soft HEAD~1'
+alias gc='git commit'
 # alias gcan='gc --amend --no-edit'
-# alias gpf='git push --force-with-lease'
-# alias gl=pretty_git_log
+# alias gco='git checkout'
+# alias gcp='git cherry-pick'
+alias gd='git diff -w'
+alias gds='git diff -w --staged'
+alias gl=pretty_git_log
 # alias gla=pretty_git_log_all
+# alias gpf='git push --force-with-lease'
+alias grs='git restore --staged'
+alias gs='git status'
+# alias gu='git reset --soft HEAD~1'
