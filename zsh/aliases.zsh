@@ -13,7 +13,7 @@ alias ls='exa --icons --classify --group-directories-first'
 
 # BREW ALIASES ----------------------------------------------------------------
 alias clean="sh -c 'brew autoremove; brew cleanup --prune=all'"
-alias update="sh -c 'brew update; brew upgrade'; clean"
+alias update="sh -c 'brew update; brew upgrade'"
 
 # GIT ALIASES -----------------------------------------------------------------
 alias ga='git add'
@@ -22,11 +22,15 @@ alias gb=pretty_git_branch_sorted
 # alias gbd='git branch -D'
 alias gc='git commit'
 # alias gcan='gc --amend --no-edit'
-# alias gco='git checkout'
+alias gco='git checkout'
+alias gcm='git checkout master'
+alias gcd='git checkout development'
 # alias gcp='git cherry-pick'
 alias gd='git diff -w'
 alias gds='git diff -w --staged'
 alias gl=pretty_git_log
+alias gp='git push'
+alias gpl='git pull'
 # alias gla=pretty_git_log_all
 # alias gpf='git push --force-with-lease'
 alias grs='git restore --staged'
