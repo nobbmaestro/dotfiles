@@ -2,6 +2,40 @@
 
 # ~/.macos — https://mths.be/macos
 
+COLOR_GRAY="\033[1;38;5;243m"
+COLOR_BLUE="\033[1;34m"
+COLOR_GREEN="\033[1;32m"
+COLOR_RED="\033[1;31m"
+COLOR_PURPLE="\033[1;35m"
+COLOR_YELLOW="\033[1;33m"
+COLOR_NONE="\033[0m"
+
+title() {
+	echo -e "\n${COLOR_PURPLE}$1${COLOR_NONE}"
+	echo -e "${COLOR_GRAY}==============================${COLOR_NONE}\n"
+}
+
+error() {
+	echo -e "${COLOR_RED}Error: ${COLOR_NONE}$1"
+	exit 1
+}
+
+warning() {
+	echo -e "${COLOR_YELLOW}Warning: ${COLOR_NONE}$1"
+}
+
+info() {
+	echo -e "${COLOR_BLUE}Info: ${COLOR_NONE}$1"
+}
+
+success() {
+	echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
+}
+
+if [[ "$OSTYPE" != 'darwin'* ]]; then
+	error "Device is not running MacOS"
+fi
+
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
@@ -10,13 +44,17 @@ osascript -e 'tell application "System Preferences" to quit'
 sudo -v
 
 # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+while true; do
+	sudo -n true
+	sleep 60
+	kill -0 "$$" || exit
+done 2>/dev/null &
 
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
 
-echo 'General UI/UX'
+title 'General UI/UX'
 
 # Set sidebar icon size to medium
 # defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
@@ -55,35 +93,36 @@ echo 'General UI/UX'
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
 
-echo 'Trackpad: enable tap to click for this user and for the login screen'
+title "Trackpad, mouse, keyboard and more"
+info 'Enable tap to click for this user and for the login screen'
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 # defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-echo 'Trackpad: map bottom right corner to right-click'
+info 'Map bottom right corner to right-click'
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
 # defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
 # defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
-echo 'Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)'
+info 'Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)'
 # defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
-echo 'Disable press-and-hold for keys in favor of key repeat'
+info 'Disable press-and-hold for keys in favor of key repeat'
 # defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-echo 'Set a blazingly fast keyboard repeat rate'
+info 'Set a blazingly fast keyboard repeat rate'
 # defaults write NSGlobalDomain KeyRepeat -int 1
 # defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
-echo 'Stop iTunes from responding to the keyboard media keys'
+info 'Stop iTunes from responding to the keyboard media keys'
 # launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
 
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
 
-echo 'Screen'
+title 'Screen'
 
 # Require password immediately after sleep or screen saver begins
 # defaults write com.apple.screensaver askForPassword -int 1
@@ -109,7 +148,7 @@ echo 'Screen'
 # Finder                                                                      #
 ###############################################################################
 
-echo 'Finder'
+title 'Finder'
 
 # Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
 # defaults write com.apple.finder QuitMenuItem -bool true
@@ -192,7 +231,7 @@ echo 'Finder'
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################
 
-echo 'Dock, Dashboard and hot corners'
+title 'Dock, Dashboard and hot corners'
 
 # Enable highlight hover effect for the grid view of a stack (Dock)
 # defaults write com.apple.dock mouse-over-hilite-stack -bool true
@@ -254,7 +293,7 @@ echo 'Dock, Dashboard and hot corners'
 # Safari & WebKit                                                             #
 ###############################################################################
 
-echo 'Safari & WebKit'
+title 'Safari & WebKit'
 
 # Privacy: don’t send search queries to Apple
 # defaults write com.apple.Safari UniversalSearchEnabled -bool false
@@ -359,7 +398,7 @@ echo 'Safari & WebKit'
 # Spotlight                                                                   #
 ###############################################################################
 
-echo 'Spotlight'
+title 'Spotlight'
 
 # defaults write com.apple.spotlight orderedItems -array \
 # 	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
@@ -398,7 +437,7 @@ echo 'Spotlight'
 # Terminal & iTerm 2                                                          #
 ###############################################################################
 
-echo 'Terminal'
+title 'Terminal'
 
 # Only use UTF-8 in Terminal.app
 # defaults write com.apple.terminal StringEncodings -array 4
@@ -417,7 +456,7 @@ echo 'Terminal'
 # Activity Monitor                                                            #
 ###############################################################################
 
-echo 'Activity Monitor'
+title 'Activity Monitor'
 
 # Show the main window when launching Activity Monitor
 # defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
@@ -436,7 +475,7 @@ echo 'Activity Monitor'
 # Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
 ###############################################################################
 
-echo 'Address Book, Dashboard'
+title 'Address Book, Dashboard'
 
 # Use plain text mode for new TextEdit documents
 # defaults write com.apple.TextEdit RichText -int 0
@@ -456,7 +495,7 @@ echo 'Address Book, Dashboard'
 # Mac App Store                                                               #
 ###############################################################################
 
-echo 'Mac App Store'
+title 'Mac App Store'
 
 # Enable the automatic update check
 # defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
@@ -502,4 +541,4 @@ echo 'Mac App Store'
 # 	killall "${app}" &> /dev/null
 # done
 
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+success "Done. Note that some of these changes require a logout/restart to take effect."
