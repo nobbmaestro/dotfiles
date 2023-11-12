@@ -19,3 +19,8 @@ function benchmark_zsh() {
    shell=${1-$SHELL}
    for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
+
+# find string in file
+function fstr() {
+    grep -Rnw "." -e "$1"
+}
