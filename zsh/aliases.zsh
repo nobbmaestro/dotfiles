@@ -10,6 +10,7 @@ alias count='ls -a1 | wc -l'
 alias la='ls -al'
 alias ll='ls -l'
 alias ls='exa --icons --classify --group-directories-first'
+alias lt='exa --tree --group-directories-first'
 
 # BREW ALIASES ----------------------------------------------------------------
 alias clean="sh -c 'brew autoremove; brew cleanup --prune=all'"
