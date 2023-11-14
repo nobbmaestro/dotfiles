@@ -53,3 +53,13 @@ fi
 if type "zoxide" >/dev/null 2>&1; then
 	eval "$(zoxide init zsh)"
 fi
+
+# CUnit
+if [[ -d $(brew --prefix)/opt/cunit/include ]]; then
+	C_INCLUDE_PATH=$(brew --prefix)/opt/cunit/include
+	export C_INCLUDE_PATH
+fi
+if [[ -d $(brew --prefix)/opt/cunit/lib ]]; then
+	LIBRARY_PATH=$(brew --prefix)/opt/cunit/lib
+	export LIBRARY_PATH
+fi
