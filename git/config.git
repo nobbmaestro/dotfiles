@@ -1,10 +1,11 @@
 [user]
 	email = norbert@batiuk.se
 	name = Norbert Batiuk
+
 [pull]
 	rebase = true
 
 [core]
 	autocrlf = input
     filemode = false
-	excludefile = /Users/norbertbatiuk/.config/git/.gitignore
+	excludefile = $HOME/.config/git/.gitignore
