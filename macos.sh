@@ -252,6 +252,9 @@ setup_dock() {
 	# Change minimize/maximize window effect
 	defaults write com.apple.dock mineffect -string "genie"
 
+    # Disable auto rearrange spaces on recent app
+    defaults write com.apple.dock mru-spaces -bool false
+
 	# Show indicator lights for open applications in the Dock
 	defaults write com.apple.dock show-process-indicators -bool true
 
