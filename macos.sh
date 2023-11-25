@@ -544,25 +544,36 @@ setup_app_store() {
 
 kill_all() {
 	title "Kill all"
-	for app in "Activity Monitor" \
-		"Address Book" \
-		"Calendar" \
-		"cfprefsd" \
-		"Contacts" \
-		"Dock" \
-		"Finder" \
-		"Google Chrome" \
-		"Messages" \
-		"Photos" \
-		"Safari" \
-		"SystemUIServer" \
-		"Terminal" \
-		"Transmission" \
-		"Twitter" \
-		"iCal"; do
-		info "killing ${app}..."
-		killall "${app}" &>/dev/null
-	done
+
+	if [[ -z "$1" ]]; then
+		warning "argument not specified"
+
+	elif [[ "$1" == "all" ]]; then
+		for app in "Activity Monitor" \
+			"Address Book" \
+			"Calendar" \
+			"cfprefsd" \
+			"Contacts" \
+			"Dock" \
+			"Finder" \
+			"Google Chrome" \
+			"Messages" \
+			"Photos" \
+			"Safari" \
+			"SystemUIServer" \
+			"Terminal" \
+			"Transmission" \
+			"Twitter" \
+			"iCal"; do
+
+			info "killing: ${app}..."
+			killall "${app}" &>/dev/null
+		done
+
+	else
+        info "killing: $1..."
+		killall "$1" &>/dev/null
+	fi
 }
 
 case "$1" in
@@ -572,17 +583,17 @@ screen)
 	;;
 finder)
 	setup_finder
-	kill_all
+	kill_all "Finder"
 	;;
 dock)
 	setup_dock
-	kill_all
+	kill_all "Dock"
 	;;
 all)
 	setup_screen
 	setup_finder
 	setup_dock
-	kill_all
+	kill_all "all"
 	;;
 *)
 	echo -e $"\nUsage: $(basename "$0") [screen|finder|dock|all]"
