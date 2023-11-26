@@ -236,7 +236,7 @@ setup_dock() {
 	title 'Dock, Dashboard and hot corners'
 
 	# Disable click to reveal desktop
-	defaults write com.apple.WindowManager EnableStandardClickToShowDesktop 0
+	defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 
 	# Enable highlight hover effect for the grid view of a stack (Dock)
 	defaults write com.apple.dock mouse-over-hilite-stack -bool true
