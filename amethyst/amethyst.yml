@@ -2,19 +2,15 @@ layouts:
     - floating
     - fullscreen
     - column
-    - tall
 
-select-fullscreen-layout:
-    mod: mod1
-    key: s
+mod1:
+    - option
+    - control
 
-select-column-layout:
-    mod: mod1
-    key: d
-
-select-floating-layout:
-    mod: mod1
-    key: f
+mod2:
+    - option
+    - control
+    - command
 
 relaunch-amethyst:
     mod: mod1
@@ -23,12 +19,12 @@ relaunch-amethyst:
 # Ignore following by default
 # Example for how to find process id: osascript -e 'id of app "System Preferences"'
 floating:
-  - com.apple.ActivityMonitor
-  - com.apple.MobileSMS
-  - com.apple.finder
-  - com.apple.systempreferences
-  - com.koingosw.alarmclockpro
-  - com.logitech.Logi-Options
+    - com.apple.ActivityMonitor
+    - com.apple.MobileSMS
+    - com.apple.finder
+    - com.apple.systempreferences
+    - com.koingosw.alarmclockpro
+    - com.logitech.Logi-Options
 
 # General
 restore-layouts-on-launch: true
@@ -40,4 +36,3 @@ ignore-menu-bars: true
 smart-window-margins: true
 window-margins: true
 window-margin-size: 8
-
