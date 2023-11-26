@@ -5,6 +5,10 @@ end
 
 local sql_formatter_config_file = os.getenv("HOME") .. "/.config/sql_formatter/sql_formatter.json"
 
+-- Formatting constants
+local tab_width = 4
+local line_len = 120
+
 require("mason").setup()
 require("null-ls").setup({
     sources = {
@@ -17,18 +21,11 @@ require("null-ls").setup({
         -- html, markdown, js and more
         null_ls.builtins.formatting.prettier.with({
             filetypes = { "css", "html", "json", "yaml", "markdown", "javascript", "typescript" },
-            extra_args = function(params)
-                return params.options
-                    and params.options.tabSize
-                    and {
-                        "--tab-width",
-                        params.options.tabSize,
-                    }
-            end,
+            extra_args = { "--tab-width", tab_width },
         }),
 
         -- python
-        null_ls.builtins.formatting.black.with({ extra_args = { "--line-length", 120 } }),
+        null_ls.builtins.formatting.black.with({ extra_args = { "--line-length", line_len } }),
         null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.djlint.with({
             extra_args = { "--blank-line-after-tag", "load,extends,include,endblock" },
