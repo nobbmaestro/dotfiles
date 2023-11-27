@@ -2,55 +2,23 @@
 #
 # Tmux nvim-zsh toggler
 #
-# This script will toggle between nvim and zsh window. If nvim is not running, the script will run nvim as new window 
-# from current path with loaded .envrc if applicable. If zsh is not running (as separate window), the script will 
-# initialize zsh in a new window.
+# This script will toggle between nvim and lastly visited window.
+# If nvim is not running, the script will run nvim as new window
+# from current path with loaded .envrc if applicable.
 #
-# Dependencies: 
+# Dependencies:
 #   required: tmux, nvim
 #   optional: direnv
 
-init_cache() {
-	if [ -e "$cache" ]; then
-		rm "$cache"
-	fi
-	mkdir -p "$(dirname "$cache")" && touch "$cache"
-}
-
-update_cache() {
-	local idx=$1 name=$2
-
-	# Cache only if the caller has changed
-	if [[ "$(tail -1 "$cache")" != "$idx:$name" ]]; then
-		echo "$idx:$name" >>"$cache"
-	fi
-}
-
-get_cached_caller() {
-	local matches
-
-	# Obtain all cached window associated with window name, i.e., '$1'
-	matches="$(grep "$1" "$cache" | sort --unique | sort -r)"
-
-	# Find the most recent cached window that is still active
-	while read -r line; do
-		if [[ "$list_windows" == *"$line"* ]]; then
-			cached_caller="$line"
-			break
-		fi
-	done <<<"$matches"
-}
-
 init_nvim() {
-	if [ ! -d "$1" ]; then
-		exit 1
-	fi
+	pane_id="$(tmux display-message -p "#I")"
+	pane_path="$(tmux display-message -p -t "$pane_id" '#{pane_current_path}')"
 
 	# if direnv is installed, load env prior to running nvim
 	if type "direnv" >/dev/null 2>&1; then
-		tmux neww -c "$1" zsh -c "direnv exec /'$1' zsh -c nvim"
+		tmux neww -c "$pane_path" -n "nvim" zsh -c "direnv exec /'$pane_path' zsh -c nvim"
 	else
-		tmux neww -c "$1" zsh -c "nvim"
+		tmux neww -c "$pane_path" -n "nvim" zsh -c "nvim"
 	fi
 }
 
@@ -61,49 +29,19 @@ if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
 	exit 1
 fi
 
-list_windows="$(tmux list-windows -F "#I:#W")"
-session_name="$(tmux display-message -p "#S")"
-window_name="$(tmux display-message -p "#W")"
-window_idx="$(tmux display-message -p "#I")"
-
-cache="$HOME/.cache/tmux/tmux-nvim-zsh-toggler/$session_name.cache"
+ses_name="$(tmux display-message -p "#S")"
+win_name="$(tmux display-message -p "#W")"
+win_list="$(tmux list-windows -F "#I:#W")"
 
 # Make sure 'nvim' window exists
-if [[ "$list_windows" != *"nvim"* ]]; then
-	init_cache
-	update_cache "$window_idx" "$window_name"
-	pane_id="$(tmux display-message -p "#I")"
-	pane_path="$(tmux display-message -p -t "$pane_id" '#{pane_current_path}')"
-	init_nvim "$pane_path"
+if [[ "$win_list" != *"nvim"* ]]; then
+	init_nvim
 
-# Make sure 'zsh' window exists
-elif [[ "$list_windows" != *"zsh"* ]]; then
-	update_cache "$window_idx" "$window_name"
-	tmux new-window
+# If we are not in 'nvim', switch to 'nvim' window
+elif [[ "$win_name" != *"nvim"* ]]; then
+	tmux switch-client -t "$ses_name"":nvim"
 
+# Switch to lastly visited (but still active) window
 else
-	update_cache "$window_idx" "$window_name"
-
-	# Select destination based on current window
-	case "$window_name" in
-	nvim)
-		get_cached_caller "zsh"
-		;;
-	*)
-		get_cached_caller "nvim"
-		;;
-	esac
-
-	# Verify that cache did non yield empty destination
-	if [[ -n "$cached_caller" ]]; then
-		window_dst=$(eval echo "$cached_caller" | cut -d ':' -f 1)
-
-	else
-		if [ "$window_name" == "nvim" ]; then
-			window_dst="zsh"
-		else
-			window_dst="nvim"
-		fi
-	fi
-	tmux switch-client -t "$session_name"":$window_dst"
+	tmux select-window -l
 fi
