@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 -- Add border to LspInfo float window
-require('lspconfig.ui.windows').default_options.border = 'single'
+require("lspconfig.ui.windows").default_options.border = "single"
 
 local function fmt(diagnostic)
     if diagnostic.code then
@@ -12,6 +12,15 @@ local function fmt(diagnostic)
     end
     return diagnostic.message
 end
+
+-- Toggle virtual diagnostics
+local diagnostic_visible = true
+local function toggle_diagnostic()
+    diagnostic_visible = not diagnostic_visible
+    vim.diagnostic.config({ virtual_text = diagnostic_visible })
+end
+
+vim.api.nvim_create_user_command("ToggleDiagnostics", toggle_diagnostic, {})
 
 -- Fix undefined global `vim`
 require("lspconfig").lua_ls.setup({
@@ -42,6 +51,7 @@ lsp_zero.on_attach(function(_, bufnr)
     nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
     nmap("n", "<leader>dn", vim.diagnostic.goto_next, "Go to next diagnostic message")
     nmap("n", "<leader>dp", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
+    nmap("n", "<leader>d", toggle_diagnostic, "Toggle virtual diagnostic messages")
 
     -- Refactoring keymaps
     nmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
