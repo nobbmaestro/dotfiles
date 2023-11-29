@@ -16,7 +16,6 @@ local plugins = {
     {
         "nobbmaestro/nvim-andromeda",
         branch = "development",
-        -- dev = true,
         -- dir = "~/repos/dev-nvim-andromeda",
         dependencies = { "tjdevries/colorbuddy.nvim", branch = "dev" },
     },
