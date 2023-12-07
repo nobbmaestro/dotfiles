@@ -22,9 +22,6 @@ source_if_exists $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.
 source_if_exists $(brew --prefix)/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source_if_exists $(brew --prefix)/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Enable vi-mode
-bindkey -v
-
 # Node (JS) Version Manager (JS)
 if type "nvm" >/dev/null 2>&1; then
 	export NVM_DIR="$HOME/.nvm"
