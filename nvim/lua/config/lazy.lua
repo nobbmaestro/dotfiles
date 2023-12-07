@@ -26,7 +26,6 @@ local plugins = {
         branch = "0.1.x",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
-    { "folke/flash.nvim" },
     { "theprimeagen/harpoon" },
     { "christoomey/vim-tmux-navigator" },
 
@@ -48,7 +47,6 @@ local plugins = {
     { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" }, version = "2.20.8" },
     { "HiPhish/rainbow-delimiters.nvim",     event = { "BufReadPost", "BufNewFile" } },
     { "nvim-tree/nvim-web-devicons" },
-
     {
         "/nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
