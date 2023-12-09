@@ -1,11 +1,12 @@
 # ALIASES ---------------------------------------------------------------------
-alias c='clear'
 # alias cat='bat'
 # alias find='fd'
+alias c='clear'
+alias count='ls -a1 | wc -l'
+alias lg='lazygit'
+alias pretty_path="sh -c 'python ~/.local/bin/pretty_path.py $PATH'"
 alias rm='rm -i'
 alias vim='nvim'
-alias count='ls -a1 | wc -l'
-alias pretty_path="sh -c 'python ~/.local/bin/pretty_path.py $PATH'"
 
 # LS (EXA) ALIASES ------------------------------------------------------------
 alias la='ls -al'

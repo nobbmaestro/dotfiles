@@ -25,6 +25,7 @@ brew "fd"           # modern find https://github.com/sharkdp/fd
 brew "fzf"          # fuzzy-finder https://github.com/junegunn/fzf
 brew "git"
 brew "htop"
+brew "lazygit"      # Terminal git GUI https://github.com/jesseduffield/lazygit
 brew "mas"          # Mac automation https://github.com/mas-cli/mas
 brew "neovim"
 brew "npm"
