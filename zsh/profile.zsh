@@ -37,6 +37,8 @@ if type "pyenv" >/dev/null 2>&1; then
 fi
 
 # Python: Set up direnv hook (for activating local dir venv)
+#   pipenv:   echo layout pipenv >> .envrc
+#   other:    echo 'source $(pwd)/.venv/bin/activate' >> .envrc
 if type "direnv" >/dev/null 2>&1; then
 	eval "$(direnv hook zsh)"
 fi
