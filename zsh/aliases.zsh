@@ -5,6 +5,7 @@ alias c='clear'
 alias rm='rm -i'
 alias vim='nvim'
 alias count='ls -a1 | wc -l'
+alias pretty_path="sh -c 'python ~/.local/bin/pretty_path.py $PATH'"
 
 # LS (EXA) ALIASES ------------------------------------------------------------
 alias la='ls -al'
