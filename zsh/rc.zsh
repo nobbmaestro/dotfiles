@@ -88,15 +88,7 @@ ZSH_DISABLE_COMPFIX="true"
 plugins=()
 
 # User configuration
-source_if_exists () {
-    if test -e "$1"; then
-        source "$1"
-    else
-        echo "zshrc: file not found: $1"
-    fi
-}
-
-source_if_exists $ZDOTDIR/.zsh_helpers
+source $ZDOTDIR/.zsh_helpers
 source_if_exists $ZDOTDIR/.zsh_profile
 source_if_exists $ZDOTDIR/.zsh_aliases
 source_if_exists $HOME/repos/dotfiles/zsh/profile_work.zsh
