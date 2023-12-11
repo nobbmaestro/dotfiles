@@ -94,8 +94,7 @@ install_zsh_utils() {
 
 backup_target_file() {
 	local root_dir file=$1
-    root_dir=$(dirname "$(purge_home_from_path "$file")")
-
+	root_dir=$(dirname "$(purge_home_from_path "$file")")
 
 	# set target directory
 	if [ "$root_dir" != "$HOME" ]; then

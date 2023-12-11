@@ -9,7 +9,6 @@
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
   "colorbuddy.nvim": { "branch": "dev", "commit": "8508c6f5f6ef03c59ea864870e215d19ac7ff8bb" },
-  "flash.nvim": { "branch": "main", "commit": "6d76c5dee65181ab55cbdfb0760260e800d643f4" },
   "friendly-snippets": { "branch": "main", "commit": "43727c2ff84240e55d4069ec3e6158d74cb534b6" },
   "git-blame.nvim": { "branch": "master", "commit": "e4dafc79cc7dcf4eec0547dbc6f3f3821b2f2b14" },
   "harpoon": { "branch": "master", "commit": "c1aebbad9e3d13f20bedb8f2ce8b3a94e39e424a" },
