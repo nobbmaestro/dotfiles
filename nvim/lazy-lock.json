@@ -1,6 +1,7 @@
 {
   "LuaSnip": { "branch": "master", "commit": "0df29db3543837f8b41597f2640397c5ec792b7b" },
   "alpha-nvim": { "branch": "main", "commit": "234822140b265ec4ba3203e3e0be0e0bb826dff5" },
+  "async.vim": { "branch": "master", "commit": "2082d13bb195f3203d41a308b89417426a7deca1" },
   "autoclose.nvim": { "branch": "main", "commit": "37e11589aac55b0e8810dc5865f898f9cb36fef6" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
@@ -33,6 +34,7 @@
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "f1ce55edcbd2c25a544c93357c66d4172a870766" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a" },
   "undotree": { "branch": "master", "commit": "0e11ba7325efbbb3f3bebe06213afa3e7ec75131" },
+  "vim-arsync": { "branch": "master", "commit": "dd5fd93182aafb67ede2ef465f379610980b52d3" },
   "vim-fugitive": { "branch": "master", "commit": "cbe9dfa162c178946afa689dd3f42d4ea8bf89c1" },
   "vim-gitgutter": { "branch": "main", "commit": "f7b97666ae36c7b3f262f3190dbcd7033845d985" },
   "vim-tmux-navigator": { "branch": "master", "commit": "7db70e08ea03b3e4d91f63713d76134512e28d7e" }

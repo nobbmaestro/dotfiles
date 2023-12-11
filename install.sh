@@ -75,12 +75,21 @@ install_tmux_package_manager_helper() {
 	fi
 }
 
+install_sshpass_helper() {
+	if [[ "$(command -v tmux)" ]]; then
+		curl -L https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb >sshpass.rb
+		brew install sshpass.rb
+		rm sshpass.rb
+	fi
+}
+
 install_zsh_utils() {
 	title "Installing zsh utilities"
 
 	# Install zsh utilities
 	install_oh_my_zsh_helper
 	install_powerlevel10k_helper
+	install_sshpass_helper
 }
 
 backup_target_file() {

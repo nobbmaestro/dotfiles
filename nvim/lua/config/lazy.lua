@@ -41,6 +41,7 @@ local plugins = {
     { "terrortylor/nvim-comment",            event = { "BufReadPost", "BufNewFile" } },
     { "nvim-lualine/lualine.nvim",           event = { "VeryLazy" } },
     { "m4xshen/autoclose.nvim" },
+    { 'kenn7/vim-arsync',                    dependencies = {'prabirshrestha/async.vim'} }, -- sync local project to server
 
     -- UI Utilities
     { "goolord/alpha-nvim",                  event = { "VimEnter" } },

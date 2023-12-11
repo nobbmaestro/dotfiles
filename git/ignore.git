@@ -1,5 +1,6 @@
 # Enviroment
 .envrc
+.vim-arsync
 
 # Mac
 .DS_Store
