@@ -30,7 +30,7 @@ local plugins = {
     { "christoomey/vim-tmux-navigator" },
 
     -- Git
-    { "tpope/vim-fugitive",                  event = { "BufReadPost", "BufNewFile" } },
+    { "kdheepak/lazygit.nvim" },
     { "airblade/vim-gitgutter",              event = { "BufReadPost", "BufNewFile" } }, -- indicates changes to the file
     { "f-person/git-blame.nvim",             event = { "BufReadPost", "BufNewFile" } }, -- display inline git blame
 
