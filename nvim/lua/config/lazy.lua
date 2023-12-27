@@ -41,11 +41,11 @@ local plugins = {
     { "terrortylor/nvim-comment",            event = { "BufReadPost", "BufNewFile" } },
     { "nvim-lualine/lualine.nvim",           event = { "VeryLazy" } },
     { "m4xshen/autoclose.nvim" },
-    { 'kenn7/vim-arsync',                    dependencies = {'prabirshrestha/async.vim'} }, -- sync local project to server
+    { 'kenn7/vim-arsync',                    dependencies = { 'prabirshrestha/async.vim' } }, -- sync local project to server
 
     -- UI Utilities
     { "goolord/alpha-nvim",                  event = { "VimEnter" } },
-    { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" }, version = "2.20.8" },
+    { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" },      version = "2.20.8" },
     { "HiPhish/rainbow-delimiters.nvim",     event = { "BufReadPost", "BufNewFile" } },
     { "nvim-tree/nvim-web-devicons" },
     {
