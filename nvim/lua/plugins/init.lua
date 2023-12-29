@@ -1,17 +1,4 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
-end
-vim.opt.rtp:prepend(lazypath)
-
-local plugins = {
+return {
     -- Colorscheme
     {
         "nobbmaestro/nvim-andromeda",
@@ -31,22 +18,22 @@ local plugins = {
 
     -- Git
     { "kdheepak/lazygit.nvim" },
-    { "airblade/vim-gitgutter",              event = { "BufReadPost", "BufNewFile" } }, -- indicates changes to the file
-    { "f-person/git-blame.nvim",             event = { "BufReadPost", "BufNewFile" } }, -- display inline git blame
+    { "airblade/vim-gitgutter", event = { "BufReadPost", "BufNewFile" } }, -- indicates changes to the file
+    { "f-person/git-blame.nvim", event = { "BufReadPost", "BufNewFile" } }, -- display inline git blame
 
     -- Utilities
-    { "nvim-treesitter/nvim-treesitter",     event = { "BufReadPost", "BufNewFile" } },
-    { "nvim-treesitter/playground",          event = { "BufReadPost", "BufNewFile" } },
-    { "mbbill/undotree",                     event = { "BufReadPost", "BufNewFile" } },
-    { "terrortylor/nvim-comment",            event = { "BufReadPost", "BufNewFile" } },
-    { "nvim-lualine/lualine.nvim",           event = { "VeryLazy" } },
+    { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
+    { "nvim-treesitter/playground", event = { "BufReadPost", "BufNewFile" } },
+    { "mbbill/undotree", event = { "BufReadPost", "BufNewFile" } },
+    { "terrortylor/nvim-comment", event = { "BufReadPost", "BufNewFile" } },
+    { "nvim-lualine/lualine.nvim", event = { "VeryLazy" } },
     { "m4xshen/autoclose.nvim" },
-    { 'kenn7/vim-arsync',                    dependencies = { 'prabirshrestha/async.vim' } }, -- sync local project to server
+    { "kenn7/vim-arsync", dependencies = { "prabirshrestha/async.vim" } }, -- sync local project to server
 
     -- UI Utilities
-    { "goolord/alpha-nvim",                  event = { "VimEnter" } },
-    { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" },      version = "2.20.8" },
-    { "HiPhish/rainbow-delimiters.nvim",     event = { "BufReadPost", "BufNewFile" } },
+    { "goolord/alpha-nvim", event = { "VimEnter" } },
+    { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" }, version = "2.20.8" },
+    { "HiPhish/rainbow-delimiters.nvim", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-tree/nvim-web-devicons" },
     {
         "/nvim-neo-tree/neo-tree.nvim",
@@ -82,7 +69,3 @@ local plugins = {
         },
     },
 }
-
-local opts = {}
-
-require("lazy").setup(plugins, opts)
