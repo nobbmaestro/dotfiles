@@ -11,7 +11,6 @@ return {
     -- Git
     { "kdheepak/lazygit.nvim" },
     { "airblade/vim-gitgutter", event = { "BufReadPost", "BufNewFile" } }, -- indicates changes to the file
-    { "f-person/git-blame.nvim", event = { "BufReadPost", "BufNewFile" } }, -- display inline git blame
 
     -- Utilities
     { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
@@ -58,5 +57,6 @@ return {
         },
     },
     { import = "plugins.colorschemes" },
+    { import = "plugins.git" },
     { import = "plugins.editing" },
 }
