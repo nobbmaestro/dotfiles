@@ -1,6 +1,5 @@
 return {
     -- Utilities
-    { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
     { "kenn7/vim-arsync", dependencies = { "prabirshrestha/async.vim" } }, -- sync local project to server
 
     -- LSP
