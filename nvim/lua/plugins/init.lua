@@ -6,7 +6,6 @@ return {
     { "kenn7/vim-arsync", dependencies = { "prabirshrestha/async.vim" } }, -- sync local project to server
 
     -- UI Utilities
-    { "goolord/alpha-nvim", event = { "VimEnter" } },
     { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" }, version = "2.20.8" },
     { "HiPhish/rainbow-delimiters.nvim", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-tree/nvim-web-devicons" },
@@ -41,5 +40,6 @@ return {
     { import = "plugins.colorschemes" },
     { import = "plugins.git" },
     { import = "plugins.navigation" },
+    { import = "plugins.ui" },
     { import = "plugins.editing" },
 }
