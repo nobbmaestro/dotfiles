@@ -1,17 +1,22 @@
-local status_ok, plugin = pcall(require, "andromeda")
-if not status_ok then
-	return
-end
+return {
+    "nobbmaestro/nvim-andromeda",
+    lazy = true,
+    priority = 1000,
 
-local setup = {
-	preset = "andromeda",
-	transparent_bg = true,
-	styles = {
-		italic = true,
-		bold = true,
-		underline = true,
-		undercurl = true,
-	},
+    branch = "development",
+    -- dir = "~/repos/dev-nvim-andromeda",
+    dependencies = { "tjdevries/colorbuddy.nvim", branch = "dev" },
+
+    config = function()
+        require("andromeda").setup({
+            preset = "andromeda",
+            transparent_bg = true,
+            styles = {
+                italic = true,
+                bold = true,
+                underline = true,
+                undercurl = true,
+            },
+        })
+    end,
 }
-
-plugin.setup(setup)
