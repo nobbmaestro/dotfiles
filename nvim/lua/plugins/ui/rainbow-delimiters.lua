@@ -1,23 +1,28 @@
-local status_ok, plugin = pcall(require, "rainbow-delimiters")
-if not status_ok then
-	return
-end
+return {
+    "HiPhish/rainbow-delimiters.nvim",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
 
-vim.g.rainbow_delimiters = {
-	strategy = {
-		[""] = plugin.strategy["global"],
-		vim = plugin.strategy["local"],
-	},
-	query = {
-		[""] = "rainbow-delimiters",
-		lua = "rainbow-blocks",
-	},
-	highlight = {
-		"RainbowDelimiterYellow",
-		"RainbowDelimiterViolet",
-		"RainbowDelimiterBlue",
-		"RainbowDelimiterYellow",
-		"RainbowDelimiterViolet",
-		"RainbowDelimiterBlue",
-	},
+    config = function()
+        local plugin = require("rainbow-delimiters")
+
+        vim.g.rainbow_delimiters = {
+            strategy = {
+                [""] = plugin.strategy["global"],
+                vim = plugin.strategy["local"],
+            },
+            query = {
+                [""] = "rainbow-delimiters",
+                lua = "rainbow-blocks",
+            },
+            highlight = {
+                "RainbowDelimiterYellow",
+                "RainbowDelimiterViolet",
+                "RainbowDelimiterBlue",
+                "RainbowDelimiterYellow",
+                "RainbowDelimiterViolet",
+                "RainbowDelimiterBlue",
+            },
+        }
+    end,
 }
