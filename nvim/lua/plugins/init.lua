@@ -1,7 +1,4 @@
 return {
-    -- Navigation
-    { "christoomey/vim-tmux-navigator" },
-
     -- Utilities
     { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-treesitter/playground", event = { "BufReadPost", "BufNewFile" } },
