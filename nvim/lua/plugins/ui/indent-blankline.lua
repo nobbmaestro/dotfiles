@@ -1,24 +1,26 @@
-local status_ok, plugin = pcall(require, "indent_blankline")
-if not status_ok then
-	return
-end
+return {
+    "lukas-reineke/indent-blankline.nvim",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
+    version = "2.20.8",
 
-local setup = {
-	char = "▏",
-	context_char = "▏",
-	filetype_exclude = {
-		"help",
-		"alpha",
-		"dashboard",
-		"neo-tree",
-		"Trouble",
-		"lazy",
-		"mason",
-		"notify",
-		"toggleterm",
-		"lazyterm",
-	},
-	show_current_context = true,
+    config = function()
+        require("indent_blankline").setup({
+            char = "▏",
+            context_char = "▏",
+            filetype_exclude = {
+                "help",
+                "alpha",
+                "dashboard",
+                "neo-tree",
+                "Trouble",
+                "lazy",
+                "mason",
+                "notify",
+                "toggleterm",
+                "lazyterm",
+            },
+            show_current_context = true,
+        })
+    end,
 }
-
-plugin.setup(setup)
