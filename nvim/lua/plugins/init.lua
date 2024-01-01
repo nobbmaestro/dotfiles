@@ -19,7 +19,6 @@ return {
     { "mbbill/undotree", event = { "BufReadPost", "BufNewFile" } },
     { "terrortylor/nvim-comment", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-lualine/lualine.nvim", event = { "VeryLazy" } },
-    { "m4xshen/autoclose.nvim" },
     { "kenn7/vim-arsync", dependencies = { "prabirshrestha/async.vim" } }, -- sync local project to server
 
     -- UI Utilities
@@ -61,4 +60,5 @@ return {
         },
     },
     { import = "plugins.colorschemes" },
+    { import = "plugins.editing" },
 }

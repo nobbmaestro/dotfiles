@@ -1,6 +1,9 @@
-local status_ok = pcall(require, "autoclose")
-if not status_ok then
-    return
-end
+return {
+    "m4xshen/autoclose.nvim",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
 
-require("autoclose").setup()
+    config = function()
+        require("autoclose").setup()
+    end,
+}
