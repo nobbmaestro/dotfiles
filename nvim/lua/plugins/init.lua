@@ -1,7 +1,4 @@
 return {
-    -- Utilities
-    { "kenn7/vim-arsync", dependencies = { "prabirshrestha/async.vim" } }, -- sync local project to server
-
     -- LSP
     {
         "VonHeikemen/lsp-zero.nvim",

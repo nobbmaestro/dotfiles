@@ -1,6 +1,10 @@
--- local status_ok = pcall(require, "vim-arsync")
--- if not status_ok then
---     return
--- end
+return {
+    "kenn7/vim-arsync",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "prabirshrestha/async.vim" },
 
-vim.keymap.set("n", "<leader>ru", "<cmd>ARsyncUp<CR>", { desc = "Vim-arsync: Sync files up to the remote" })
+    config = function()
+        vim.keymap.set("n", "<leader>ru", "<cmd>ARsyncUp<CR>", { desc = "Vim-arsync: Sync files up to the remote" })
+    end,
+}
