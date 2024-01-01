@@ -18,6 +18,8 @@ define: &green    "#96e072"
 gui:
   border: "rounded"
   nerdFontsVersion: "3"
+  timeFormat: '02 Jan 06'
+  shortTimeFormat: '15:04'
   theme:
     activeBorderColor:
       - *cyan
