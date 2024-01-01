@@ -18,11 +18,6 @@ return {
     { "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" }, version = "2.20.8" },
     { "HiPhish/rainbow-delimiters.nvim", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-tree/nvim-web-devicons" },
-    {
-        "/nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = "MunifTanjim/nui.nvim",
-    },
 
     -- LSP
     {
