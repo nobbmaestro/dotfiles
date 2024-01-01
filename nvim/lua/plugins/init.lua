@@ -8,9 +8,6 @@ return {
     { "theprimeagen/harpoon" },
     { "christoomey/vim-tmux-navigator" },
 
-    -- Git
-    { "kdheepak/lazygit.nvim" },
-
     -- Utilities
     { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-treesitter/playground", event = { "BufReadPost", "BufNewFile" } },
