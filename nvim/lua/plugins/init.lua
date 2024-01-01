@@ -2,7 +2,6 @@ return {
     -- Utilities
     { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-treesitter/playground", event = { "BufReadPost", "BufNewFile" } },
-    { "nvim-lualine/lualine.nvim", event = { "VeryLazy" } },
     { "kenn7/vim-arsync", dependencies = { "prabirshrestha/async.vim" } }, -- sync local project to server
 
     -- UI Utilities
