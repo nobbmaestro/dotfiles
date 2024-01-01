@@ -1,10 +1,9 @@
-local status_ok, lsp_zero = pcall(require, "lsp-zero")
-if not status_ok then
-    return
-end
-
--- Add border to LspInfo float window
-require("lspconfig.ui.windows").default_options.border = "single"
+local servers = {
+    "bashls",
+    "clangd",
+    "lua_ls",
+    "pyright",
+}
 
 local function fmt(diagnostic)
     if diagnostic.code then
@@ -20,84 +19,100 @@ local function toggle_diagnostic()
     vim.diagnostic.config({ virtual_text = diagnostic_visible })
 end
 
-vim.api.nvim_create_user_command("ToggleDiagnostics", toggle_diagnostic, {})
-
--- Fix undefined global `vim`
-require("lspconfig").lua_ls.setup({
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { "vim" },
-            },
+return {
+    {
+        "williamboman/mason.nvim",
+        lazy = true,
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            require("mason").setup()
+        end,
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        lazy = true,
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            local lsp_zero = require("lsp-zero")
+            require("mason-lspconfig").setup({
+                ensure_installed = servers,
+                handlers = {
+                    lsp_zero.default_setup,
+                },
+            })
+        end,
+    },
+    {
+        "VonHeikemen/lsp-zero.nvim",
+        branch = "v3.x",
+        lazy = true,
+        event = { "BufReadPost", "BufNewFile" },
+        dependencies = {
+            "neovim/nvim-lspconfig",
         },
+
+        config = function()
+            vim.api.nvim_create_user_command("ToggleDiagnostics", toggle_diagnostic, {})
+
+            -- Add border to LspInfo float window
+            require("lspconfig.ui.windows").default_options.border = "single"
+
+            local lsp_zero = require("lsp-zero")
+            lsp_zero.on_attach(function(_, bufnr)
+                local nmap = function(mode, keys, func, desc)
+                    if desc then
+                        desc = "LSP: " .. desc
+                    end
+
+                    vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
+                end
+
+                -- General LSP keymaps
+                nmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
+                nmap("n", "gr", require("telescope.builtin").lsp_references, "Go to references")
+                nmap("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace symbols")
+
+                -- Diagnostics keymaps
+                nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
+                nmap("n", "<leader>dn", vim.diagnostic.goto_next, "Go to next diagnostic message")
+                nmap("n", "<leader>dp", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
+                nmap("n", "<leader>d", toggle_diagnostic, "Toggle virtual diagnostic messages")
+
+                -- Refactoring keymaps
+                nmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
+                nmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename reference")
+
+                -- Help and documentation keymaps
+                nmap("n", "K", vim.lsp.buf.hover, "Hover documentation")
+                nmap("i", "<C-h>", vim.lsp.buf.signature_help, "Signature documentations")
+            end)
+
+            lsp_zero.set_sign_icons({
+                error = "✘",
+                hint = "⚑",
+                info = "»",
+                warn = "▲",
+            })
+
+            vim.diagnostic.config({
+                virtual_text = {
+                    prefix = "●",
+                    source = "always",
+                    format = fmt,
+                    severity = {
+                        -- min = vim.diagnostic.severity.ERROR,
+                    },
+                },
+                severity_sort = true,
+                float = {
+                    focusable = true,
+                    style = "minimal",
+                    border = "rounded",
+                    source = "always",
+                    header = "",
+                    prefix = "",
+                },
+            })
+        end,
     },
-})
-
-lsp_zero.on_attach(function(_, bufnr)
-    local nmap = function(mode, keys, func, desc)
-        if desc then
-            desc = "LSP: " .. desc
-        end
-
-        vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
-    end
-
-    -- General LSP keymaps
-    nmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
-    nmap("n", "gr", require("telescope.builtin").lsp_references, "Go to references")
-    nmap("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace symbols")
-
-    -- Diagnostics keymaps
-    nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
-    nmap("n", "<leader>dn", vim.diagnostic.goto_next, "Go to next diagnostic message")
-    nmap("n", "<leader>dp", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
-    nmap("n", "<leader>d", toggle_diagnostic, "Toggle virtual diagnostic messages")
-
-    -- Refactoring keymaps
-    nmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
-    nmap("n", "<leader>rn", vim.lsp.buf.rename, "Rename reference")
-
-    -- Help and documentation keymaps
-    nmap("n", "K", vim.lsp.buf.hover, "Hover documentation")
-    nmap("i", "<C-h>", vim.lsp.buf.signature_help, "Signature documentations")
-end)
-
-lsp_zero.set_sign_icons({
-    error = "✘",
-    hint = "⚑",
-    info = "»",
-    warn = "▲",
-})
-
-vim.diagnostic.config({
-    virtual_text = {
-        prefix = "●",
-        source = "always",
-        format = fmt,
-        severity = {
-            -- min = vim.diagnostic.severity.ERROR,
-        },
-    },
-    severity_sort = true,
-    float = {
-        focusable = true,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-    },
-})
-
-require("mason").setup()
-require("mason-lspconfig").setup({
-    ensure_installed = {
-        "bashls",
-        "clangd",
-        "lua_ls",
-        "pyright",
-    },
-    handlers = {
-        lsp_zero.default_setup,
-    },
-})
+}
