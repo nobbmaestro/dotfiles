@@ -4,10 +4,6 @@ return {
     { "nvim-treesitter/playground", event = { "BufReadPost", "BufNewFile" } },
     { "kenn7/vim-arsync", dependencies = { "prabirshrestha/async.vim" } }, -- sync local project to server
 
-    -- UI Utilities
-    { "HiPhish/rainbow-delimiters.nvim", event = { "BufReadPost", "BufNewFile" } },
-    { "nvim-tree/nvim-web-devicons" },
-
     -- LSP
     {
         "VonHeikemen/lsp-zero.nvim",
