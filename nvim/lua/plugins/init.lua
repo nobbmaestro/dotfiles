@@ -1,12 +1,4 @@
 return {
-    -- Colorscheme
-    {
-        "nobbmaestro/nvim-andromeda",
-        branch = "development",
-        -- dir = "~/repos/dev-nvim-andromeda",
-        dependencies = { "tjdevries/colorbuddy.nvim", branch = "dev" },
-    },
-
     -- Navigation
     {
         "nvim-telescope/telescope.nvim",
@@ -68,4 +60,5 @@ return {
             { "rafamadriz/friendly-snippets" },
         },
     },
+    { import = "plugins.colorschemes" },
 }
