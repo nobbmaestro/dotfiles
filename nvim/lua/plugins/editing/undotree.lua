@@ -1,6 +1,9 @@
--- local status_ok = pcall(require, "undotree")
--- if not status_ok then
---     return
--- end
+return {
+    "mbbill/undotree",
+    lazy = true,
+    event = { "BufReadPost", "BufNewFile" },
 
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree: Toggle tree" })
+    config = function()
+        vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "Undotree: Toggle tree" })
+    end,
+}
