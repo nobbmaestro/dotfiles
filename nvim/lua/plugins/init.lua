@@ -5,7 +5,6 @@ return {
         branch = "0.1.x",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
-    { "theprimeagen/harpoon" },
     { "christoomey/vim-tmux-navigator" },
 
     -- Utilities
@@ -54,5 +53,6 @@ return {
     },
     { import = "plugins.colorschemes" },
     { import = "plugins.git" },
+    { import = "plugins.navigation" },
     { import = "plugins.editing" },
 }
