@@ -1,39 +1,59 @@
-local status_ok, plugin = pcall(require, "telescope")
-if not status_ok then
-    return
-end
+return {
+    {
+        "nvim-telescope/telescope.nvim",
+        lazy = true,
+        event = { "VimEnter" },
+        branch = "0.1.x",
+        dependencies = { "nvim-lua/plenary.nvim" },
 
-local builtin = require("telescope.builtin")
+        config = function()
+            local builtin = require("telescope.builtin")
 
-vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Telescope: Search files (git)" })
-vim.keymap.set("n", "<leader>t", builtin.builtin, { desc = "Telescope: Open telescope" })
-vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Telescope: Search files" })
-vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope: Search help" })
-vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Telescope: Search by grep" })
-vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Telescope: Search for highlighted word" })
-vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Telescope: Search diagnostics" })
-vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Telescope: Search resume" })
+            vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Telescope: Search files (git)" })
+            vim.keymap.set("n", "<leader>t", builtin.builtin, { desc = "Telescope: Open telescope" })
+            vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Telescope: Search files" })
+            vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope: Search help" })
+            vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Telescope: Search by grep" })
+            vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Telescope: Search for highlighted word" })
+            vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Telescope: Search diagnostics" })
+            vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Telescope: Search resume" })
 
-local setup = {
-    defaults = {
-        sorting_strategy = "ascending",
-        prompt_prefix = "  ",
-        selection_caret = " ",
-        multi_icon = " ",
+            require("telescope").setup({
+                defaults = {
+                    sorting_strategy = "ascending",
+                    prompt_prefix = "  ",
+                    selection_caret = " ",
+                    multi_icon = " ",
+                },
+                pickers = {
+                    git_files = {
+                        theme = "dropdown",
+                        previewer = false,
+                    },
+                    diagnostics = {
+                        theme = "ivy",
+                        previewer = false,
+                    },
+                },
+                extensions = {
+                    -- ...
+                },
+            })
+        end,
     },
-    pickers = {
-        git_files = {
-            theme = "dropdown",
-            previewer = false,
-        },
-        diagnostics = {
-            theme = "ivy",
-            previewer = false,
-        },
-    },
-    extensions = {
-        -- ...
+    {
+        "nvim-telescope/telescope-ui-select.nvim",
+        lazy = true,
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            require("telescope").setup({
+                extensions = {
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({}),
+                    },
+                },
+            })
+            require("telescope").load_extension("ui-select")
+        end,
     },
 }
-
-plugin.setup(setup)
