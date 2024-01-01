@@ -10,7 +10,6 @@ return {
 
     -- Git
     { "kdheepak/lazygit.nvim" },
-    { "airblade/vim-gitgutter", event = { "BufReadPost", "BufNewFile" } }, -- indicates changes to the file
 
     -- Utilities
     { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
