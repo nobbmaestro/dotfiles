@@ -17,7 +17,6 @@ return {
     { "nvim-treesitter/nvim-treesitter", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-treesitter/playground", event = { "BufReadPost", "BufNewFile" } },
     { "mbbill/undotree", event = { "BufReadPost", "BufNewFile" } },
-    { "terrortylor/nvim-comment", event = { "BufReadPost", "BufNewFile" } },
     { "nvim-lualine/lualine.nvim", event = { "VeryLazy" } },
     { "kenn7/vim-arsync", dependencies = { "prabirshrestha/async.vim" } }, -- sync local project to server
 
