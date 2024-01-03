@@ -23,6 +23,7 @@ return {
 
     config = function()
         local null_ls = require("null-ls")
+        vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "LSP: Format buffer" })
         null_ls.setup({
             sources = {
                 -- bash
