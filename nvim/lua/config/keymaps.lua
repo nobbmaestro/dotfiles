@@ -4,10 +4,10 @@ vim.g.mapleader = " "
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move down the selected text" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move up the selected text" })
 
--- keep courser on start of the line on movement
+-- keep cursor on start of the line on movement
 vim.keymap.set("n", "J", "mzJ`z")
 
--- keep courser in the middle while jumping up and down
+-- keep cursor in the middle while jumping up and down
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Jump down" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Jump up" })
 
@@ -34,7 +34,3 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
--- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Open tmux-sessionizer" })
--- vim.keymap.set("n", "<leader><leader>", function()
--- 	vim.cmd("so")
--- end, { desc = "Source file" })
