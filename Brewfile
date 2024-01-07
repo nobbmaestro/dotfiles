@@ -20,6 +20,8 @@ brew "zsh-syntax-highlighting"
 brew "bat"          # modern cat https://github.com/sharkdp/bat
 brew "curl"         # https://github.com/curl/curl
 brew "direnv"
+brew "docker"
+brew "docker-compose"
 brew "exa"          # ls replacement https://github.com/ogham/exa
 brew "fd"           # modern find https://github.com/sharkdp/fd
 brew "fzf"          # fuzzy-finder https://github.com/junegunn/fzf
@@ -45,6 +47,7 @@ cask "alfred"
 cask "amethyst"
 cask "bartender"
 cask "dictionaries"
+cask "docker"
 cask "iterm2"
 cask "kitty"
 cask "logi-options-plus"
