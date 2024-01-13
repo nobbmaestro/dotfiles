@@ -1,8 +1,10 @@
 # Enviroment
-.envrc
-.vim-arsync
+.cache/
 .direnv/
+.envrc
 .python-version
+.vim-arsync
+compile_commands.json
 
 # Mac
 .DS_Store
