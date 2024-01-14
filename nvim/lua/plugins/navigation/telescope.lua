@@ -25,6 +25,11 @@ return {
                     prompt_prefix = "  ",
                     selection_caret = " ",
                     multi_icon = " ",
+                    layout_config = {
+                        horizontal = {
+                            preview_width = 0.5,
+                        },
+                    },
                 },
                 pickers = {
                     git_files = {
