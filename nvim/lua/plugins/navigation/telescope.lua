@@ -11,12 +11,13 @@ return {
 
             vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Telescope: Search files (git)" })
             vim.keymap.set("n", "<leader>t", builtin.builtin, { desc = "Telescope: Open telescope" })
-            vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Telescope: Search files" })
-            vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope: Search help" })
-            vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Telescope: Search by grep" })
-            vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Telescope: Search for highlighted word" })
+            vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Telescope: Git status" })
             vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Telescope: Search diagnostics" })
+            vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Telescope: Search files" })
+            vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "Telescope: Search by grep" })
+            vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope: Search help" })
             vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Telescope: Search resume" })
+            vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Telescope: Search for highlighted word" })
 
             require("telescope").setup({
                 defaults = {
