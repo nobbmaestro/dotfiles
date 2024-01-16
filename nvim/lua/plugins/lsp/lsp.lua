@@ -70,7 +70,6 @@ return {
                 -- General LSP keymaps
                 nmap("n", "gd", vim.lsp.buf.definition, "Go to definition")
                 nmap("n", "gr", require("telescope.builtin").lsp_references, "Go to references")
-                nmap("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace symbols")
 
                 -- Diagnostics keymaps
                 nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
