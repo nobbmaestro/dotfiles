@@ -17,7 +17,6 @@ brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
 # miscs
-brew "bat"              # modern cat https://github.com/sharkdp/bat
 brew "bear"             # Bear is a tool that generates a compilation database for clang tooling
 brew "curl"             # https://github.com/curl/curl
 brew "direnv"
