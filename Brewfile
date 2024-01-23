@@ -28,6 +28,7 @@ brew "fzf"              # fuzzy-finder https://github.com/junegunn/fzf
 brew "git"
 brew "htop"
 brew "lazygit"          # Terminal git GUI https://github.com/jesseduffield/lazygit
+brew "lazydocker"
 brew "mas"              # Mac automation https://github.com/mas-cli/mas
 brew "neovim"
 brew "npm"
