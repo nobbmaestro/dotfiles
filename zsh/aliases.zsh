@@ -3,7 +3,7 @@
 # alias find='fd'
 alias c='clear'
 alias count='ls -a1 | wc -l'
-alias lg='lazygit'
+alias lzg='lazygit'
 alias pretty_path="sh -c 'python3 ~/.local/bin/pretty_path.py $PATH'"
 alias rm='rm -i'
 alias vim='nvim'
