@@ -44,7 +44,7 @@ fi
 
 # Zoxide
 if type "zoxide" >/dev/null 2>&1; then
-	eval "$(zoxide init zsh)"
+	eval "$(zoxide init --cmd cd zsh)"
 fi
 
 # CUnit
