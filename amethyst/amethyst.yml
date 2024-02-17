@@ -25,6 +25,7 @@ floating:
     - com.apple.systempreferences
     - com.koingosw.alarmclockpro
     - com.logitech.Logi-Options
+    - com.logitech.Logi-Options-Plus
 
 # General
 restore-layouts-on-launch: true
@@ -33,6 +34,6 @@ display-layout-when-changing-spaces: false
 ignore-menu-bars: true
 
 # Add 8px margin between windows
-smart-window-margins: true
+smart-window-margins: false
 window-margins: true
 window-margin-size: 8
