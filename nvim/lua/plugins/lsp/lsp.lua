@@ -13,7 +13,7 @@ local function fmt(diagnostic)
 end
 
 -- Toggle virtual diagnostics
-local diagnostic_visible = true
+local diagnostic_visible = false
 local function toggle_diagnostic()
     diagnostic_visible = not diagnostic_visible
     vim.diagnostic.config({ virtual_text = diagnostic_visible })
@@ -107,7 +107,7 @@ return {
                     source = "always",
                     format = fmt,
                     severity = {
-                        -- min = vim.diagnostic.severity.ERROR,
+                        min = vim.diagnostic.severity.ERROR,
                     },
                 },
                 severity_sort = true,
