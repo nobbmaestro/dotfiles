@@ -56,3 +56,14 @@ if [[ -d $(brew --prefix)/opt/cunit/lib ]]; then
 	LIBRARY_PATH=$(brew --prefix)/opt/cunit/lib
 	export LIBRARY_PATH
 fi
+
+# SSH wrapper
+ssh() {
+	if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
+		tmux rename-window "$(echo $*)"
+		command ssh "$@"
+		tmux set-window-option automatic-rename "on" 1>/dev/null
+	else
+		command ssh "$@"
+	fi
+}
