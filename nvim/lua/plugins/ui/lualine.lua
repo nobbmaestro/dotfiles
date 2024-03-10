@@ -25,14 +25,14 @@ local function lsp_server_component()
     if next(buf_client_names) == nil then
         return ""
     else
-        return string.format("(%s)", table.concat(buf_client_names, ", "))
+        return string.format("[%s]", table.concat(buf_client_names, ", "))
     end
 end
 
 return {
     "nvim-lualine/lualine.nvim",
     lazy = true,
-    event = { "VimEnter"},
+    event = { "VimEnter" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
 
     config = function()
