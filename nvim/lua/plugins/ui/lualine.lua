@@ -47,7 +47,7 @@ return {
                     statusline = {},
                     winbar = {},
                 },
-                ignore_focus = {},
+                ignore_focus = { "neo-tree" },
                 always_divide_middle = true,
                 globalstatus = false,
                 refresh = {
