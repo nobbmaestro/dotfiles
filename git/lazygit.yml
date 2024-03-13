@@ -45,4 +45,5 @@ gui:
       - *mono_5
 
 os:
-  editPreset: 'nvim'
+  editCommand: "lazygit-edit-nvim"
+  editCommandTemplate: "{{editor}} {{filename}} {{line}}"

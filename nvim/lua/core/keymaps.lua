@@ -34,3 +34,8 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "Q", "<nop>")
+
+-- lazygit
+vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "lazyGit: Start" })
+vim.keymap.set("n", "<leader>gl", "<cmd>LazyGitLog<CR>", { desc = "lazyGit: Open git log" })
+vim.keymap.set("n", "<leader>gbl", "<cmd>LazyGitFilter<CR>", { desc = "lazyGit: Open git log for current buffer" })
