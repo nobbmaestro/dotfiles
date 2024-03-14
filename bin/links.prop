@@ -1,6 +1,7 @@
 $DOTFILES/bin/opacity=$HOME/.local/bin/opacity
 $DOTFILES/bin/tmux-cht=$HOME/.local/bin/tmux-cht
 $DOTFILES/bin/tmux-nvim-zsh-toggler=$HOME/.local/bin/tmux-nvim-zsh-toggler
+$DOTFILES/bin/tmux-last-window=$HOME/.local/bin/tmux-last-window
 $DOTFILES/bin/tmux-sessionizer=$HOME/.local/bin/tmux-sessionizer
 $DOTFILES/bin/truecolor-test=$HOME/.local/bin/truecolor-test
 $DOTFILES/bin/pretty_path.py=$HOME/.local/bin/pretty_path.py
