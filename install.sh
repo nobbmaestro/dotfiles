@@ -48,6 +48,11 @@ purge_home_from_path() {
 	echo "${path/#$HOME\//}"
 }
 
+setup_python() {
+    title "Setting up Python"
+    bash -c ./python/install.sh
+}
+
 install_oh_my_zsh_helper() {
 	if [ ! -d "$ZSH" ] || [ ! -e "$ZSH/oh-my-zsh.sh" ]; then
 		info "installing: oh-my-zsh"
@@ -295,6 +300,9 @@ zsh)
 tmux)
 	setup_tmux
 	;;
+python)
+    setup_python
+    ;;
 symlink)
 	create_symlinks all
 	;;
@@ -303,10 +311,11 @@ all)
 	setup_homebrew
 	setup_zsh
 	setup_tmux
+    setup_python
 	create_symlinks all
 	;;
 *)
-	echo -e $"\nUsage: $(basename "$0") [backup|brew|zsh|tmux|symlink|all]\n"
+	echo -e $"\nUsage: $(basename "$0") [backup|brew|zsh|tmux|python|symlink|all]\n"
 	exit 1
 	;;
 esac
