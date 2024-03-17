@@ -3,3 +3,4 @@ $DOTFILES/bin/tmux-cht=$HOME/.local/bin/tmux-cht
 $DOTFILES/bin/tmux-sessionizer=$HOME/.local/bin/tmux-sessionizer
 $DOTFILES/bin/truecolor-test=$HOME/.local/bin/truecolor-test
 $DOTFILES/bin/pretty_path.py=$HOME/.local/bin/pretty_path.py
+$DOTFILES/bin/lazygit-edit-nvim=$HOME/.local/bin/lazygit-edit-nvim

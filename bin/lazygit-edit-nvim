@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# reference: https://www.reddit.com/r/neovim/comments/ydt86z/is_there_a_luabased_terminal_plugin_that_opens/
+
+# Check if the file name is provided
+if [ -z "$1" ]; then
+	echo "Usage: $0 <file> [line]"
+	exit 1
+fi
+
+file_to_edit="$1"
+line="${2:-1}"
+
+if [[ -n "$NVIM" ]]; then
+	# If in a Neovim terminal, open the file in the current nvim instance
+	nvim --server "${NVIM}" --remote-send "<CMD>q<CR>:e +${line} ${file_to_edit}<CR>"
+	exit 0
+fi
+
+nvim +"{$line}" -- "${file_to_edit}"

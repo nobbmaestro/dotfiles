@@ -45,6 +45,7 @@ gui:
       - *mono_5
 
 os:
+  # editCommand: 'lazygit-edit-nvim {{filename}}'
   editPreset: 'nvim-remote'
   edit: "nvr --remote-send '<CMD>q<CR><CMD>lua local root = vim.fn.trim(vim.fn.system(\"git rev-parse --show-toplevel\")); vim.cmd(\"e \" .. root .. \"/\" .. {{filename}})<CR>'"
   open: "nvr --remote-send '<CMD>q<CR><CMD>lua local root = vim.fn.trim(vim.fn.system(\"git rev-parse --show-toplevel\")); vim.cmd(\"e \" .. root .. \"/\" .. {{filename}})<CR>'"
