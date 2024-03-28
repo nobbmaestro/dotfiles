@@ -10,7 +10,6 @@ return {
             local builtin = require("telescope.builtin")
 
             vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Telescope: Search files (git)" })
-            vim.keymap.set("n", "<leader>t", builtin.builtin, { desc = "Telescope: Open telescope" })
             vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Telescope: Git status" })
             vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Telescope: Search diagnostics" })
             vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Telescope: Search files" })
