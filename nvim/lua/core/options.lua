@@ -2,6 +2,7 @@ vim.opt.backup = false
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.cursorline = true
 vim.opt.expandtab = true
+vim.opt.exrc = true
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.incsearch = true

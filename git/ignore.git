@@ -2,6 +2,7 @@
 .cache/
 .direnv/
 .envrc
+.exrc
 .python-version
 .vim-arsync
 compile_commands.json
