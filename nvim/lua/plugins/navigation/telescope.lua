@@ -39,14 +39,14 @@ return {
                         theme = "ivy",
                         previewer = false,
                         layout_config = {
-                            height = 0.35,
+                            height = 0.25,
                         },
                     },
                     lsp_references = {
                         theme = "ivy",
                         show_line = false,
                         layout_config = {
-                            height = 0.35,
+                            height = 0.25,
                         },
                     },
                 },

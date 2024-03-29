@@ -11,7 +11,7 @@ return {
     vim.keymap.set("n", "q", ":VimuxCloseRunner<CR>", { silent = true }),
 
     vim.cmd([[
-        let g:VimuxHeight = '30'
+        let g:VimuxHeight = '25'
         let test#strategy = 'vimux'
         let test#python#runner = "pyunit"
         let g:test#python#pyunit#options = "--verbose"
