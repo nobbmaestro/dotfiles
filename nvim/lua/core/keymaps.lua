@@ -24,10 +24,10 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to the system clip
 
 -- multiline replace on highlighted
 vim.keymap.set(
-	"n",
-	"<leader>s",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = "Multiline string replace on highlighted" }
+    "n",
+    "<leader>ss",
+    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gIc<Left><Left><Left><Left>]],
+    { desc = "Multiline string replace on highlighted" }
 )
 
 -- other
