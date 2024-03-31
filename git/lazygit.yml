@@ -44,6 +44,11 @@ gui:
     defaultFgColor:
       - *mono_5
 
+keybinding:
+  commits:
+    moveDownCommit: '<c-n>'
+    moveUpCommit: '<c-p>'
+
 os:
   editCommand: "lazygit-edit-nvim"
   editCommandTemplate: "{{editor}} {{filename}} {{line}}"
