@@ -8,7 +8,7 @@ return {
     vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", { desc = "Vimtest: Run test file" }),
     vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", { desc = "Vimtest: Run last test" }),
     vim.keymap.set("n", "<leader>tv", ":TestVisit<CR>", { desc = "Vimtest: Visit last test" }),
-    vim.keymap.set("n", "q", ":VimuxCloseRunner<CR>", { silent = true }),
+    vim.keymap.set("n", "<leader>tq", ":VimuxCloseRunner<CR>", { silent = true }),
 
     vim.cmd([[
         let g:VimuxHeight = '25'
