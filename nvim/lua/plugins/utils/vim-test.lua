@@ -4,11 +4,11 @@ return {
         "preservim/vimux",
     },
 
-    vim.keymap.set("n", "<leader>tt", ":TestNearest<CR>", { desc = "Vimtest: Run nearest test" }),
-    vim.keymap.set("n", "<leader>tf", ":TestFile<CR>", { desc = "Vimtest: Run test file" }),
-    vim.keymap.set("n", "<leader>tl", ":TestLast<CR>", { desc = "Vimtest: Run last test" }),
-    vim.keymap.set("n", "<leader>tv", ":TestVisit<CR>", { desc = "Vimtest: Visit last test" }),
-    vim.keymap.set("n", "<leader>tq", ":VimuxCloseRunner<CR>", { silent = true }),
+    vim.keymap.set("n", "<leader>tt", "<cmd>TestNearest<CR>", { desc = "Vimtest: Run nearest test" }),
+    vim.keymap.set("n", "<leader>tf", "<cmd>TestFile<CR>", { desc = "Vimtest: Run test file" }),
+    vim.keymap.set("n", "<leader>tl", "<cmd>TestLast<CR>", { desc = "Vimtest: Run last test" }),
+    vim.keymap.set("n", "<leader>tv", "<cmd>TestVisit<CR>", { desc = "Vimtest: Visit last test" }),
+    vim.keymap.set("n", "<leader>tq", "<cmd>VimuxCloseRunner<CR>", { silent = true }),
 
     vim.cmd([[
         let g:VimuxHeight = '25'
