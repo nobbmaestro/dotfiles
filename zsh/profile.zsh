@@ -67,3 +67,6 @@ ssh() {
 		command ssh "$@"
 	fi
 }
+
+# Bob, A version manager for neovim
+add_to_path_front $HOME/.local/share/bob/nvim-bin

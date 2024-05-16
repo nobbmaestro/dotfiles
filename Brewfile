@@ -18,6 +18,7 @@ brew "zsh-syntax-highlighting"
 
 # miscs
 brew "bear"             # Bear is a tool that generates a compilation database for clang tooling
+brew "bob"              # Bob, A version manager for neovim
 brew "curl"             # https://github.com/curl/curl
 brew "direnv"
 brew "docker"
