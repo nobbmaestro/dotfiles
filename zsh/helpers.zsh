@@ -3,8 +3,6 @@
 function source_if_exists() {
 	if test -e "$1"; then
 		source "$1"
-	else
-		echo "zshrc: file not found: $1"
 	fi
 }
 
