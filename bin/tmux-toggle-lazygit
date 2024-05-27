@@ -2,41 +2,41 @@
 
 args=$(getopt lf $*)
 if [ $? -ne 0 ]; then
-	echo 'Usage: tmux-toggle-lazygit [options] [/path/to/file]...
+    echo 'Usage: tmux-toggle-lazygit [options] [/path/to/file]...
 
 Options:
     -l     focus log upon opening lazygit
     -f     forcefully opens lazygit log
     '
-	exit 2
+    exit 2
 fi
 
 set -- $args
 while :; do
-	case "$1" in
-	-l | -f)
-		# echo "flag $1 set"
-		sflags="${1#-}$sflags"
-		shift
-		;;
-	--)
-		shift
-		break
-		;;
-	esac
+    case "$1" in
+    -l | -f)
+        # echo "flag $1 set"
+        sflags="${1#-}$sflags"
+        shift
+        ;;
+    --)
+        shift
+        break
+        ;;
+    esac
 done
 
 COMMAND=""
 if [[ -n "$1" && ! -f "$1" ]]; then
-	echo "filename '$1' does not exist..."
-	exit 1
+    echo "filename '$1' does not exist..."
+    exit 1
 elif [[ $sflags == *"l"* && -n "$1" ]]; then
-	# echo "Flag 'l' is set."
-	COMMAND="lazygit --filter ${1}"
+    # echo "Flag 'l' is set."
+    COMMAND="lazygit --filter ${1}"
 elif [[ $sflags == *"l"* ]]; then
-	COMMAND="lazygit log"
+    COMMAND="lazygit log"
 else
-	COMMAND="lazygit"
+    COMMAND="lazygit"
 fi
 
 # Get the current window name
@@ -50,16 +50,16 @@ lazygit_window_index=$(tmux list-windows | grep "lazygit" | awk -F: '{print $1}'
 
 # If the "lazygit" window doesn't exist, create a new "lazygit" window and switch to it
 if [ -z "$lazygit_window_index" ]; then
-	tmux new-window -n "lazygit" "${COMMAND}"
-	exit 0
+    tmux new-window -n "lazygit" "${COMMAND}"
+    exit 0
 elif [[ $sflags == *"f"* ]]; then
-	tmux kill-window -t "${lazygit_window_index}"
-	tmux new-window -n "lazygit" "${COMMAND}"
-	exit 0
+    tmux kill-window -t "${lazygit_window_index}"
+    tmux new-window -n "lazygit" "${COMMAND}"
+    exit 0
 # If the current window is "lazygit", switch to the previous window
 elif [ "$current_window" == "lazygit" ]; then
-	tmux last-window
+    tmux last-window
 else
-	# If the current window is not "lazygit", switch to the "lazygit" window
-	tmux select-window -t "${lazygit_window_index}"
+    # If the current window is not "lazygit", switch to the "lazygit" window
+    tmux select-window -t "${lazygit_window_index}"
 fi

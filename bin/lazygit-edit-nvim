@@ -3,32 +3,32 @@
 source "$HOME"/.local/bin/utils/tmux_funcs.sh
 
 if [ -z "$1" ]; then
-	echo "Usage: $0 <file> [line]"
-	exit 1
+    echo "Usage: $0 <file> [line]"
+    exit 1
 fi
 
 file_to_edit="$1"
 line="${2:-1}"
 
 if [[ -n "$NVIM" ]]; then
-	# If in a Neovim terminal, open the file in the current nvim instance
-	nvim --server "${NVIM}" --remote-send "<C-w>:e +${line} ${file_to_edit}<CR>"
-	exit 0
+    # If in a Neovim terminal, open the file in the current nvim instance
+    nvim --server "${NVIM}" --remote-send "<C-w>:e +${line} ${file_to_edit}<CR>"
+    exit 0
 fi
 
 if [ -z "$TMUX" ]; then
-	# If not in a tmux session, open the file in a new Neovim instance
-	nvim +$\line -- "$file_to_edit"
-	exit 0
+    # If not in a tmux session, open the file in a new Neovim instance
+    nvim +$\line -- "$file_to_edit"
+    exit 0
 fi
 
 nvim_pane_id=$(get_pane_id_by_command nvim)
 nvim_window_id=$(get_window_id_by_command nvim)
 
 if [ -z "$nvim_pane_id" ]; then
-	tmux new-window -n "nvim" "nvim +${line} -- ${file_to_edit}"
+    tmux new-window -n "nvim" "nvim +${line} -- ${file_to_edit}"
 else
-	tmux select-window -t "$nvim_window_id"
-	tmux select-pane -t "$nvim_pane_id"
-	tmux send-keys ":edit +${line} ${file_to_edit}" Enter
+    tmux select-window -t "$nvim_window_id"
+    tmux select-pane -t "$nvim_pane_id"
+    tmux send-keys ":edit +${line} ${file_to_edit}" Enter
 fi

@@ -11,22 +11,22 @@
 #   optional: direnv
 
 init_nvim() {
-	pane_id="$(tmux display-message -p "#I")"
-	pane_path="$(tmux display-message -p -t "$pane_id" '#{pane_current_path}')"
+    pane_id="$(tmux display-message -p "#I")"
+    pane_path="$(tmux display-message -p -t "$pane_id" '#{pane_current_path}')"
 
-	# if direnv is installed, load env prior to running nvim
-	if type "direnv" >/dev/null 2>&1; then
-		tmux neww -c "$pane_path" -n "nvim" zsh -c "direnv exec /'$pane_path' zsh -c nvim"
-	else
-		tmux neww -c "$pane_path" -n "nvim" zsh -c "nvim"
-	fi
+    # if direnv is installed, load env prior to running nvim
+    if type "direnv" >/dev/null 2>&1; then
+        tmux neww -c "$pane_path" -n "nvim" zsh -c "direnv exec /'$pane_path' zsh -c nvim"
+    else
+        tmux neww -c "$pane_path" -n "nvim" zsh -c "nvim"
+    fi
 }
 
 # Make sure tmux is running
 tmux_running="$(pgrep tmux)"
 if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
-	echo "tmux needs to be running"
-	exit 1
+    echo "tmux needs to be running"
+    exit 1
 fi
 
 ses_name="$(tmux display-message -p "#S")"
@@ -35,13 +35,13 @@ win_list="$(tmux list-windows -F "#I:#W")"
 
 # Make sure 'nvim' window exists
 if [[ "$win_list" != *"nvim"* ]]; then
-	init_nvim
+    init_nvim
 
 # If we are not in 'nvim', switch to 'nvim' window
 elif [[ "$win_name" != *"nvim"* ]]; then
-	tmux switch-client -t "$ses_name"":nvim"
+    tmux switch-client -t "$ses_name"":nvim"
 
 # Switch to lastly visited (but still active) window
 else
-	tmux select-window -l
+    tmux select-window -l
 fi

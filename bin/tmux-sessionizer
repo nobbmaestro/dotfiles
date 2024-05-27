@@ -10,30 +10,30 @@ PROMPT_ICON="  "
 SEARCH_PATH="$HOME/repos"
 
 if [[ $# -eq 1 ]]; then
-	selected=$1
+    selected=$1
 else
-	selected=$(
-		find "$SEARCH_PATH" -mindepth 1 -maxdepth 1 -type d |
-        sed "s;$SEARCH_PATH/;;" | # removes the ~/repos/ prefix
-        sort |
-        fzf --no-sort --cycle --track --exact --pointer="$POINTER_ICON" --prompt="$PROMPT_ICON"
-	)
+    selected=$(
+        find "$SEARCH_PATH" -mindepth 1 -maxdepth 1 -type d |
+            sed "s;$SEARCH_PATH/;;" | # removes the ~/repos/ prefix
+            sort |
+            fzf --no-sort --cycle --track --exact --pointer="$POINTER_ICON" --prompt="$PROMPT_ICON"
+    )
 fi
 
 if [[ -z $selected ]]; then
-	exit 0
+    exit 0
 fi
 
 selected_path="$SEARCH_PATH/$selected"
 tmux_running=$(pgrep tmux)
 
 if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
-	tmux new-session -s "$selected" -c "$selected_path"
-	exit 0
+    tmux new-session -s "$selected" -c "$selected_path"
+    exit 0
 fi
 
 if ! tmux has-session -t="$selected" 2>/dev/null; then
-	tmux new-session -ds "$selected" -c "$selected_path"
+    tmux new-session -ds "$selected" -c "$selected_path"
 fi
 
 tmux switch-client -t "$selected"
