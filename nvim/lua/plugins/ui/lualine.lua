@@ -1,10 +1,8 @@
 local function harpoon_component()
     local mark_idx = require("harpoon.mark").get_current_index()
-    if mark_idx == nil then
-        return ""
-    end
+    return mark_idx ~= nil and string.format(" %d", mark_idx) or ""
+end
 
-    return string.format(" %d", mark_idx)
 local function sleuth_component()
     return vim.g.loaded_sleuth == 1 and vim.fn.SleuthIndicator() or ""
 end
