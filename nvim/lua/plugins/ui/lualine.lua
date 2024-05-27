@@ -22,11 +22,7 @@ local function lsp_server_component()
             table.insert(buf_client_names, client.name)
         end
     end
-    if next(buf_client_names) == nil then
-        return ""
-    else
-        return string.format("[%s]", table.concat(buf_client_names, ", "))
-    end
+    return next(buf_client_names) ~= nil and string.format("[%s]", table.concat(buf_client_names, ", ")) or ""
 end
 
 return {
@@ -76,7 +72,7 @@ return {
                     { "location", padding = { left = 0, right = 1 } },
                 },
                 lualine_z = {
-                    { "filetype", icon_only = false, separator = "", padding = { left = 1, right = 0 } },
+                    { "filetype",          icon_only = false, separator = "", padding = { left = 1, right = 0 } },
                     { lsp_server_component },
                 },
             },
