@@ -5,6 +5,8 @@ local function harpoon_component()
     end
 
     return string.format(" %d", mark_idx)
+local function sleuth_component()
+    return vim.g.loaded_sleuth == 1 and vim.fn.SleuthIndicator() or ""
 end
 
 local function lsp_server_component()
@@ -69,6 +71,7 @@ return {
                         "diagnostics",
                         symbols = { error = "✘", hint = "⚑", info = "»", warn = "▲" },
                     },
+                    { sleuth_component },
                 },
                 lualine_y = {
                     { "progress", padding = { left = 1, right = 1 } },
