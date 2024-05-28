@@ -1,6 +1,7 @@
 return {
     "nobbmaestro/nvim-andromeda",
     lazy = true,
+    event = { "VimEnter" },
     priority = 1000,
 
     branch = "development",
