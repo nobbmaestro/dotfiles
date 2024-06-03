@@ -1,6 +1,5 @@
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH="$ZDOTDIR/.oh-my-zsh"
-export ZSH_CUSTOM="$ZSH/custom"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # Editor
 export EDITOR="nvim"
