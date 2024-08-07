@@ -81,3 +81,14 @@ ssh() {
 
 # Bob, A version manager for neovim
 add_to_path_front $HOME/.local/share/bob/nvim-bin
+
+# Fzf integration
+if type "fzf" >/dev/null 2>&1; then
+	# zsh-vi-mode interferes with fzf-history-widget bindkey
+	# https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
+	if type "zvm_version" >/dev/null 2>&1; then
+		zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+	else
+		source_if_exists $HOME/.fzf.zsh
+	fi
+fi

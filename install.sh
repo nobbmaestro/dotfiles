@@ -88,6 +88,13 @@ install_sshpass_helper() {
     fi
 }
 
+install_fzf_zsh_integration() {
+    if type "fzf" >/dev/null 2>&1; then
+        info "installing: fzf"
+        $(brew --prefix)/opt/fzf/install
+    fi
+}
+
 install_zsh_utils() {
     title "Installing zsh utilities"
 
@@ -95,6 +102,7 @@ install_zsh_utils() {
     install_oh_my_zsh_helper
     install_powerlevel10k_helper
     install_sshpass_helper
+    install_fzf_zsh_integration
 }
 
 backup_target_file() {
