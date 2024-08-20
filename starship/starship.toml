@@ -1,164 +1,132 @@
-[aws]
-symbol = "  "
+format = """
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$python\
+$lua\
+$nodejs\
+$golang\
+$haskell\
+$rust\
+$ruby\
+$aws\
+$docker_context\
+$jobs\
+$cmd_duration\
+$line_break\
+$character"""
 
-[buf]
-symbol = " "
+add_newline = true
+palette = "andromeda"
 
-[c]
-symbol = " "
-
-[conda]
-symbol = " "
-
-[crystal]
-symbol = " "
-
-[dart]
-symbol = " "
+[character]
+success_symbol = '[➜](bold white) '
+vimcmd_symbol = '[V](bold red) '
 
 [directory]
-read_only = " 󰌾"
+style = 'bold fg:cyan'
+format = '[$path ]($style)'
+truncation_length = 3
+truncation_symbol = '…/'
+truncate_to_repo = false
 
-[docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
+# [directory.substitutions]
+# 'Documents' = '󰈙'
+# 'Downloads' = ''
+# 'Music' = ''
+# 'Pictures' = ''
 
 [git_branch]
-symbol = " "
+style = 'fg:gray'
+symbol = ' '
+format = '[on](white) [$symbol$branch ]($style)'
 
-[golang]
-symbol = " "
+[git_status]
+style = 'fg:red'
+format = '([$all_status$ahead_behind]($style) )'
 
-[guix_shell]
-symbol = " "
+staged = '+${count} '
+stashed = '*${count} '
 
-[haskell]
-symbol = " "
+modified = '~${count} '
+deleted = '!${count} '
 
-[haxe]
-symbol = " "
+behind = '⇣${count} '
+ahead = '⇡${count} '
+untracked = '?${count} '
 
-[hg_branch]
-symbol = " "
-
-[hostname]
-ssh_symbol = " "
-
-[java]
-symbol = " "
-
-[julia]
-symbol = " "
-
-[kotlin]
-symbol = " "
-
-[lua]
-symbol = " "
-
-[memory_usage]
-symbol = "󰍛 "
-
-[meson]
-symbol = "󰔷 "
-
-[nim]
-symbol = "󰆥 "
-
-[nix_shell]
-symbol = " "
-
-[nodejs]
-symbol = " "
-
-[ocaml]
-symbol = " "
-
-[os.symbols]
-Alpaquita = " "
-Alpine = " "
-AlmaLinux = " "
-Amazon = " "
-Android = " "
-Arch = " "
-Artix = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "󰛓 "
-Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = "󰈸 "
-Kali = " "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = "󰈺 "
-openSUSE = " "
-OracleLinux = "󰌷 "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-RockyLinux = " "
-Redox = "󰀘 "
-Solus = "󰠳 "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Void = " "
-Windows = "󰍲 "
-
-[package]
-symbol = "󰏗 "
-
-[perl]
-symbol = " "
-
-[php]
-symbol = " "
-
-[pijul_channel]
-symbol = " "
+[fill]
+symbol = ' '
 
 [python]
-symbol = " "
+style = 'fg:blue'
+symbol = ' '
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+pyenv_version_name = true
+pyenv_prefix = ''
 
-[rlang]
-symbol = "󰟔 "
+[lua]
+symbol = ' '
 
-[ruby]
-symbol = " "
+[nodejs]
+style = 'blue'
+symbol = ' '
+
+[golang]
+style = 'blue'
+symbol = ' '
+
+[haskell]
+style = 'blue'
+symbol = ' '
 
 [rust]
-symbol = " "
+style = 'orange'
+symbol = ' '
 
-[scala]
-symbol = " "
+[ruby]
+style = 'blue'
+symbol = ' '
 
-[swift]
-symbol = " "
+[package]
+symbol = '󰏗 '
 
-[zig]
-symbol = " "
+[aws]
+symbol = ' '
+style = 'yellow'
+format = '[$symbol($profile )(\[$duration\] )]($style)'
+
+[docker_context]
+symbol = ' '
+style = 'fg:#06969A'
+format = '[$symbol]($style) $path'
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+detect_extensions = ['Dockerfile']
+
+[jobs]
+symbol = ' '
+style = 'red'
+number_threshold = 1
+format = '[$symbol]($style)'
+
+[cmd_duration]
+min_time = 500
+style = 'fg:gray'
+format = '[$duration]($style)'
+
+[palettes.andromeda]
+blue = '#7cb7ff'
+red = '#ee5f43'
+green = '#96e072'
+purple = '#c74ded'
+cyan = '#00e8c6'
+orange = '#f39c12'
+yellow = '#ffe66d'
+gray = '#606064'
+# white = '#abb2bf'
+white = '#d5ced9'
+pink = "#ff00aa"
+hot_pink = "#f92672"
+
+
