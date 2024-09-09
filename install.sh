@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH="$ZDOTDIR/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
 DOTFILES="$(pwd -P)"
@@ -53,24 +52,6 @@ setup_python() {
     bash -c ./python/install.sh
 }
 
-install_oh_my_zsh_helper() {
-    if [ ! -d "$ZSH" ] || [ ! -e "$ZSH/oh-my-zsh.sh" ]; then
-        info "installing: oh-my-zsh"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    else
-        info "utility already installed: oh-my-zsh"
-    fi
-}
-
-install_powerlevel10k_helper() {
-    if [ ! -d "$ZSH/custom/themes/powerlevel10k" ]; then
-        info "installing: powerlevel10k"
-        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$ZSH/custom}/themes/powerlevel10k"
-    else
-        info "utility already installed: powerlevel10k"
-    fi
-}
-
 install_tmux_package_manager_helper() {
     if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
         info "installing: tmux tpm"
@@ -99,8 +80,6 @@ install_zsh_utils() {
     title "Installing zsh utilities"
 
     # Install zsh utilities
-    install_oh_my_zsh_helper
-    install_powerlevel10k_helper
     install_sshpass_helper
     install_fzf_zsh_integration
 }
