@@ -3,4 +3,3 @@ $DOTFILES/zsh/rc.zsh=$ZDOTDIR/.zshrc
 $DOTFILES/zsh/profile.zsh=$ZDOTDIR/.zsh_profile
 $DOTFILES/zsh/aliases.zsh=$ZDOTDIR/.zsh_aliases
 $DOTFILES/zsh/helpers.zsh=$ZDOTDIR/.zsh_helpers
-$DOTFILES/zsh/powerlevel10k/p10k.zsh=$ZDOTDIR/p10k.zsh
