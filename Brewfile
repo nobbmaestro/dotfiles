@@ -39,6 +39,7 @@ brew "pypy"             # Python JIT (Just-In-Time) Interpreter
 brew "rbenv"            # Ruby Version Manager
 brew "ripgrep"
 brew "ruby-build"
+brew "starship"
 brew "tmux"
 brew "tldr"             # Collaborative cheatsheets for console commands https://github.com/tldr-pages/tldr
 brew "tree"
