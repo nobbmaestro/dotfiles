@@ -6,3 +6,4 @@ $DOTFILES/bin/tmux-sessionizer=$HOME/.local/bin/tmux-sessionizer
 $DOTFILES/bin/tmux-toggle-lazygit=$HOME/.local/bin/tmux-toggle-lazygit
 $DOTFILES/bin/truecolor-test=$HOME/.local/bin/truecolor-test
 $DOTFILES/bin/utils=$HOME/.local/bin/utils
+$DOTFILES/bin/cycle-workspaces=$HOME/.local/bin/cycle-workspaces

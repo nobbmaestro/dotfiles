@@ -1,0 +1,42 @@
+#!/usr/bin/python3
+
+import argparse
+import subprocess
+
+WORKSPACES = ("home", "term", "web", "dev-web", "chat", "main", "notes", "misc", "other")
+
+
+def run_process(params, timeout=2, check=True):
+    return subprocess.run(params, stdout=subprocess.PIPE, text=True, timeout=timeout, check=check)
+
+
+def get_current_workspace():
+    ret = run_process(["aerospace", "list-workspaces", "--focused"])
+    return ret.stdout.strip("\n")
+
+
+def set_workspace(workspace):
+    run_process(["aerospace", "workspace", f"{workspace}"])
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n", "--next", action="store_true", help="cycle to next workspace")
+    parser.add_argument("-p", "--previous", action="store_true", help="cycle to previous workspace")
+
+    args = parser.parse_args()
+
+    curr = get_current_workspace()
+
+    i = WORKSPACES.index(curr)
+    if args.next:
+        i = min(i + 1, len(WORKSPACES) - 1)
+    elif args.previous:
+        i = max(i - 1, 0)
+    set_workspace(WORKSPACES[i])
+
+    exit(0)
+
+
+if __name__ == "__main__":
+    main()

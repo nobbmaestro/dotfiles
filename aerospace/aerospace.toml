@@ -117,6 +117,9 @@ ctrl-6 = 'workspace notes'
 ctrl-7 = 'workspace misc'
 ctrl-8 = 'workspace other'
 
+ctrl-right = 'exec-and-forget ~/.local/bin/cycle-workspaces --next'
+ctrl-left = 'exec-and-forget ~/.local/bin/cycle-workspaces --previous'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 ctrl-tab = 'workspace-back-and-forth'
 
