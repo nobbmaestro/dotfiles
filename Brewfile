@@ -49,7 +49,6 @@ brew "coreutils"        # For tmux-network-bandwidth plugin
 ## Casks - actual visual software 
 cask "aldente"
 cask "alfred"
-cask "amethyst"
 cask "bartender"
 cask "dictionaries"
 cask "docker"
