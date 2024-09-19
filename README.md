@@ -2,7 +2,7 @@
 
 Dotfiles and automations that should make my life easier (or rather harder?).
 
--   [Amethyst](https://github.com/ianyh/Amethyst) Automatic tiling window manager for MacOS.
+-   [AeroSpace](https://github.com/nikitabobko/AeroSpace) AeroSpace is an i3-like tiling window manager for macOS
 -   [Homebrew](https://github.com/Homebrew/brew) The Missing Package Manager for MacOS (or Linux).
 -   [Neovim](https://github.com/neovim/neovim) A Modern, ground up rewrite of Vim.
 -   [Oh-My-Zsh](https://www.zsh.org) Oh My Zsh is an open source, community-driven framework for managing your zsh configuration.
