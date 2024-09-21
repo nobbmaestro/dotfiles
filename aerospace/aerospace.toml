@@ -7,12 +7,12 @@
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
-after-login-command = []
+after-login-command = ['workspace home']
 
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = ['workspace home']
 
 # Start AeroSpace at login
 start-at-login = true
@@ -168,18 +168,26 @@ run = "move-node-to-workspace dev-web"
 if.app-id = 'org.mozilla.firefox'
 run = "move-node-to-workspace dev-web"
 
-# [[on-window-detected]]
-# if.app-id = 'com.apple.mail'
-# run = "move-node-to-workspace mail"
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams'
+run = "move-node-to-workspace chat"
 
-# [[on-window-detected]]
-# if.app-id = 'com.microsoft.Outlook'
-# run = "move-node-to-workspace mail"
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = "move-node-to-workspace mail"
 
-# [[on-window-detected]]
-# if.app-id = 'md.obsidian'
-# run = "move-node-to-workspace notes"
+[[on-window-detected]]
+if.app-id = 'com.microsoft.Outlook'
+run = "move-node-to-workspace mail"
 
-# [[on-window-detected]]
-# if.app-id = 'com.microsoft.teams'
-# run = "move-node-to-workspace chat"
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = "move-node-to-workspace notes"
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iBooksX'
+run = "move-node-to-workspace other"
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Preview'
+run = "move-node-to-workspace other"
