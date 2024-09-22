@@ -6,6 +6,7 @@ export EXA_COLORS="di=37;1:fi=37:ex=31:ln=35;1"
 # Homebrew
 if [[ "$OSTYPE" == 'darwin'* ]]; then
 	add_to_path_front /opt/homebrew/bin
+	add_to_path_front /opt/homebrew/sbin
 elif [[ "$OSTYPE" == 'linux'* ]]; then
 	add_to_path_front /home/linuxbrew/.linuxbrew/bin
 fi
