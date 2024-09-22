@@ -43,6 +43,8 @@ brew "tmux"
 brew "tldr"             # Collaborative cheatsheets for console commands https://github.com/tldr-pages/tldr
 brew "tree"
 brew "zoxide"           # smarter cd command https://github.com/ajeetdsouza/zoxide
+brew "gawk"             # For tmux-network-bandwidth plugin
+brew "coreutils"        # For tmux-network-bandwidth plugin
 
 ## Casks - actual visual software 
 cask "aldente"
