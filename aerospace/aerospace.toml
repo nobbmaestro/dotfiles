@@ -95,16 +95,10 @@ alt-equal = 'resize smart +50'
 alt-backspace = 'balance-sizes'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#move
-alt-ctrl-h = 'move left'
-alt-ctrl-j = 'move down'
-alt-ctrl-k = 'move up'
-alt-ctrl-l = 'move right'
+alt-ctrl-h = 'focus left'
+alt-ctrl-j = 'focus down'
+alt-ctrl-k = 'focus up'
+alt-ctrl-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 ctrl-0 = 'workspace home'
@@ -120,9 +114,6 @@ ctrl-8 = 'workspace other'
 ctrl-right = 'exec-and-forget ~/.local/bin/cycle-workspaces --next'
 ctrl-left = 'exec-and-forget ~/.local/bin/cycle-workspaces --previous'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
-ctrl-tab = 'workspace-back-and-forth'
-
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 ctrl-m = 'mode modify'
 
@@ -130,10 +121,21 @@ ctrl-m = 'mode modify'
 esc = ['reload-config', 'mode main']
 backspace = ['close-all-windows-but-current', 'mode main']
 
-h = ['join-with left',  'mode main']
-k = ['join-with up',    'mode main']
-j = ['join-with down',  'mode main']
-l = ['join-with right', 'mode main']
+l = ['workspace-back-and-forth', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
+f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#move
+ctrl-h = 'move left'
+ctrl-j = 'move down'
+ctrl-k = 'move up'
+ctrl-l = 'move right'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#join
+alt-ctrl-h = ['join-with left',  'mode main']
+alt-ctrl-k = ['join-with up',    'mode main']
+alt-ctrl-j = ['join-with down',  'mode main']
+alt-ctrl-l = ['join-with right', 'mode main']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 0 = ['move-node-to-workspace home',     'workspace home',       'mode main']
