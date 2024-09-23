@@ -5,7 +5,7 @@ Dotfiles and automations that should make my life easier (or rather harder?).
 -   [AeroSpace](https://github.com/nikitabobko/AeroSpace) AeroSpace is an i3-like tiling window manager for macOS
 -   [Homebrew](https://github.com/Homebrew/brew) The Missing Package Manager for MacOS (or Linux).
 -   [Neovim](https://github.com/neovim/neovim) A Modern, ground up rewrite of Vim.
--   [PowerLevel10k](https://github.com/romkatv/powerlevel10k) A zsh theme that emphasizes speed, flexibility and an out-of-box experience.
+-   [Starship](https://github.com/starship/starship) The minimal, blazing-fast, and infinitely customizable prompt for any shell!
 -   [Tmux](https://github.com/tmux/tmux) Create, split, save, move terminal tabs easily all within one window.
 -   [Zsh](https://www.zsh.org) Zsh is a shell designed for interactive use, although it is also a powerful scripting language.
 
