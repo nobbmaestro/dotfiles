@@ -1,6 +1,5 @@
 $DOTFILES/bin/lazygit-edit-nvim=$HOME/.local/bin/lazygit-edit-nvim
 $DOTFILES/bin/opacity=$HOME/.local/bin/opacity
-$DOTFILES/bin/pretty_path.py=$HOME/.local/bin/pretty_path.py
 $DOTFILES/bin/tmux-cht=$HOME/.local/bin/tmux-cht
 $DOTFILES/bin/tmux-sessionizer=$HOME/.local/bin/tmux-sessionizer
 $DOTFILES/bin/tmux-toggle-lazygit=$HOME/.local/bin/tmux-toggle-lazygit
