@@ -22,7 +22,7 @@ palette = "andromeda"
 
 [character]
 success_symbol = '[➜](bold white) '
-vimcmd_symbol = '[V](bold red) '
+vimcmd_symbol = '[󰕷](bold orange) '
 
 [directory]
 style = 'bold fg:cyan'
@@ -128,5 +128,3 @@ gray = '#606064'
 white = '#d5ced9'
 pink = "#ff00aa"
 hot_pink = "#f92672"
-
-
