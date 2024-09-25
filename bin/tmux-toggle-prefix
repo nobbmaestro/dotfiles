@@ -1,0 +1,62 @@
+#!/usr/bin/python3
+
+import argparse
+import os
+import subprocess
+
+TMUX_PREFIX = os.getenv("TMUX_PREFIX", "C-s")
+FILENAME = f"{os.environ['HOME']}/.config/tmux/.DISABLED"
+
+
+def is_local_tmux_enabled(filename: str = FILENAME) -> bool:
+    return os.path.exists(filename)
+
+
+def activate_local_tmux(filename: str = FILENAME) -> bool:
+    try:
+        open(filename, "w").close()
+    except Exception:
+        pass
+    finally:
+        return is_local_tmux_enabled(filename)
+
+
+def deactivate_local_tmux(filename: str = FILENAME) -> bool:
+    try:
+        os.remove(filename)
+    except Exception:
+        pass
+    finally:
+        return not is_local_tmux_enabled(filename)
+
+
+def on_activated_local_tmux():
+    subprocess.run(args=["tmux", "set", "prefix", TMUX_PREFIX])
+
+
+def on_deactivated_local_tmux():
+    subprocess.run(args=["tmux", "set", "prefix", "None"])
+
+
+def toggle_local_tmux():
+    if is_local_tmux_enabled():
+        deactivate_local_tmux()
+    else:
+        activate_local_tmux()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-q", "--query", action="store_true")
+    args = parser.parse_args()
+
+    if args.query:
+        print("OFF" if is_local_tmux_enabled() else "")
+    else:
+        toggle_local_tmux()
+
+    exit(0)
+
+
+if __name__ == "__main__":
+    main()
