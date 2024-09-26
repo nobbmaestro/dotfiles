@@ -175,6 +175,10 @@ if.app-id = 'com.microsoft.teams'
 run = "move-node-to-workspace chat"
 
 [[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = "move-node-to-workspace chat"
+
+[[on-window-detected]]
 if.app-id = 'com.apple.mail'
 run = "move-node-to-workspace mail"
 
