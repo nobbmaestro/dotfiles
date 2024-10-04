@@ -6,7 +6,7 @@ return {
 
     branch = "development",
     -- dir = "~/repos/dev-nvim-andromeda",
-    dependencies = { "tjdevries/colorbuddy.nvim", branch = "dev" },
+    dependencies = { "tjdevries/colorbuddy.nvim" },
 
     config = function()
         require("andromeda").setup({
