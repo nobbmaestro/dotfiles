@@ -1,1 +1,1 @@
-$DOTFILES/docker/lazydocker.yml=$HOME/Library/Application\ Support/lazydocker/config.yml
+$DOTFILES/docker/lazydocker.yml=$HOME/.config/lazydocker/config.yml
