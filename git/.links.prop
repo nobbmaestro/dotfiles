@@ -1,3 +1,3 @@
 $DOTFILES/git/config.git=$HOME/.gitconfig
 $DOTFILES/git/ignore.git=$HOME/.config/git/.gitignore
-$DOTFILES/git/lazygit.yml=$HOME/Library/Application\ Support/lazygit/config.yml
+$DOTFILES/git/lazygit.yml=$HOME/.config/lazygit/config.yml
