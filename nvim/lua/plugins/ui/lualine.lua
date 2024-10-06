@@ -1,13 +1,13 @@
 local function harpoon_component()
     local mark_idx = require("harpoon.mark").get_current_index()
-    return mark_idx ~= nil and string.format(" %d", mark_idx) or ""
+    return mark_idx ~= nil and string.format("󰐃 %d", mark_idx) or ""
 end
 
 local function sleuth_component()
     return vim.g.loaded_sleuth == 1 and vim.fn.SleuthIndicator() or ""
 end
 
-local function lsp_server_component()
+local function lsp_client_component()
     local buf_clients = vim.lsp.buf_get_clients()
     local null_ls_installed, null_ls = pcall(require, "null-ls")
     local buf_client_names = {}
@@ -32,11 +32,13 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
 
     config = function()
-        local andromeda_lualine = require("andromeda.plugins.lualine")
+        local andromeda = require("andromeda.plugins.lualine")
+        local colors = require("andromeda.presets.andromeda")
+
         require("lualine").setup({
             options = {
                 icons_enabled = true,
-                theme = andromeda_lualine.theme,
+                theme = andromeda.theme,
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
                 disabled_filetypes = {
@@ -53,27 +55,28 @@ return {
                 },
             },
             sections = {
-                lualine_a = { "mode" },
-                lualine_b = { "branch", "diff" },
+                lualine_a = {
+                    { "mode", separator = { right = "", left = "" } },
+                },
+                lualine_b = {
+                    "branch",
+                    "diff",
+                },
                 lualine_c = {
-                    { harpoon_component },
-                    { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-                    { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+                    { harpoon_component, padding = { left = 1 }, color = { fg = colors.cyan } },
+                    { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
                 },
                 lualine_x = {
-                    {
-                        "diagnostics",
-                        symbols = { error = "✘", hint = "⚑", info = "»", warn = "▲" },
-                    },
-                    { sleuth_component },
+                    { "diagnostics", symbols = { error = "✘", hint = "⚑", info = "»", warn = "▲" } },
                 },
                 lualine_y = {
-                    { "progress", padding = { left = 1, right = 1 } },
+                    { sleuth_component },
                     { "location", padding = { left = 0, right = 1 } },
+                    { "progress", padding = { left = 1, right = 1 } },
                 },
                 lualine_z = {
-                    { "filetype",          icon_only = false, separator = "", padding = { left = 1, right = 0 } },
-                    { lsp_server_component },
+                    { "filetype", icon_only = false, padding = { left = 1, right = 0 } },
+                    { lsp_client_component, separator = { right = "", left = "" } },
                 },
             },
             inactive_sections = {
