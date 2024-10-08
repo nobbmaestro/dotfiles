@@ -35,11 +35,14 @@ return {
         local andromeda = require("andromeda.plugins.lualine")
         local colors = require("andromeda.presets.andromeda")
 
+        -- Overwrite theme properties
+        andromeda.theme.normal.b = { fg = colors.mono_5, bg = colors.mono_2 }
+
         require("lualine").setup({
             options = {
                 icons_enabled = true,
                 theme = andromeda.theme,
-                component_separators = { left = "", right = "" },
+                component_separators = { left = "|", right = "" },
                 section_separators = { left = "", right = "" },
                 disabled_filetypes = {
                     statusline = {},
@@ -59,12 +62,12 @@ return {
                     { "mode", separator = { right = "", left = "" } },
                 },
                 lualine_b = {
-                    "branch",
-                    "diff",
+                    { "branch", color = { fg = colors.green } },
+                    { "diff" },
                     { "diagnostics", symbols = { error = "✘", hint = "⚑", info = "»", warn = "▲" } },
                 },
                 lualine_c = {
-                    { harpoon_component, padding = { left = 1 }, color = { fg = colors.cyan } },
+                    { harpoon_component, padding = { left = 1, right = 1 }, color = { fg = colors.cyan } },
                     { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
                 },
                 lualine_x = {},
