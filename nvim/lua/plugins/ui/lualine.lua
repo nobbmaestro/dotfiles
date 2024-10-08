@@ -61,14 +61,13 @@ return {
                 lualine_b = {
                     "branch",
                     "diff",
+                    { "diagnostics", symbols = { error = "✘", hint = "⚑", info = "»", warn = "▲" } },
                 },
                 lualine_c = {
                     { harpoon_component, padding = { left = 1 }, color = { fg = colors.cyan } },
                     { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
                 },
-                lualine_x = {
-                    { "diagnostics", symbols = { error = "✘", hint = "⚑", info = "»", warn = "▲" } },
-                },
+                lualine_x = {},
                 lualine_y = {
                     { sleuth_component },
                     { "location", padding = { left = 0, right = 1 } },
