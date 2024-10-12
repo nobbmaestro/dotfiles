@@ -1,0 +1,13 @@
+.DS_Store
+.git
+.gitignore
+Brewfile
+README.md
+install.sh
+macos.sh
+Makefile
+
+python
+terminfo
+vscode
+wallpapers

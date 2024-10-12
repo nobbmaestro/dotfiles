@@ -1,4 +1,0 @@
-$DOTFILES/tmux/tmux.conf=$HOME/.config/tmux/tmux.conf
-$DOTFILES/tmux/tmux-cht-command=$HOME/.config/tmux/.tmux-cht-command
-$DOTFILES/tmux/tmux-cht-languages=$HOME/.config/tmux/.tmux-cht-languages
-$DOTFILES/tmux/themes=$HOME/.config/tmux/themes
