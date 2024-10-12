@@ -11,16 +11,6 @@ elif [[ "$OSTYPE" == 'linux'* ]]; then
 	add_to_path_front /home/linuxbrew/.linuxbrew/bin
 fi
 
-# Source zsh plugins
-source_if_exists $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source_if_exists $(brew --prefix)/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source_if_exists $(brew --prefix)/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Starship
-if type "starship" >/dev/null 2>&1; then
-	eval "$(starship init zsh)"
-fi
-
 # Node (JS) Version Manager (JS)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
@@ -64,14 +54,3 @@ fi
 
 # Bob, A version manager for neovim
 add_to_path_front $HOME/.local/share/bob/nvim-bin
-
-# Fzf integration
-if type "fzf" >/dev/null 2>&1; then
-	# zsh-vi-mode interferes with fzf-history-widget bindkey
-	# https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
-	if type "zvm_version" >/dev/null 2>&1; then
-		zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-	else
-		source_if_exists $HOME/.fzf.zsh
-	fi
-fi
