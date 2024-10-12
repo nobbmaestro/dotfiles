@@ -62,17 +62,6 @@ if [[ -d $(brew --prefix)/opt/cunit/lib ]]; then
 	export LIBRARY_PATH
 fi
 
-# SSH wrapper
-ssh() {
-	if [ "$(ps -p $(ps -p $$ -o ppid=) -o comm=)" = "tmux" ]; then
-		tmux rename-window "$(echo $*)"
-		command ssh "$@"
-		tmux set-window-option automatic-rename "on" 1>/dev/null
-	else
-		command ssh "$@"
-	fi
-}
-
 # Bob, A version manager for neovim
 add_to_path_front $HOME/.local/share/bob/nvim-bin
 
