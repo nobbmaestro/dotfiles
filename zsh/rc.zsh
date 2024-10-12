@@ -1,7 +1,7 @@
 # User configuration
-source_if_exists $ZDOTDIR/.zsh_profile
-source_if_exists $ZDOTDIR/.zsh_aliases
 source $ZDOTDIR/functions.zsh
+source_if_exists $ZDOTDIR/profile.zsh
+source_if_exists $ZDOTDIR/aliases.zsh
 source_if_exists $ZDOTDIR/history.zsh
 source_if_exists $HOME/repos/dotfiles/zsh/profile_work.zsh
 
