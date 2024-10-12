@@ -1,6 +1,0 @@
-$DOTFILES/zsh/env.zsh=$HOME/.zshenv
-$DOTFILES/zsh/rc.zsh=$ZDOTDIR/.zshrc
-$DOTFILES/zsh/profile.zsh=$ZDOTDIR/profile.zsh
-$DOTFILES/zsh/aliases.zsh=$ZDOTDIR/aliases.zsh
-$DOTFILES/zsh/functions.zsh=$ZDOTDIR/functions.zsh
-$DOTFILES/zsh/history.zsh=$ZDOTDIR/history.zsh

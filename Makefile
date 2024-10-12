@@ -6,9 +6,8 @@ all: symlink
 
 symlink:
 	@echo "Creating symlinks..."
-	stow --target=${TARGET} . -v
+	stow --restow --verbose --target=${TARGET} config bin --no-folding
 
 clean:
 	@echo "Cleaning up..."
-	stow --target=${TARGET} --delete . -v
-
+	stow --delete --verbose --target=${TARGET} config bin
