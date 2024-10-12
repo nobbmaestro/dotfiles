@@ -3,10 +3,6 @@
 export ZDOTDIR="$HOME/.config/zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
-DOTFILES="$(pwd -P)"
-BACKUP_SUBDIR="$(date +%Y%m%d%H%M%S)"
-BACKUP_DIR="$HOME/dotfiles-backup"/$BACKUP_SUBDIR
-
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
 COLOR_GREEN="\033[1;32m"
@@ -49,7 +45,7 @@ purge_home_from_path() {
 
 setup_python() {
     title "Setting up Python"
-    bash -c ./python/install.sh
+    bash -c /resources/python/install.sh
 }
 
 install_tmux_package_manager_helper() {
@@ -82,48 +78,6 @@ install_zsh_utils() {
     # Install zsh utilities
     install_sshpass_helper
     install_fzf_zsh_integration
-}
-
-backup_target_file() {
-    local root_dir file=$1
-    root_dir=$(dirname "$(purge_home_from_path "$file")")
-
-    # set target directory
-    if [ "$root_dir" != "$HOME" ]; then
-        target_dir="$BACKUP_DIR"/"$root_dir"
-    else
-        target_dir="$BACKUP_DIR"
-    fi
-
-    # check whether target directory exist, create if not
-    if [ ! -d "$target_dir" ]; then
-        mkdir -p "$target_dir"
-    fi
-
-    # check if source file/directory exist and make copy on true
-    if [ -f "$file" ]; then
-        info "backing up file: \t$(truncate_path "$file")"
-        cp "$file" "$target_dir"
-    elif [ -d "$file" ]; then
-        info "backing up dir: \t$(truncate_path "$file")"
-        cp -rf "$file" "$target_dir"
-    fi
-}
-
-create_backup() {
-    title "Creating backup directory at: $BACKUP_DIR"
-    mkdir -p "$BACKUP_DIR"
-
-    find -H "$DOTFILES" -maxdepth 3 -name '*.prop' | while read -r linkfile; do
-        while read -r line; do
-            local src dst dir
-            src=$(eval echo "$line" | cut -d '=' -f 1)
-            dst=$(eval echo "$line" | cut -d '=' -f 2)
-            dir=$(dirname "$dst")
-
-            backup_target_file "$dst"
-        done <"$linkfile"
-    done
 }
 
 setup_ubuntu_reqs() {
@@ -160,68 +114,8 @@ setup_homebrew() {
     fi
 
     # install brew dependencies from Brewfile
-    brew bundle
+    brew bundle --file="resources/homebrew/Brewfile"
     brew bundle cleanup
-}
-
-symlink_target_file() {
-    local src=$1 dst=$2 dir=$3
-
-    # check whether symlink exists and is working properly
-    if [ -L "$dst" ] && [ -e "$dst" ] && [ "$(readlink "$dst")" == "$src" ]; then
-        info "symlink already exists:   $(truncate_path "$dst")"
-
-    else
-        # check whether source is a directory
-        if [ -d "$src" ]; then
-            info "creating symlink to dir:  $(truncate_path "$src") -> $(truncate_path "$dst")"
-            rm -rf "$dst"
-            ln -s "$src" "$dst"
-        else
-            # check whether directory exists
-            if [ ! -d "$dir" ]; then
-                mkdir -p "$dir"
-            fi
-            info "creating symlink to file: $(truncate_path "$src") -> $(truncate_path "$dst")"
-            rm -f "$dst"
-            ln -s "$src" "$dst"
-        fi
-    fi
-}
-
-create_symlinks() {
-    local path=""
-
-    # check if argument is given
-    if [ -z "$1" ]; then
-        warning "argument not specified"
-
-    # check if argument is 'all'
-    elif [[ "$1" == "all" ]]; then
-        path="$DOTFILES"
-
-    # check if argument is an existing path
-    elif [ -d "$1" ]; then
-        path="$1"
-
-    else
-        warning "invalid argument: $1"
-    fi
-
-    # Do nothing if path is empty
-    if [ -n "$path" ]; then
-        title "Creating symlinks from: $path"
-        find -H "$path" -maxdepth 3 -name '*.prop' | while read -r linkfile; do
-            while read -r line; do
-                local src dst dir
-                src=$(eval echo "$line" | cut -d '=' -f 1)
-                dst=$(eval echo "$line" | cut -d '=' -f 2)
-                dir=$(dirname "$dst")
-
-                symlink_target_file "$src" "$dst" "$dir"
-            done <"$linkfile"
-        done
-    fi
 }
 
 setup_zsh() {
@@ -250,19 +144,15 @@ setup_zsh() {
     # Setup terminfo
     if [ -d "$(pwd)/terminfo/files" ]; then
         info "configuring terminfo"
-        tic "$(pwd)/terminfo/files/xterm-256color-italic.terminfo"
-        tic -x "$(pwd)/terminfo/files/tmux-256color.terminfo"
+        tic "$(pwd)/resources/terminfo/files/xterm-256color-italic.terminfo"
+        tic -x "$(pwd)/resources/terminfo/files/tmux-256color.terminfo"
     fi
 
     install_zsh_utils
-    create_symlinks "$DOTFILES/zsh"
+    # create_symlinks "$DOTFILES/zsh"
 }
 
 setup_tmux() {
-    if [[ "$(command -v tmux)" ]]; then
-        create_symlinks "$DOTFILES/tmux"
-    fi
-
     title "Setting up Tmux"
     if [[ "$(command -v tmux)" ]]; then
         install_tmux_package_manager_helper
@@ -273,11 +163,18 @@ setup_tmux() {
     fi
 }
 
+setup_neovim() {
+    title "Setting up NeoVim"
+    if [[ "$(command -v bob)" ]]; then
+        bob install 0.9.2
+        bob use 0.9.2
+    else
+        warning "command not found: bob"
+    fi
+}
+
 # Only run if you pass in parameters. Wont't run everything by defualt, unless you pass in: './install.sh all'
 case "$1" in
-backup)
-    create_backup
-    ;;
 brew)
     setup_homebrew
     ;;
@@ -287,19 +184,18 @@ zsh)
 tmux)
     setup_tmux
     ;;
+neovim)
+    setup_neovim
+    ;;
 python)
     setup_python
     ;;
-symlink)
-    create_symlinks all
-    ;;
 all)
-    create_backup
     setup_homebrew
     setup_zsh
     setup_tmux
+    setup_neovim
     setup_python
-    create_symlinks all
     ;;
 *)
     echo -e $"\nUsage: $(basename "$0") [backup|brew|zsh|tmux|python|symlink|all]\n"
