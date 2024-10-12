@@ -39,6 +39,7 @@ brew "rbenv"            # Ruby Version Manager
 brew "ripgrep"
 brew "ruby-build"
 brew "starship"
+brew "stow"
 brew "tmux"
 brew "tldr"             # Collaborative cheatsheets for console commands https://github.com/tldr-pages/tldr
 brew "zoxide"           # smarter cd command https://github.com/ajeetdsouza/zoxide
