@@ -31,21 +31,17 @@ brew "htop"
 brew "lazygit"          # Terminal git GUI https://github.com/jesseduffield/lazygit
 brew "lazydocker"
 brew "mas"              # Mac automation https://github.com/mas-cli/mas
-brew "neovim"
+# brew "neovim"
 brew "npm"
 brew "nvm"              # Node (JS) Version Manager https://github.com/nvm-sh/nvm
 brew "pyenv"            # Python Version Manager https://github.com/pyenv/pyenv
-brew "pypy"             # Python JIT (Just-In-Time) Interpreter 
 brew "rbenv"            # Ruby Version Manager
 brew "ripgrep"
 brew "ruby-build"
 brew "starship"
 brew "tmux"
 brew "tldr"             # Collaborative cheatsheets for console commands https://github.com/tldr-pages/tldr
-brew "tree"
 brew "zoxide"           # smarter cd command https://github.com/ajeetdsouza/zoxide
-brew "gawk"             # For tmux-network-bandwidth plugin
-brew "coreutils"        # For tmux-network-bandwidth plugin
 
 ## Casks - actual visual software 
 cask "aldente"
@@ -53,11 +49,10 @@ cask "alfred"
 cask "bartender"
 cask "dictionaries"
 cask "docker"
-cask "iterm2"
+# cask "iterm2"
 cask "kitty"
-cask "logi-options-plus"
+# cask "logi-options-plus"
 cask "monitorcontrol"
 cask "the-unarchiver"
-cask "visual-studio-code"
 cask "wireshark"
 cask "nikitabobko/tap/aerospace"
