@@ -31,3 +31,8 @@ if type "fzf" >/dev/null 2>&1; then
 		source_if_exists $HOME/.fzf.zsh
 	fi
 fi
+
+# Zoxide
+if type "zoxide" >/dev/null 2>&1; then
+	eval "$(zoxide init --cmd cd zsh)"
+fi

@@ -46,8 +46,3 @@ if type "rbenv" >/dev/null 2>&1; then
 		eval "$(rbenv init - zsh)"
 	fi
 fi
-
-# Zoxide
-if type "zoxide" >/dev/null 2>&1; then
-	eval "$(zoxide init --cmd cd zsh)"
-fi
