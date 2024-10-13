@@ -13,8 +13,8 @@ alias vim="nvim"
 # LS (EXA) ALIASES ------------------------------------------------------------
 alias la='ls -al'
 alias ll='ls -l'
-alias ls='exa --icons --classify --group-directories-first'
-alias lt='exa --tree --group-directories-first'
+alias ls='eza --icons --classify --group-directories-first'
+alias lt='eza --tree --group-directories-first'
 
 # BREW ALIASES ----------------------------------------------------------------
 alias clean="sh -c 'brew autoremove; brew cleanup --prune=all'"

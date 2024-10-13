@@ -23,7 +23,7 @@ brew "curl"             # https://github.com/curl/curl
 brew "direnv"
 brew "docker"
 brew "docker-compose"
-brew "exa"              # ls replacement https://github.com/ogham/exa
+brew "eza"              # ls replacement https://github.com/eza-community/eza
 brew "fd"               # modern find https://github.com/sharkdp/fd
 brew "fzf"              # fuzzy-finder https://github.com/junegunn/fzf
 brew "git"

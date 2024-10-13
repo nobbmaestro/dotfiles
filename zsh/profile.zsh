@@ -2,7 +2,7 @@
 add_to_path_front $HOME/.local/bin
 
 # Configure EXA colors
-export EXA_COLORS="di=37;1:fi=37:ex=31:ln=35;1"
+export EZA_COLORS="di=37;1:fi=37:ex=31:ln=35;1"
 
 # CUnit
 if [[ -d $(brew --prefix)/opt/cunit/include ]]; then
