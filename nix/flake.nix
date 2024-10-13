@@ -40,6 +40,10 @@
               "firefox"
               "the-unarchiver"
             ];
+            brews = [
+              "mas"
+            ];
+            masApps = { };
             onActivation.cleanup = "zap"; # This will remove unspecified casks
           };
 
