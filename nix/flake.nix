@@ -35,16 +35,20 @@
 
           homebrew = {
             enable = true;
+            onActivation = {
+              cleanup = "zap"; # This will remove unspecified casks
+              autoUpdate = true;
+              upgrade = true;
+            };
+            brews = [
+              "mas"
+            ];
             casks = [
               "nikitabobko/tap/aerospace"
               "firefox"
               "the-unarchiver"
             ];
-            brews = [
-              "mas"
-            ];
             masApps = { };
-            onActivation.cleanup = "zap"; # This will remove unspecified casks
           };
 
           fonts.packages = [
