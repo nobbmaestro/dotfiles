@@ -1,3 +1,6 @@
 .DS_Store
-nvim/plugin/packer_compiled.lua
-zsh/profile_work.zsh
+config/tmux/.config/tmux/plugins
+config/zsh/.config/zsh/.zsh_sessions
+config/zsh/.config/zsh/.zsh_history
+config/zsh/.config/zsh/profile_work.zsh
+config/zsh/.config/zsh/.zcompdump
