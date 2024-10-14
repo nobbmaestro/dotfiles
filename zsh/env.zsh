@@ -28,13 +28,6 @@ if type "pyenv" >/dev/null 2>&1; then
 	eval "$(pyenv init -)"
 fi
 
-# Python: Set up direnv hook (for activating local dir venv)
-#   pipenv:   echo layout pipenv >> .envrc
-#   other:    echo 'source $(pwd)/.venv/bin/activate' >> .envrc
-if type "direnv" >/dev/null 2>&1; then
-	eval "$(direnv hook zsh)"
-fi
-
 # Node (JS) Version Manager (JS)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
