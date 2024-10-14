@@ -4,7 +4,7 @@
 Host *
     AddKeysToAgent yes
     UseKeychain yes
-    # IdentityFile ~/.ssh/...
+    IdentityFile ~/.ssh/id_ed25519
 
     # Use a shared channel for all sessions to the same host,
     # instead of always opening a new one. This leads to much
