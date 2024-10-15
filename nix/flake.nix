@@ -25,12 +25,22 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = [
+            pkgs.eza
+            pkgs.fzf
+            pkgs.iterm2 # FIXME: Remove this...
             pkgs.kitty
             pkgs.lazygit
             pkgs.mkalias
             pkgs.neovim
             pkgs.nixfmt-rfc-style
+            pkgs.starship
+            pkgs.stow
             pkgs.tmux
+            pkgs.zoxide
+            pkgs.zsh
+            pkgs.zsh-autosuggestions
+            pkgs.zsh-syntax-highlighting
+            pkgs.zsh-vi-mode
           ];
 
           homebrew = {
