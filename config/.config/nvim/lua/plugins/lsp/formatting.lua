@@ -38,6 +38,9 @@ return {
                     extra_args = { "--tab-width", tab_width },
                 }),
 
+                -- nix
+                null_ls.builtins.formatting.nixfmt,
+
                 -- python
                 null_ls.builtins.formatting.black.with({ extra_args = { "--line-length", line_len } }),
                 null_ls.builtins.formatting.isort,
