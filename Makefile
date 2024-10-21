@@ -14,8 +14,8 @@ rebuild:
 
 symlink:
 	@echo "Creating symlinks..."
-	stow --restow --verbose --target=${TARGET} config bin --no-folding
+	stow --restow --verbose --target=${TARGET} config bin nix --no-folding
 
 clean:
 	@echo "Cleaning up..."
-	stow --delete --verbose --target=${TARGET} config bin
+	stow --delete --verbose --target=${TARGET} config bin nix
