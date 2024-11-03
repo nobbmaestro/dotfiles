@@ -1,9 +1,0 @@
-#!/bin/sh
-
-if [ "$1" = "false" ]; then
-    kitty @ set-background-opacity 1
-elif [ "$1" = "true" ]; then
-    kitty @ set-background-opacity 0.9
-else
-    kitty @ set-background-opacity "$1"
-fi
