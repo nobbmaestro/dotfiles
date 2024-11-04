@@ -24,3 +24,10 @@ layout_poetry() {
     export POETRY_ACTIVE=1  # or VENV_ACTIVE=1
     export VIRTUAL_ENV
 }
+
+layout_nvm() {
+    if [ -f $NVM_DIR/nvm.sh ]; then
+        type nvm >/dev/null 2>&1 || . $NVM_DIR/nvm.sh
+        nvm use $(< .nvmrc)
+    fi
+}
