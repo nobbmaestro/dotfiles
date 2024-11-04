@@ -1,7 +1,7 @@
 # Configuration directories
 export XDG_CONFIG_HOME="$HOME/.config"
-export ZDOTDIR="$HOME/.config/zsh"
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/starship.toml"
 
 # Editor Configuration
 export EDITOR="nvim"
