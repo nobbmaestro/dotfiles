@@ -21,13 +21,6 @@ elif [[ "$OSTYPE" == 'linux'* ]]; then
 	add_to_path_front /home/linuxbrew/.linuxbrew/bin
 fi
 
-# Python Version Manager
-if type "pyenv" >/dev/null 2>&1; then
-	export PYENV_ROOT="$HOME/.pyenv"
-	add_to_path_front $PYENV_ROOT/bin
-	eval "$(pyenv init -)"
-fi
-
 # Node (JS) Version Manager (JS)
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm

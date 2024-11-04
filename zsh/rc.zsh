@@ -43,3 +43,10 @@ fi
 if type "direnv" >/dev/null 2>&1; then
 	eval "$(direnv hook zsh)"
 fi
+
+# Python Version Manager
+if type "pyenv" >/dev/null 2>&1; then
+	export PYENV_ROOT="$HOME/.pyenv"
+	add_to_path_front $PYENV_ROOT/bin
+	eval "$(pyenv init -)"
+fi
