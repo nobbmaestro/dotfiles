@@ -3,6 +3,7 @@
 .direnv/
 .envrc
 .exrc
+.nvmrc
 .python-version
 .vim-arsync
 compile_commands.json
