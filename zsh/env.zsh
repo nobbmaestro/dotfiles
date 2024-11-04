@@ -20,10 +20,3 @@ if [[ "$OSTYPE" == 'darwin'* ]]; then
 elif [[ "$OSTYPE" == 'linux'* ]]; then
 	add_to_path_front /home/linuxbrew/.linuxbrew/bin
 fi
-
-# Ruby Version Manager
-if type "rbenv" >/dev/null 2>&1; then
-	if [[ ! "$PATH" != *"$1"* ]]; then
-		eval "$(rbenv init - zsh)"
-	fi
-fi
