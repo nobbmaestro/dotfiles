@@ -1,5 +1,6 @@
 local utils = {
     "black",
+    "clang-format",
     "djlint",
     "isort",
     "prettier",
@@ -12,7 +13,7 @@ local utils = {
 
 -- Formatting constants
 local tab_width = 4
-local line_len = 120
+local line_len = 88
 local sql_formatter_config_file = os.getenv("HOME") .. "/.config/sql_formatter/sql_formatter.json"
 
 return {
@@ -26,6 +27,9 @@ return {
         vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "LSP: Format buffer" })
         null_ls.setup({
             sources = {
+                -- c, arduino
+                null_ls.builtins.formatting.clang_format.with({ filetypes = { "c", "arduino" } }),
+
                 -- bash
                 null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "zsh", "bash" } }),
 
@@ -35,7 +39,7 @@ return {
                 -- html, markdown, js and more
                 null_ls.builtins.formatting.prettier.with({
                     filetypes = { "css", "html", "json", "yaml", "markdown", "javascript", "typescript" },
-                    extra_args = { "--tab-width", tab_width },
+                    -- extra_args = { "--tab-width", tab_width },
                 }),
 
                 -- python
