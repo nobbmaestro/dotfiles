@@ -7,5 +7,5 @@
 
 [core]
 	autocrlf = input
-    filemode = false
+	filemode = false
 	excludesfile = ~/.config/git/.gitignore
