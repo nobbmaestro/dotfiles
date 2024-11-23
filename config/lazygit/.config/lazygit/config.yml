@@ -28,5 +28,5 @@ gui:
             - "#d5ced9"
 
 os:
-    editCommand: "lazygit-edit-nvim"
+    editCommand: "tmux-nvim-open"
     editCommandTemplate: "{{editor}} {{filename}} {{line}}"

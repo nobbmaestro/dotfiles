@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# tmux-lazygit-open
+#
+# This script jumps to exisiting LazyGit tmux pane. If current Tmux sessions
+# does not contain LazyGit instance, it will create a new pane and run Lazygit.
 
 args=$(getopt lf $*)
 if [ $? -ne 0 ]; then

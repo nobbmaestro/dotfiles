@@ -1,6 +1,28 @@
 #!/bin/bash
+#
+# tmux-nvim-open
+#
+# This script opens the given file in existing NeoVim instance. If current
+# Tmux session does not contain NeoVim instance, it will create a new pane
+# and run NeoVim.
 
-source "$HOME"/.local/bin/utils/tmux_funcs.sh
+get_pane_info() {
+    tmux list-panes -s -F "#{pane_id} #{window_id} #{pane_current_command}"
+}
+
+get_pane_id_by_command() {
+    cmd_name=$1
+    pane_id=$(get_pane_info |
+        awk -v cmd_name="$cmd_name" '$3 == cmd_name { print $1; exit }')
+    echo "$pane_id"
+}
+
+get_window_id_by_command() {
+    cmd_name=$1
+    window_id=$(get_pane_info |
+        awk -v cmd_name="$cmd_name" '$3 == cmd_name { print $2; exit }')
+    echo "$window_id"
+}
 
 if [ -z "$1" ]; then
     echo "Usage: $0 <file> [line]"
