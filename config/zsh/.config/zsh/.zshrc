@@ -3,7 +3,7 @@ source $ZDOTDIR/functions.zsh
 source_if_exists $ZDOTDIR/profile.zsh
 source_if_exists $ZDOTDIR/aliases.zsh
 source_if_exists $ZDOTDIR/history.zsh
-source_if_exists $HOME/repos/dotfiles/zsh/profile_work.zsh
+source_if_exists $ZDOTDIR/profile_work.zsh
 
 # Language settings
 export LANG=en_US.UTF-8
