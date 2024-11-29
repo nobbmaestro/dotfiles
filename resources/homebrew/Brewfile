@@ -42,6 +42,7 @@ brew "starship"
 brew "stow"
 brew "tmux"
 brew "tldr"             # Collaborative cheatsheets for console commands https://github.com/tldr-pages/tldr
+brew "yazi"
 brew "zoxide"           # smarter cd command https://github.com/ajeetdsouza/zoxide
 
 ## Casks - actual visual software 
