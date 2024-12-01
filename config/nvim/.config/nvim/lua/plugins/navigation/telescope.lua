@@ -29,8 +29,23 @@ return {
                             preview_width = 0.5,
                         },
                     },
+                    vimgrep_arguments = {
+                        "rg",
+                        "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
+                        "--hidden",
+                        "--glob",
+                        "!**/.git/*",
+                    },
                 },
                 pickers = {
+                    find_files = {
+                        find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+                    },
                     git_files = {
                         theme = "dropdown",
                         previewer = false,
