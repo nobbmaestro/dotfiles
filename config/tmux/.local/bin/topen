@@ -1,0 +1,71 @@
+#!/bin/bash
+#
+# topen (Tmux open)
+#
+# Generic script for creating window for given executable.
+# If window exists, navigate tmux to the existing window.
+#
+# Written by Norbert Batiuk
+
+usage() {
+	cat <<EOF
+Usage: topen [-h] [-f] -- EXEC [ARGS]
+
+  EXEC   The executable command to run (required).
+  ARGS   Optional arguments to pass to the command.
+
+The '--' separates the options for the script from the options for the executable.
+
+Options:
+  -h, --help	Show this help message and exit.
+  -f, --force	Recreate the tmux window.
+
+Examples:
+  topen -- nvim
+  topen -- lazygit --filter /path/to/file
+
+EOF
+	exit 1
+}
+
+for i in "$@"; do
+	case $i in
+	-h | --help)
+		usage
+		;;
+	-f | --force)
+		FORCE=1
+		shift
+		;;
+	--)
+		shift
+		EXEC="$1"
+		shift
+		ARGS=("$@") # Capture remaining arguments
+		break
+		;;
+	*)
+		echo "Unknown option: $1"
+		echo
+		usage
+		;;
+	esac
+done
+
+# Check if EXEC is executable
+if ! command -v "$EXEC" >/dev/null 2>&1; then
+	echo "'$EXEC' is not found or not executable."
+	exit 1
+fi
+
+# Run the command with arguments
+if tmux list-panes -s -F "#W" | grep -q "$EXEC"; then
+	if [ -n "$FORCE" ]; then
+		tmux kill-window -t "$EXEC"
+		tmux neww -n "$EXEC" "$EXEC" "${ARGS[@]}"
+	else
+		tmux select-window -t "$EXEC"
+	fi
+else
+	tmux neww -n "$EXEC" "$EXEC" "${ARGS[@]}"
+fi
