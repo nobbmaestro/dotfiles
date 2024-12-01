@@ -1,9 +1,0 @@
-#!/bin/bash
-
-if [[ -z "$TMUX" ]]; then
-    exit 1
-fi
-
-if [ "$(tmux list-windows | wc -l)" -gt 1 ]; then
-    tmux select-window -l
-fi
