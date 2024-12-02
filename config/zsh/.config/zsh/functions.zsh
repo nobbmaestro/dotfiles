@@ -58,3 +58,8 @@ function truecolor-test() {
 		printf "\n";
 	}'
 }
+
+function nvim() {
+	local socket="/tmp/nvim-server-$(tmux display-message -p '#S').sock"
+	command nvim --listen $socket "$@"
+}
