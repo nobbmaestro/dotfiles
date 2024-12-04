@@ -1,5 +1,4 @@
 .DS_Store
-config/tmux/.config/tmux/plugins
 config/zsh/.config/zsh/.zsh_sessions
 config/zsh/.config/zsh/.zsh_history
 config/zsh/.config/zsh/profile_work.zsh

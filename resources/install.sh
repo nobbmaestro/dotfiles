@@ -2,6 +2,7 @@
 
 export ZDOTDIR="$HOME/.config/zsh"
 export ZSH_CUSTOM="$ZSH/custom"
+export TMUX_PLUGIN_MANAGER_PATH="$HOME/.local/share/tmux/plugins"
 
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
@@ -49,9 +50,9 @@ setup_python() {
 }
 
 install_tmux_package_manager_helper() {
-    if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
+    if [ ! -d "$TMUX_PLUGIN_MANAGER_PATH/tpm" ]; then
         info "installing: tmux tpm"
-        git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+        git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_MANAGER_PATH/tpm"
     else
         info "utility already installed: tpm"
     fi
@@ -157,7 +158,7 @@ setup_tmux() {
     if [[ "$(command -v tmux)" ]]; then
         install_tmux_package_manager_helper
         info "downloading tmux plugins..."
-        sh -c "$HOME/.config/tmux/plugins/tpm/scripts/install_plugins.sh" "" --unattended
+        sh -c "$TMUX_PLUGIN_MANAGER_PATH/tpm/scripts/install_plugins.sh" "" --unattended
     else
         warning "command not found: tmux"
     fi
