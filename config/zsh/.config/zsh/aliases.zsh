@@ -7,6 +7,7 @@ alias lzg='lazygit'
 alias lzd='lazydocker'
 alias rm='rm -i'
 alias vim="nvim"
+alias fman="compgen -c | fzf --preview='man {}' | xargs man"
 
 # LS (EXA) ALIASES ------------------------------------------------------------
 alias la='ls -al'
