@@ -13,7 +13,7 @@ Dotfiles and automations that should make my life easier (or rather harder?).
 
 ### Bootstrap
 
-Check out [install.sh](install.sh). You may either run `./resources/install.sh all` or pick whatever you find interesting.
+Check out [install.sh](resources/install.sh). You may either run `./resources/install.sh all` or pick whatever you find interesting.
 
 The script won't run anything unless argument is passed. Once you pass decired argument, the `install.sh` execute associated function.
 

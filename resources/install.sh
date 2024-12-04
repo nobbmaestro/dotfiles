@@ -34,16 +34,6 @@ success() {
     echo -e "${COLOR_GREEN}$1${COLOR_NONE}"
 }
 
-truncate_path() {
-    local path="$1"
-    echo "${path/#$HOME/~}"
-}
-
-purge_home_from_path() {
-    local path="$1"
-    echo "${path/#$HOME\//}"
-}
-
 setup_python() {
     title "Setting up Python"
     bash -c /resources/python/install.sh
@@ -150,7 +140,6 @@ setup_zsh() {
     fi
 
     install_zsh_utils
-    # create_symlinks "$DOTFILES/zsh"
 }
 
 setup_tmux() {
