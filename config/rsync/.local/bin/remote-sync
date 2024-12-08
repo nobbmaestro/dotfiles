@@ -1,0 +1,114 @@
+#!/bin/bash
+#
+# remote-sync
+#
+# This scripts wraps rsync utility and executes rsync command with
+# arguments provided by the local configuration file.
+#
+# Written by Norbert Batiuk
+
+DEFAULT_PATH="$(pwd)/"
+DEFAULT_FILENAME=".rsync.env"
+DEFAULT_TIMEOUT="2"
+DRY=0
+
+usage() {
+	cat <<EOF
+usage: remote-sync [-h] [-p PATH] [--dry]
+
+Options:
+  -p, --path PATH     Absolute path to the local configuration file (defaults to current working directory)
+  -h, --help	      Show this help message and exit
+  --dry	              Show generated command and exit
+
+The configuration file, ${DEFAULT_FILENAME}, should define the following shell variables:
+
+Required variables:
+  REMOTE_USER	      The username on the remote system
+  REMOTE_HOST	      The hostname of the remote system
+  REMOTE_PATH	      The destination path on the remote system
+
+Optional variables:
+  LOCAL_PATH	      The source path for sync (defaults to current working directory)
+  IGNORE_PATH	      A list of paths or patterns to ignore during sync
+  REMOTE_PASSWD       Password to the remote server (requires sshpass)
+
+Dependencies:
+  sshpass (OPTIONAL)  Required if REMOTE_PASSWD is set
+EOF
+	exit 0
+}
+
+error() {
+	echo "$1"
+	exit 1
+}
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+	-h | --help)
+		usage
+		;;
+	-p | --path)
+		DEFAULT_PATH="$2"
+		shift
+		;;
+	--dry)
+		DRY=1
+		;;
+	*)
+		error "Unknown option: $1"
+		;;
+	esac
+	shift
+done
+
+LOCAL_CONFIG="${DEFAULT_PATH}/${DEFAULT_FILENAME}"
+
+if [ ! -f "$LOCAL_CONFIG" ]; then
+	error "Configuration file does not exist: $LOCAL_CONFIG"
+fi
+
+set -a
+# shellcheck source=/dev/null
+source "$LOCAL_CONFIG"
+set +a
+
+for var in REMOTE_USER REMOTE_HOST REMOTE_PATH; do
+	[[ -z "${!var}" ]] && error "${LOCAL_CONFIG} does not contain: $var"
+done
+
+RSYNC_EXCLUDE=()
+for exclude in "${IGNORE_PATH[@]}"; do
+	RSYNC_EXCLUDE+=("--exclude" "${exclude}")
+done
+
+RSYNC_CMD=(
+	"rsync"
+	"--archive"
+	"--timeout"
+	"${DEFAULT_TIMEOUT}"
+	"${RSYNC_EXCLUDE[@]}"
+	"${LOCAL_PATH:-$DEFAULT_PATH}"
+	"${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
+)
+
+if [ -n "${REMOTE_PASSWD}" ]; then
+	if ! command -v sshpass &>/dev/null; then
+		error "Dependency not installed: sshpass"
+	fi
+	RSYNC_CMD=(
+		"sshpass"
+		"-p"
+		"${REMOTE_PASSWD}"
+		"${RSYNC_CMD[@]}"
+	)
+fi
+
+if [ "$DRY" -ne "0" ]; then
+	echo "Command:" "${RSYNC_CMD[@]}"
+else
+	"${RSYNC_CMD[@]}"
+fi
+
+exit $?
