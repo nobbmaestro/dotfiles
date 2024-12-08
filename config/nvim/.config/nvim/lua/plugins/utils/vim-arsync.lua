@@ -1,5 +1,6 @@
 return {
     "kenn7/vim-arsync",
+    enabled = false,
     lazy = true,
     event = { "BufReadPost", "BufNewFile" },
     dependencies = { "prabirshrestha/async.vim" },

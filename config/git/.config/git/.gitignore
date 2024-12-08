@@ -6,6 +6,7 @@
 .nvmrc
 .python-version
 .vim-arsync
+.rsync.env
 compile_commands.json
 
 # Mac

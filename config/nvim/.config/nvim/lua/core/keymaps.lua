@@ -39,3 +39,6 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "lazyGit: Start" })
 vim.keymap.set("n", "<leader>gl", "<cmd>LazyGitLog<CR>", { desc = "lazyGit: Open git log" })
 vim.keymap.set("n", "<leader>gbl", "<cmd>LazyGitFilter<CR>", { desc = "lazyGit: Open git log for current buffer" })
+
+-- remote sync
+vim.keymap.set("n", "<leader>ru", "<cmd>RemoteSync<CR>", { desc = "RSync: Sync Remote" })
