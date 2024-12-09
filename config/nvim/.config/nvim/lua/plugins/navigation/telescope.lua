@@ -17,6 +17,10 @@ return {
             vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Telescope: Search resume" })
             vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Telescope: Search for highlighted word" })
 
+            vim.keymap.set("n", "<leader>en", function()
+                builtin.find_files({ cwd = vim.fn.stdpath("config") })
+            end, { desc = "Telescope: Search config files" })
+
             require("telescope").setup({
                 defaults = {
                     sorting_strategy = "ascending",
