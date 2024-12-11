@@ -14,6 +14,19 @@ vim.api.nvim_create_user_command("LazyGitFilter", function()
     os.execute("topen --force -- lazygit --filter " .. buff)
 end, { nargs = 0 })
 
+-- toggle virtual text diagnostics
+vim.api.nvim_create_user_command("ToggleDiagnostics", function()
+    local current_config = vim.diagnostic.config()
+    local enabled = not current_config.virtual_text
+    vim.diagnostic.config({ virtual_text = enabled })
+
+    if enabled then
+        print("Diagnostics enabled")
+    else
+        print("Diagnostics disabled")
+    end
+end, { nargs = 0 })
+
 -- run remote-sync
 vim.api.nvim_create_user_command("RemoteSync", function()
     local output = vim.fn.system("remote-sync")

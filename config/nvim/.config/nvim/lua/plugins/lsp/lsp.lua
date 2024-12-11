@@ -12,13 +12,6 @@ local function fmt(diagnostic)
     return diagnostic.message
 end
 
--- Toggle virtual diagnostics
-local diagnostic_visible = false
-local function toggle_diagnostic()
-    diagnostic_visible = not diagnostic_visible
-    vim.diagnostic.config({ virtual_text = diagnostic_visible })
-end
-
 return {
     {
         "williamboman/mason.nvim",
@@ -60,8 +53,6 @@ return {
         },
 
         config = function()
-            vim.api.nvim_create_user_command("ToggleDiagnostics", toggle_diagnostic, {})
-
             -- Add border to LspInfo float window
             require("lspconfig.ui.windows").default_options.border = "single"
 
@@ -83,7 +74,7 @@ return {
                 nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
                 nmap("n", "<leader>dn", vim.diagnostic.goto_next, "Go to next diagnostic message")
                 nmap("n", "<leader>dp", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
-                nmap("n", "<leader>d", toggle_diagnostic, "Toggle virtual diagnostic messages")
+                nmap("n", "<leader>dd", vim.cmd.ToggleDiagnostics, "Toggle virtual diagnostic messages")
 
                 -- Refactoring keymaps
                 nmap("n", "<leader>ca", vim.lsp.buf.code_action, "Code actions")
@@ -107,7 +98,7 @@ return {
                     source = "always",
                     format = fmt,
                     severity = {
-                        min = vim.diagnostic.severity.ERROR,
+                        -- min = vim.diagnostic.severity.ERROR,
                     },
                 },
                 severity_sort = true,
