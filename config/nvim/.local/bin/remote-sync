@@ -7,34 +7,35 @@
 #
 # Written by Norbert Batiuk
 
-DEFAULT_PATH="$(pwd)/"
+DEFAULT_CONFIG_PATH="$(pwd)"
 DEFAULT_FILENAME=".rsync.env"
 DEFAULT_TIMEOUT="2"
 DRY=0
 
 usage() {
 	cat <<EOF
-usage: remote-sync [-h] [-p PATH] [--dry]
+usage: remote-sync [-h] [-p PATH] [-t TIMEOUT] [--dry]
 
 Options:
-  -p, --path PATH     Absolute path to the local configuration file (defaults to current working directory)
-  -h, --help	      Show this help message and exit
-  --dry	              Show generated command and exit
+  -p, --path PATH           Absolute path to the local configuration file (defaults to current working directory)
+  -t, --timeout TIMEOUT     Custom timeout duration (default to ${DEFAULT_TIMEOUT} seconds)
+  -h, --help                Show this help message and exit
+  --dry                     Show generated command and exit
 
 The configuration file, ${DEFAULT_FILENAME}, should define the following shell variables:
 
 Required variables:
-  REMOTE_USER	      The username on the remote system
-  REMOTE_HOST	      The hostname of the remote system
-  REMOTE_PATH	      The destination path on the remote system
+  REMOTE_USER               The username on the remote system
+  REMOTE_HOST               The hostname of the remote system
+  REMOTE_PATH               The destination path on the remote system
 
 Optional variables:
-  LOCAL_PATH	      The source path for sync (defaults to current working directory)
-  IGNORE_PATH	      A list of paths or patterns to ignore during sync
-  REMOTE_PASSWD       Password to the remote server (requires sshpass)
+  LOCAL_PATH                The source path for sync (defaults to current working directory)
+  IGNORE_PATH               A list of paths or patterns to ignore during sync
+  REMOTE_PASSWD             Password to the remote server (requires sshpass)
 
 Dependencies:
-  sshpass (OPTIONAL)  Required if REMOTE_PASSWD is set
+  sshpass (OPTIONAL)        Required if REMOTE_PASSWD is set
 EOF
 	exit 0
 }
@@ -44,14 +45,24 @@ error() {
 	exit 1
 }
 
+validate_arg() {
+	[ -z "$1" ] && error "$2: missing argument"
+}
+
 while [[ $# -gt 0 ]]; do
 	case $1 in
+	-p | --path)
+		validate_arg "$2" "--path"
+		CONFIG_PATH="${2%/}"
+		shift
+		;;
+	-t | --timeout)
+		validate_arg "$2" "--timeout"
+		TIMEOUT="$2"
+		shift
+		;;
 	-h | --help)
 		usage
-		;;
-	-p | --path)
-		DEFAULT_PATH="$2"
-		shift
 		;;
 	--dry)
 		DRY=1
@@ -63,7 +74,7 @@ while [[ $# -gt 0 ]]; do
 	shift
 done
 
-LOCAL_CONFIG="${DEFAULT_PATH}/${DEFAULT_FILENAME}"
+LOCAL_CONFIG="${CONFIG_PATH:-$DEFAULT_CONFIG_PATH}/${DEFAULT_FILENAME}"
 
 if [ ! -f "$LOCAL_CONFIG" ]; then
 	error "Configuration file does not exist: $LOCAL_CONFIG"
@@ -87,9 +98,9 @@ RSYNC_CMD=(
 	"rsync"
 	"--archive"
 	"--timeout"
-	"${DEFAULT_TIMEOUT}"
+	"${TIMEOUT:-$DEFAULT_TIMEOUT}"
 	"${RSYNC_EXCLUDE[@]}"
-	"${LOCAL_PATH:-$DEFAULT_PATH}"
+	"${LOCAL_PATH:-$DEFAULT_CONFIG_PATH}"
 	"${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
 )
 
