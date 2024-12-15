@@ -4,7 +4,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
 
     config = function()
-        vim.keymap.set("n", "ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "GitSigns: Stage hunk" })
+        -- vim.keymap.set("n", "ga", "<cmd>Gitsigns stage_hunk<CR>", { desc = "GitSigns: Stage hunk" })
         vim.keymap.set("n", "gn", "<cmd>Gitsigns next_hunk<CR>", { desc = "GitSigns: Go to next hunk" })
         vim.keymap.set("n", "gp", "<cmd>Gitsigns prev_hunk<CR>", { desc = "GitSigns: Go to prev hunk" })
         vim.keymap.set("n", "gh", "<cmd>Gitsigns preview_hunk<CR>", { desc = "GitSigns: Hover preview hunk" })

@@ -12,7 +12,7 @@ local utils = {
 }
 
 -- Formatting constants
-local tab_width = 4
+-- local tab_width = 4
 local line_len = 88
 local sql_formatter_config_file = os.getenv("HOME") .. "/.config/sql_formatter/sql_formatter.json"
 
