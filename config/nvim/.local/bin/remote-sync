@@ -7,7 +7,7 @@
 #
 # Written by Norbert Batiuk
 
-DEFAULT_CONFIG_PATH="$(pwd)"
+DEFAULT_CONFIG_PATH="$(pwd)/"
 DEFAULT_FILENAME=".rsync.env"
 DEFAULT_TIMEOUT="2"
 DRY=0
