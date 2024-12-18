@@ -36,7 +36,7 @@ success() {
 
 setup_python() {
     title "Setting up Python"
-    bash -c /resources/python/install.sh
+    bash -c ./resources/python/install.sh
 }
 
 install_tmux_package_manager_helper() {
