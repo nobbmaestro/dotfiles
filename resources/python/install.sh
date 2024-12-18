@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 COLOR_BLUE="\033[1;34m"
 COLOR_NONE="\033[0m"
 
@@ -8,12 +10,13 @@ info() {
 }
 
 install_python_packages() {
-    local file=${1:-"packages"}
+    local exec=${1:-"pip"}
+    local file=${2:-"packages"}
 
     if [ -f "$file" ]; then
         while IFS= read -r package; do
             info "installing: ${package}"
-            pip install "$package"
+            ${exec} install "$package"
         done <"$file"
     fi
 }
@@ -40,8 +43,9 @@ install_python_versions() {
     fi
 }
 
-cd -- "$(dirname -- "$0")" || exit 1
+cd -- "$(dirname -- "$0")"
 if [[ "$(command -v pyenv)" ]]; then
     install_python_versions "versions"
-    install_python_packages "packages"
+    pip install pipx
+    install_python_packages "pipx" "packages"
 fi
