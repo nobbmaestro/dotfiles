@@ -1,20 +1,20 @@
 #!/bin/bash
 #
-# remote-sync
+# rsyncer
 #
 # This scripts wraps rsync utility and executes rsync command with
 # arguments provided by the local configuration file.
 #
 # Written by Norbert Batiuk
 
-DEFAULT_CONFIG_PATH="$(pwd)/"
+DEFAULT_CONFIG_PATH="$(pwd)"
 DEFAULT_FILENAME=".rsync.env"
 DEFAULT_TIMEOUT="2"
 DRY=0
 
 usage() {
 	cat <<EOF
-usage: remote-sync [-h] [-p PATH] [-t TIMEOUT] [--dry]
+usage: rsyncer [-h] [-p PATH] [-t TIMEOUT] [--dry]
 
 Options:
   -p, --path PATH           Absolute path to the local configuration file (defaults to current working directory)
@@ -22,7 +22,7 @@ Options:
   -h, --help                Show this help message and exit
   --dry                     Show generated command and exit
 
-The configuration file, ${DEFAULT_FILENAME}, should define the following shell variables:
+The configuration file '${DEFAULT_FILENAME}' should define the following shell variables:
 
 Required variables:
   REMOTE_USER               The username on the remote system
@@ -53,7 +53,7 @@ while [[ $# -gt 0 ]]; do
 	case $1 in
 	-p | --path)
 		validate_arg "$2" "--path"
-		CONFIG_PATH="${2%/}"
+		CONFIG_PATH="$2"
 		shift
 		;;
 	-t | --timeout)
@@ -74,7 +74,7 @@ while [[ $# -gt 0 ]]; do
 	shift
 done
 
-LOCAL_CONFIG="${CONFIG_PATH:-$DEFAULT_CONFIG_PATH}/${DEFAULT_FILENAME}"
+LOCAL_CONFIG="${CONFIG_PATH:-${DEFAULT_CONFIG_PATH%/}}/${DEFAULT_FILENAME%/}"
 
 if [ ! -f "$LOCAL_CONFIG" ]; then
 	error "Configuration file does not exist: $LOCAL_CONFIG"
@@ -100,7 +100,7 @@ RSYNC_CMD=(
 	"--timeout"
 	"${TIMEOUT:-$DEFAULT_TIMEOUT}"
 	"${RSYNC_EXCLUDE[@]}"
-	"${LOCAL_PATH:-$DEFAULT_CONFIG_PATH}"
+	"${LOCAL_PATH:-$DEFAULT_CONFIG_PATH}/"
 	"${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"
 )
 

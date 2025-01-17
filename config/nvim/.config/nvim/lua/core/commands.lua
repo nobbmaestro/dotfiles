@@ -27,9 +27,9 @@ vim.api.nvim_create_user_command("ToggleDiagnostics", function()
     end
 end, { nargs = 0 })
 
--- run remote-sync
+-- run rsyncer
 vim.api.nvim_create_user_command("RemoteSync", function()
-    local output = vim.fn.system("remote-sync")
+    local output = vim.fn.system("rsyncer")
     local exit_code = vim.v.shell_error
 
     if exit_code == 0 then
