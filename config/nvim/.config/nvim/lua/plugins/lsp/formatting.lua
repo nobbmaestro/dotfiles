@@ -2,6 +2,8 @@ local utils = {
     "black",
     "clang-format",
     "djlint",
+    "goimports",
+    "golines",
     "isort",
     "prettier",
     "pyright",
@@ -35,6 +37,11 @@ return {
 
                 -- lua
                 null_ls.builtins.formatting.stylua,
+
+                -- go
+                null_ls.builtins.formatting.gofmt,
+                null_ls.builtins.formatting.goimports,
+                null_ls.builtins.formatting.golines,
 
                 -- html, markdown, js and more
                 null_ls.builtins.formatting.prettier.with({

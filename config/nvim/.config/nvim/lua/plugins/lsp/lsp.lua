@@ -1,6 +1,7 @@
 local servers = {
     "bashls",
     "clangd",
+    "gopls",
     "lua_ls",
     "pyright",
 }
