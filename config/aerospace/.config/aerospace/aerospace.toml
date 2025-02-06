@@ -108,8 +108,9 @@ ctrl-3 = 'workspace dev-web'
 ctrl-4 = 'workspace chat'
 ctrl-5 = 'workspace mail'
 ctrl-6 = 'workspace notes'
-ctrl-7 = 'workspace misc'
-ctrl-8 = 'workspace other'
+ctrl-7 = 'workspace other-1'
+ctrl-8 = 'workspace other-2'
+ctrl-9 = 'workspace other-3'
 
 ctrl-right = 'exec-and-forget ~/.local/bin/cycle-workspaces --next'
 ctrl-left = 'exec-and-forget ~/.local/bin/cycle-workspaces --previous'
@@ -145,8 +146,9 @@ alt-ctrl-l = ['join-with right', 'mode main']
 4 = ['move-node-to-workspace chat',     'workspace chat',       'mode main']
 5 = ['move-node-to-workspace mail',     'workspace mail',       'mode main']
 6 = ['move-node-to-workspace notes',    'workspace notes',      'mode main']
-7 = ['move-node-to-workspace misc',     'workspace misc',       'mode main']
-8 = ['move-node-to-workspace other',    'workspace other',      'mode main']
+7 = ['move-node-to-workspace other-1',  'workspace other-1',    'mode main']
+8 = ['move-node-to-workspace other-2',  'workspace other-2',    'mode main']
+9 = ['move-node-to-workspace other-3',  'workspace other-3',    'mode main']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
 tab = ['move-workspace-to-monitor --wrap-around next', 'mode main']
@@ -192,8 +194,8 @@ run = "move-node-to-workspace notes"
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iBooksX'
-run = "move-node-to-workspace other"
+run = "move-node-to-workspace other-1"
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Preview'
-run = "move-node-to-workspace other"
+run = "move-node-to-workspace other-1"
