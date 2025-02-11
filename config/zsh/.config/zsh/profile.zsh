@@ -1,6 +1,9 @@
 # Setup PATH
 add_to_path_front $HOME/.local/bin
 
+# Configure Go binary destination
+export GOBIN=$HOME/.local/bin
+
 # Configure EXA colors
 export EZA_COLORS="di=37;1:fi=37:ex=31:ln=35;1"
 
