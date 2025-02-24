@@ -47,6 +47,7 @@ brew "arm-none-eabi-gcc"
 brew "arm-none-eabi-gdb"
 brew "docker"
 brew "docker-compose"
+brew "gitlab-ci-local"
 brew "lazydocker"
 
 ## Casks - actual visual software 

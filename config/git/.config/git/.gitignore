@@ -3,6 +3,7 @@
 .direnv/
 .envrc
 .exrc
+.gitlab-ci-local
 .nvmrc
 .python-version
 .vim-arsync
