@@ -16,8 +16,8 @@ alias ls='eza --icons --classify --group-directories-first'
 alias lt='eza --tree --group-directories-first'
 
 # BREW ALIASES ----------------------------------------------------------------
-alias clean="sh -c 'brew autoremove; brew cleanup --prune=all'"
-alias update="sh -c 'brew update; brew upgrade'"
+alias clean="sh -c 'brew autoremove && brew cleanup --prune=all'"
+alias update="sh -c 'brew update && brew upgrade'"
 
 # GIT ALIASES -----------------------------------------------------------------
 # alias ga='git add'
