@@ -2,7 +2,7 @@
 source $ZDOTDIR/functions.zsh
 source_if_exists $ZDOTDIR/profile.zsh
 source_if_exists $ZDOTDIR/aliases.zsh
-source_if_exists $ZDOTDIR/history.zsh
+# source_if_exists $ZDOTDIR/history.zsh
 source_if_exists $ZDOTDIR/profile_work.zsh
 
 # Language settings
@@ -60,5 +60,14 @@ export NVM_DIR="$HOME/.nvm"
 if type "rbenv" >/dev/null 2>&1; then
 	if [[ ! "$PATH" != *"$1"* ]]; then
 		eval "$(rbenv init - zsh)"
+	fi
+fi
+
+# LazyHis
+if type "lazyhis" >/dev/null 2>&1; then
+	if type "zvm_version" >/dev/null 2>&1; then
+		zvm_after_init_commands+=('eval "$(lazyhis init zsh)"')
+	else
+		eval "$(lazyhis init zsh)"
 	fi
 fi
