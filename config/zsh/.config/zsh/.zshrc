@@ -62,3 +62,12 @@ if type "rbenv" >/dev/null 2>&1; then
 		eval "$(rbenv init - zsh)"
 	fi
 fi
+
+# LazyHis
+if type "lazyhis" >/dev/null 2>&1; then
+	if type "zvm_version" >/dev/null 2>&1; then
+		zvm_after_init_commands+=('eval "$(lazyhis init zsh)"')
+	else
+		eval "$(lazyhis init zsh)"
+	fi
+fi
