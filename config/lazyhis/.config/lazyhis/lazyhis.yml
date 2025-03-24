@@ -1,0 +1,20 @@
+db:
+  excludeCommands:
+    - ^c$
+    - ^clear$
+    - ^exit$
+
+gui:
+  columnLayout:
+    - EXIT_CODE
+    - EXECUTED_AT
+    - COMMAND
+  showUniqueCommands: true
+
+os:
+  fetchCurrentSessionCmd: "tmux display-message -p '#S'"
+
+log:
+  logEnabled: false
+  logLevel: DEBUG
+  logFile: ~/Library/Logs/lazyhis.log
