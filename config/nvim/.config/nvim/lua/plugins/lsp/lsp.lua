@@ -4,6 +4,7 @@ local servers = {
     "gopls",
     "lua_ls",
     "pyright",
+    "ts_ls",
 }
 
 local function fmt(diagnostic)
