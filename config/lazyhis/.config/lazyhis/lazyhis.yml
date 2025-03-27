@@ -1,15 +1,25 @@
 db:
   excludeCommands:
+    - ^ls$
+    - ^la$
     - ^c$
     - ^clear$
     - ^exit$
+    - ^nvim$
 
 gui:
   columnLayout:
     - EXIT_CODE
     - EXECUTED_AT
     - COMMAND
-  showUniqueCommands: true
+  initialFilterMode: SESSION_FILTER
+  cyclicFilterModes:
+    - SESSION_FILTER
+    - WORKDIR_FILTER
+    - SUCCESS_FILTER
+    - NO_FILTER
+  persistentFilterModes:
+    - UNIQUE_FILTER
 
 os:
   fetchCurrentSessionCmd: "tmux display-message -p '#S'"
