@@ -22,18 +22,19 @@ end
 
 -- run lazygit
 vim.api.nvim_create_user_command("LazyGit", function()
-    os.execute("topen -- lazygit")
+    vim.fn.system({ "topen", "--", "lazygit" })
 end, { nargs = 0 })
 
 -- run lazygit and focus git log
 vim.api.nvim_create_user_command("LazyGitLog", function()
-    os.execute("topen --force -- lazygit log")
+    vim.fn.system({ "topen", "--force", "--", "lazygit", "log" })
 end, { nargs = 0 })
 
 -- run lazygit and focus git log for current buffer
-vim.api.nvim_create_user_command("LazyGitFilter", function()
+vim.api.nvim_create_user_command("LazyGitFileFilter", function()
     local buff = vim.api.nvim_buf_get_name(0)
-    os.execute("topen --force -- lazygit --filter " .. buff)
+    vim.fn.system({ "topen", "--force", "--", "lazygit", "--filter", buff })
+end, { nargs = 0 })
 
 -- run lazygit and focus git log for commit hash at cursor
 vim.api.nvim_create_user_command("LazyGitHashFilter", function()
