@@ -9,7 +9,7 @@
 
 usage() {
 	cat <<EOF
-Usage: topen [-h] [-f] -- EXEC [ARGS]
+Usage: topen [-h] [-f] [-k KEYS] -- EXEC [ARGS]
 
   EXEC   The executable command to run (required).
   ARGS   Optional arguments to pass to the command.
@@ -19,6 +19,7 @@ The '--' separates the options for the script from the options for the executabl
 Options:
   -h, --help	Show this help message and exit.
   -f, --force	Recreate the tmux window.
+  -k, --keys	Send keys to the window.
 
 Examples:
   topen -- nvim
@@ -28,14 +29,26 @@ EOF
 	exit 1
 }
 
-for i in "$@"; do
-	case $i in
+EXEC=""
+ARGS=()
+KEYS=()
+FORCE=0
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
 	-h | --help)
 		usage
 		;;
 	-f | --force)
 		FORCE=1
 		shift
+		;;
+	-k | --keys)
+		shift
+		while [[ $# -gt 0 && "$1" != "--" ]]; do
+			KEYS+=("$1")
+			shift
+		done
 		;;
 	--)
 		shift
@@ -60,7 +73,7 @@ fi
 
 # Run the command with arguments
 if tmux list-panes -s -F "#W" | grep -q "$EXEC"; then
-	if [ -n "$FORCE" ]; then
+	if [ "$FORCE" -ne 0 ]; then
 		tmux kill-window -t "$EXEC"
 		tmux neww -n "$EXEC" "$EXEC" "${ARGS[@]}"
 	else
@@ -68,4 +81,13 @@ if tmux list-panes -s -F "#W" | grep -q "$EXEC"; then
 	fi
 else
 	tmux neww -n "$EXEC" "$EXEC" "${ARGS[@]}"
+fi
+
+# Send the keys to the EXEC window
+if [ ${#KEYS[@]} -ne 0 ]; then
+	TARGET="$(tmux display-message -p '#S'):${EXEC}"
+	for key in "${KEYS[@]}"; do
+		tmux send-keys -t "${TARGET}" "${key}"
+		sleep 0.1
+	done
 fi

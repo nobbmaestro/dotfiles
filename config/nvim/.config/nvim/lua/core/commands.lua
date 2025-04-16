@@ -1,3 +1,25 @@
+local function get_commit_hash_at_cursor()
+    local buffer = vim.api.nvim_buf_get_name(0)
+    local linenr = vim.api.nvim_win_get_cursor(0)[1]
+
+    local hash = vim.fn
+        .systemlist({
+            "git",
+            "blame",
+            "-L",
+            string.format("%d,%d", linenr, linenr),
+            "--line-porcelain",
+            buffer,
+        })[1]
+        :match("^(%S+)")
+
+    if hash:match("^0+$") then
+        return nil
+    end
+
+    return hash
+end
+
 -- run lazygit
 vim.api.nvim_create_user_command("LazyGit", function()
     os.execute("topen -- lazygit")
@@ -12,6 +34,16 @@ end, { nargs = 0 })
 vim.api.nvim_create_user_command("LazyGitFilter", function()
     local buff = vim.api.nvim_buf_get_name(0)
     os.execute("topen --force -- lazygit --filter " .. buff)
+
+-- run lazygit and focus git log for commit hash at cursor
+vim.api.nvim_create_user_command("LazyGitHashFilter", function()
+    local buff = vim.api.nvim_buf_get_name(0)
+    local hash = get_commit_hash_at_cursor()
+    if hash ~= nil then
+        vim.fn.system({ "topen", "--force", "--keys", "/", hash, "ENTER", "ENTER", "--", "lazygit", "--filter", buff })
+    else
+        vim.notify("LazyGitHashFilter failed: No commit hash at cursor", vim.log.levels.ERROR)
+    end
 end, { nargs = 0 })
 
 -- toggle virtual text diagnostics
