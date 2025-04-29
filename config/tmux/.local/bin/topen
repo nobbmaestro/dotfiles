@@ -32,7 +32,6 @@ EOF
 EXEC=""
 ARGS=()
 KEYS=()
-FORCE=0
 
 while [[ $# -gt 0 ]]; do
 	case $1 in
@@ -71,20 +70,25 @@ if ! command -v "$EXEC" >/dev/null 2>&1; then
 	exit 1
 fi
 
-# Run the command with arguments
+# Check if EXEC pane already exists
 if tmux list-panes -s -F "#W" | grep -q "$EXEC"; then
-	if [ "$FORCE" -ne 0 ]; then
-		tmux kill-window -t "$EXEC"
-		tmux neww -n "$EXEC" "$EXEC" "${ARGS[@]}"
-	else
-		tmux select-window -t "$EXEC"
-	fi
+	PANE_EXISTS=1
+fi
+
+# Run the command with arguments
+if [[ "$PANE_EXISTS" && "$FORCE" ]]; then
+	tmux kill-window -t "$EXEC"
+	tmux neww -n "$EXEC" "$EXEC" "${ARGS[@]}"
+
+elif [[ "$PANE_EXISTS" ]]; then
+	tmux select-window -t "$EXEC"
+
 else
 	tmux neww -n "$EXEC" "$EXEC" "${ARGS[@]}"
 fi
 
 # Send the keys to the EXEC window
-if [ ${#KEYS[@]} -ne 0 ]; then
+if [ -n "${#KEYS[@]}" ]; then
 	TARGET="$(tmux display-message -p '#S'):${EXEC}"
 	for key in "${KEYS[@]}"; do
 		tmux send-keys -t "${TARGET}" "${key}"
