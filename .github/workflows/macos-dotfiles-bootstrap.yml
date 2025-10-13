@@ -1,0 +1,26 @@
+name: macOS dotfiles bootstrap
+
+on:
+  push:
+    branches: [master, development]
+
+  # schedule:
+  #   - cron: "0 3 * * *" # Runs every night at 03:00
+
+jobs:
+  bootstrap:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          set-safe-directory: false
+          persist-credentials: false
+
+      - name: Run install script
+        run: ./resources/install.sh all
+
+      - name: Run install macos config
+        run: ./resources/macos.sh all
+
+      - name: Run stow
+        run: make all

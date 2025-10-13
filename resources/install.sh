@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
+set -eo pipefail
+
 export ZDOTDIR="$HOME/.config/zsh"
-export ZSH_CUSTOM="$ZSH/custom"
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.local/share/tmux/plugins"
+
+BREWFILE="resources/homebrew/Brewfile"
 
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
@@ -36,7 +39,7 @@ success() {
 
 setup_python() {
     title "Setting up Python"
-    bash -c ./resources/python/install.sh
+    ./resources/python/install.sh
 }
 
 install_tmux_package_manager_helper() {
@@ -59,7 +62,7 @@ install_sshpass_helper() {
 install_fzf_zsh_integration() {
     if type "fzf" >/dev/null 2>&1; then
         info "installing: fzf"
-        $(brew --prefix)/opt/fzf/install
+        "$(brew --prefix)"/opt/fzf/install
     fi
 }
 
@@ -105,8 +108,8 @@ setup_homebrew() {
     fi
 
     # install brew dependencies from Brewfile
-    brew bundle --file="resources/homebrew/Brewfile"
-    brew bundle cleanup
+    brew bundle --file="${BREWFILE}"
+    brew bundle cleanup --file="${BREWFILE}" --force
 }
 
 setup_zsh() {
@@ -147,7 +150,7 @@ setup_tmux() {
     if [[ "$(command -v tmux)" ]]; then
         install_tmux_package_manager_helper
         info "downloading tmux plugins..."
-        sh -c "$TMUX_PLUGIN_MANAGER_PATH/tpm/scripts/install_plugins.sh" "" --unattended
+        "$TMUX_PLUGIN_MANAGER_PATH/tpm/scripts/install_plugins.sh" "" --unattended
     else
         warning "command not found: tmux"
     fi
@@ -157,7 +160,9 @@ setup_neovim() {
     title "Setting up NeoVim"
     if [[ "$(command -v bob)" ]]; then
         bob install 0.9.2
-        bob use 0.9.2
+        if [[ -z "$CI" ]]; then
+            bob use 0.9.2
+        fi
     else
         warning "command not found: bob"
     fi
