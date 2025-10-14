@@ -43,6 +43,9 @@ brew "tldr"             # Collaborative cheatsheets for console commands https:/
 brew "yazi"
 brew "zoxide"           # smarter cd command https://github.com/ajeetdsouza/zoxide
 
+tap "hudochenkov/sshpass"
+brew "hudochenkov/sshpass/sshpass"
+
 # miscs dev
 brew "arduino-cli"
 brew "arm-none-eabi-gcc"
