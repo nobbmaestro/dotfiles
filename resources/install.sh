@@ -51,20 +51,6 @@ install_tmux_package_manager_helper() {
     fi
 }
 
-install_fzf_zsh_integration() {
-    if type "fzf" >/dev/null 2>&1; then
-        info "installing: fzf"
-        "$(brew --prefix)"/opt/fzf/install
-    fi
-}
-
-install_zsh_utils() {
-    title "Installing zsh utilities"
-
-    # Install zsh utilities
-    install_fzf_zsh_integration
-}
-
 setup_ubuntu_reqs() {
     if [ "$(uname)" == "Linux" ]; then
         title "Setting up Ubuntu"
@@ -132,8 +118,6 @@ setup_zsh() {
         tic "$(pwd)/resources/terminfo/files/xterm-256color-italic.terminfo"
         tic -x "$(pwd)/resources/terminfo/files/tmux-256color.terminfo"
     fi
-
-    install_zsh_utils
 }
 
 setup_tmux() {
