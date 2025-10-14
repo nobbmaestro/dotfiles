@@ -5,7 +5,7 @@ set -eo pipefail
 export ZDOTDIR="$HOME/.config/zsh"
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.local/share/tmux/plugins"
 
-BREWFILE="resources/homebrew/Brewfile"
+BREWFILE="config/homebrew/.config/homebrew/Brewfile"
 
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"

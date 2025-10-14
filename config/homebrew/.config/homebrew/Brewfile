@@ -53,6 +53,7 @@ if OS.mac?
     # Fonts
     cask "font-jetbrains-mono-nerd-font"
 
+    cask "aerospace"
     cask "aldente"
     cask "alfred"
     cask "bartender"
@@ -62,8 +63,10 @@ if OS.mac?
     cask "kitty"
     # cask "logi-options-plus"
     cask "monitorcontrol"
-    cask "nikitabobko/tap/aerospace"
+    cask "obsidian"
+    # cask "parallels"
     cask "saleae-logic"
+    cask "spotify"
     cask "the-unarchiver"
     cask "wireshark"
 
