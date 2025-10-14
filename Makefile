@@ -1,8 +1,14 @@
 TARGET ?= ${HOME}
-STOW := stow --restow --verbose --target=$(TARGET)
-UNSTOW := stow --delete --verbose --target=$(TARGET)
 
-.PHONY: all
+STOW_FLAGS := --verbose --target=$(TARGET)
+ifeq ($(CI),true)
+  STOW_FLAGS += --ignore="(^|/)\.gitconfig$$"
+endif
+
+STOW	:= stow --restow $(STOW_FLAGS)
+UNSTOW	:= stow --delete $(STOW_FLAGS)
+
+.PHONY: all stow-all clean
 
 all: stow-all
 
