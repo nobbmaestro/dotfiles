@@ -30,22 +30,20 @@ install_python_versions() {
             local version
             version=$(eval echo "$line" | cut -d '=' -f 1)
 
-            if [[ ! $(pyenv versions) =~ ${version} ]]; then
-                info "installing: Python ${version}"
-                pyenv install "${version}"
-            fi
+            info "installing: Python ${version}"
+            uv python install "${version}"
 
             if [[ "$line" == *"=GLOBAL" ]]; then
                 info "setting global: ${version}"
-                pyenv global "${version}"
+                uv python install "${version}" --default
+                uv python pin "${version}"
             fi
         done <"$file"
     fi
 }
 
 cd -- "$(dirname -- "$0")"
-if [[ "$(command -v pyenv)" ]]; then
+if [[ "$(command -v uv)" ]]; then
     install_python_versions "versions"
-    pip install pipx
-    install_python_packages "pipx" "packages"
+    install_python_packages "uv tool" "packages"
 fi

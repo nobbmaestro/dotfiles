@@ -31,3 +31,34 @@ layout_nvm() {
         nvm use $(< .nvmrc)
     fi
 }
+
+layout_python_uv() {
+  local python=${1:-python3}
+  [[ $# -gt 0 ]] && shift
+  unset PYTHONHOME
+
+  local python_version
+  python_version="$($python -V | cut -w -f 2 | cut -d . -f 1-2)"
+  if [[ -z $python_version ]]; then
+      log_error "Could not find python's version"
+      return 1
+  fi
+
+  if [[ -n "${VIRTUAL_ENV:-}" ]]; then
+      local REPLY
+      realpath.absolute "$VIRTUAL_ENV"
+      VIRTUAL_ENV=$REPLY
+  else
+      # put the venv in the project root
+      VIRTUAL_ENV="$PWD/.venv"
+  fi
+
+  if [[ ! -d "$VIRTUAL_ENV" ]]; then
+      # create the venv at .venv using uv
+      uv venv -p "$python" "$@" "$VIRTUAL_ENV"
+      # (equivalently: (cd "$PWD" && uv venv -p "$python"))
+  fi
+
+  export VIRTUAL_ENV
+  PATH_add "$VIRTUAL_ENV/bin"
+}
