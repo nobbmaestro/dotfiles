@@ -13,9 +13,9 @@ brew "zsh-vi-mode"
 
 # --- Version Managers ---
 brew "nvm"              # Node (JS) Version Manager https://github.com/nvm-sh/nvm
-brew "pyenv"            # Python Version Manager https://github.com/pyenv/pyenv
 brew "rbenv"            # Ruby Version Manager
 brew "ruby-build"
+brew "uv"               # Python package and project manager https://github.com/astral-sh/uv
 
 # --- Tools & Utilities ---
 brew "bear"             # Bear is a tool that generates a compilation database for clang tooling
