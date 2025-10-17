@@ -4,8 +4,8 @@ on:
   push:
     branches: [master, development]
 
-  # schedule:
-  #   - cron: "0 3 * * *" # Runs every night at 03:00
+  schedule:
+    - cron: "0 3 * * *" # Runs every night at 03:00
 
 jobs:
   bootstrap:
