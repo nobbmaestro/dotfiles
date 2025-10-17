@@ -1,6 +1,6 @@
 gui:
     border: "rounded"
-    nerdFontsVersion: "3"
+    nerdFontsVersion: 3
     timeFormat: "02 Jan 06"
     shortTimeFormat: "15:04"
     theme:
@@ -28,5 +28,6 @@ gui:
             - "#d5ced9"
 
 os:
-    editCommand: "tmux-nvim-open"
-    editCommandTemplate: "{{editor}} {{filename}} {{line}}"
+    edit: "tmux-nvim-open {{filename}}"
+    editAtLine: "tmux-nvim-open {{filename}} {{line}}"
+    open: "tmux-nvim-open {{filename}}"
