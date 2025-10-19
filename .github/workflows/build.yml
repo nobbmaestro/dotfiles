@@ -1,4 +1,4 @@
-name: macOS dotfiles bootstrap
+name: macOS build
 
 on:
   push:
