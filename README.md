@@ -1,5 +1,7 @@
 # Nobbmaestro's dotfiles
 
+[![macOS Build](https://github.com/nobbmaestro/dotfiles/actions/workflows/build.yml/badge.svg)](https://github.com/nobbmaestro/dotfiles/actions/workflows/build.yml)
+
 Dotfiles and automations that should make my life easier (or rather harder?).
 
 - [AeroSpace](https://github.com/nikitabobko/AeroSpace) AeroSpace is an i3-like tiling window manager for macOS
