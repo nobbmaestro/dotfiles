@@ -23,3 +23,15 @@ if [[ -d $(brew --prefix)/opt/cunit/lib ]]; then
 	LIBRARY_PATH=$(brew --prefix)/opt/cunit/lib
 	export LIBRARY_PATH
 fi
+
+# Configure UV ref: https://www.jrisner.dev/blog/migrating-from-pyenv-to-uv/
+export UV_DIR="${HOME}/.uv"
+export UV_CACHE_DIR="${UV_DIR}/cache"
+export UV_PYTHON_INSTALL_DIR="${UV_DIR}/python/versions"
+export UV_PYTHON_BIN_DIR="${UV_DIR}/python/bin"
+export UV_TOOL_DIR="${UV_DIR}/tools"
+export UV_TOOL_BIN_DIR="${UV_DIR}/bin"
+export PATH="${UV_PYTHON_BIN_DIR}:${UV_TOOL_BIN_DIR}:${PATH}"
+export UV_PYTHON_DOWNLOADS=manual
+export UV_PYTHON_PREFERENCE=only-managed
+export UV_VENV_SEED=true
