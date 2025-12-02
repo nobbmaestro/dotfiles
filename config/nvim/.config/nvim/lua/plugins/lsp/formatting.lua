@@ -1,12 +1,11 @@
 local utils = {
-    "black",
     "clang-format",
     "djlint",
     "goimports",
     "golines",
-    "isort",
     "prettier",
     "pyright",
+    "ruff",
     "shellcheck",
     "shfmt",
     "sql-formatter",
@@ -50,8 +49,7 @@ return {
                 }),
 
                 -- python
-                null_ls.builtins.formatting.black.with({ extra_args = { "--line-length", line_len } }),
-                null_ls.builtins.formatting.isort,
+                null_ls.builtins.formatting.ruff,
                 null_ls.builtins.formatting.djlint.with({
                     extra_args = { "--blank-line-after-tag", "load,extends,include,endblock" },
                 }),
