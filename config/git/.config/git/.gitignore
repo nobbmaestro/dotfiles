@@ -7,7 +7,7 @@
 .nvmrc
 .python-version
 .vim-arsync
-.rsync.env
+.rsyncrc
 .luarc.json
 compile_commands.json
 
