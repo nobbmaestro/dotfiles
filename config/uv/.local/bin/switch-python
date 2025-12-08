@@ -1,0 +1,50 @@
+#!/bin/bash
+
+SRC=""
+DST="$HOME/.local/bin/"
+DRY=0
+ERASE=0
+
+usage() {
+	cat <<EOF
+usage: switch-python [-h] [--erase] [--dry]
+EOF
+	exit 0
+}
+
+if [[ -z "$UV_PYTHON_INSTALL_DIR" ]]; then
+	exit
+fi
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+	-h | --help)
+		usage
+		;;
+	--erase)
+		ERASE=1
+		;;
+	--dry)
+		DRY=1
+		;;
+	*)
+		SRC=$(uv python find "$1")
+		;;
+	esac
+	shift
+done
+
+if [ $DRY -eq 1 ]; then
+	exit
+fi
+
+if [ $ERASE -eq 1 ]; then
+	rm -f "$DST/python"
+	rm -f "$DST/pip"
+	exit 0
+fi
+
+ln -sf "$SRC" "$DST"
+ln -sf "$(dirname -- "$SRC")/pip" "$DST/pip"
+
+echo "$SRC"
