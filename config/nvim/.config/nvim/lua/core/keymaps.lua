@@ -3,6 +3,8 @@ vim.g.mapleader = " "
 -- allow movement of multiple lines
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move down the selected text" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move up the selected text" })
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left the selected text" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right the selected text" })
 
 -- keep cursor on start of the line on movement
 vim.keymap.set("n", "J", "mzJ`z")
