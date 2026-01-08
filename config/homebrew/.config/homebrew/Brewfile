@@ -1,6 +1,5 @@
 # --- Taps ---
 tap "hudochenkov/sshpass"
-tap "nikitabobko/tap"
 tap "nobbmaestro/tap"
 
 # --- Shell & Prompt ---
@@ -53,7 +52,7 @@ if OS.mac?
     # Fonts
     cask "font-jetbrains-mono-nerd-font"
 
-    cask "aerospace"
+    cask "nikitabobko/tap/aerospace"
     cask "aldente"
     cask "alfred"
     cask "bartender"
