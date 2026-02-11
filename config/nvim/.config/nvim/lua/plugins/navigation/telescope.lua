@@ -21,6 +21,7 @@ return {
             vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "Telescope: Search help" })
             vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Telescope: Search resume" })
             vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "Telescope: Search for highlighted word" })
+            vim.keymap.set("n", "<leader>sS", builtin.lsp_workspace_symbols, { desc = "Telescope: Search workspace symbols" })
 
             require("telescope").setup({
                 defaults = {
