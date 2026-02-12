@@ -35,9 +35,10 @@ brew "lazygit"          # Terminal git GUI https://github.com/jesseduffield/lazy
 # brew "lazydocker"
 brew "mas"              # Mac automation https://github.com/mas-cli/mas
 brew "ripgrep"
+brew "picocom"
 brew "stow"
-brew "tmux"
 brew "tldr"             # Collaborative cheatsheets for console commands https://github.com/tldr-pages/tldr
+brew "tmux"
 brew "yazi"
 
 # --- Dev Utilities ---
