@@ -12,6 +12,14 @@ UNSTOW	:= stow --delete $(STOW_FLAGS)
 
 all: stow-all
 
+install:
+	@echo "Installing Nix Package Manager..."
+	@curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh
+
+uninstall:
+	@echo "Uninstalling Nix Package Manager..."
+	@(sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller)
+
 stow-all:
 	@echo "Creating symlinks..."
 	@(cd config && $(STOW) */)
