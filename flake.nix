@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
   outputs =
@@ -12,6 +13,7 @@
       self,
       nix-darwin,
       nixpkgs,
+      nix-homebrew,
     }:
     let
       configuration =
@@ -55,13 +57,28 @@
 
           # The platform the configuration will be used on.
           nixpkgs.hostPlatform = "aarch64-darwin";
+
+          system.primaryUser = "norbertbatiuk";
         };
     in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
       darwinConfigurations."Norberts-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-        modules = [ configuration ];
+        modules = [
+          configuration
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              # User owning the Homebrew prefix
+              user = "norbertbatiuk";
+
+              autoMigrate = true;
+            };
+          }
+        ];
       };
     };
 }
