@@ -17,6 +17,8 @@
       configuration =
         { pkgs, config, ... }:
         {
+          nixpkgs.config.allowUnfree = true;
+
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = [
@@ -27,6 +29,7 @@
             pkgs.lazygit
             pkgs.neovim
             pkgs.nixfmt
+            pkgs.obsidian
             pkgs.starship
             pkgs.stow
             pkgs.tmux
