@@ -34,6 +34,7 @@ brew "htop"
 brew "lazygit"          # Terminal git GUI https://github.com/jesseduffield/lazygit
 # brew "lazydocker"
 brew "mas"              # Mac automation https://github.com/mas-cli/mas
+brew "mole"
 brew "ripgrep"
 brew "picocom"
 brew "stow"
@@ -59,17 +60,19 @@ if OS.mac?
     cask "alfred"
     cask "bartender"
     cask "dictionaries"
-    cask "docker"
+    cask "docker-desktop"
     cask "karabiner-elements"
     cask "kitty"
-    # cask "logi-options-plus"
+    cask "logi-options+"
     cask "monitorcontrol"
     cask "obsidian"
-    # cask "parallels"
+    cask "parallels"
     cask "saleae-logic"
+    cask "segger-jlink"
     cask "spotify"
+    cask "stremio"
     cask "the-unarchiver"
-    cask "wireshark"
+    cask "wireshark-app"
 
     # mas "AdGuard for Safari", id: 1440147259
     # mas "Amphetamine", id: 937984704
