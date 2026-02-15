@@ -12,9 +12,9 @@ export LANG=en_US.UTF-8
 export ARCHFLAGS="-arch arm64"
 
 # Source zsh plugins
-source_if_exists $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source_if_exists $(brew --prefix)/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source_if_exists $(brew --prefix)/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source_if_exists /nix/store/*/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source_if_exists /nix/store/*/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source_if_exists /nix/store/*/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Starship prompt
 if type "starship" >/dev/null 2>&1; then
