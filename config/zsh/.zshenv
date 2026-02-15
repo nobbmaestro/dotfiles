@@ -10,6 +10,3 @@ export VISUAL="nvim"
 
 # Source helpers
 source $ZDOTDIR/functions.zsh
-
-# Bob, A version manager for neovim
-add_to_path_front $HOME/.local/share/bob/nvim-bin

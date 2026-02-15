@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-neovim.url = "github:NixOS/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -13,9 +14,17 @@
       self,
       nix-darwin,
       nixpkgs,
+      nixpkgs-neovim,
       nix-homebrew,
     }:
     let
+      system = "aarch64-darwin";
+
+      pinnedPkgs = import nixpkgs-neovim {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       configuration =
         { pkgs, config, ... }:
         {
@@ -24,12 +33,12 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = [
+            pinnedPkgs.neovim
             pkgs.eza
             pkgs.fzf
             pkgs.git
             pkgs.kitty
             pkgs.lazygit
-            pkgs.neovim
             pkgs.nixfmt
             pkgs.obsidian
             pkgs.starship
