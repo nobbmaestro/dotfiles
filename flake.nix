@@ -42,6 +42,12 @@
             pkgs.zsh-vi-mode
           ];
 
+          fonts.packages = with pkgs; [
+            nerd-fonts.jetbrains-mono
+            nerd-fonts.symbols-only
+            jetbrains-mono
+          ];
+
           # Necessary for using flakes on this system.
           nix.settings.experimental-features = "nix-command flakes";
 
