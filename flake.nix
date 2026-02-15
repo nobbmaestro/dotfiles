@@ -34,21 +34,51 @@
           # $ nix-env -qaP | grep wget
           environment.systemPackages = [
             pinnedPkgs.neovim
+            pkgs.curl
+            pkgs.direnv
             pkgs.eza
             pkgs.fzf
             pkgs.git
+            pkgs.gitflow
+            pkgs.htop
             pkgs.kitty
             pkgs.lazygit
+            pkgs.nix-direnv
             pkgs.nixfmt
             pkgs.obsidian
-            pkgs.starship
+            pkgs.ripgrep
+            pkgs.sshpass
             pkgs.stow
+            pkgs.tldr
             pkgs.tmux
+            pkgs.yazi
+
+            # Dev Utilities
+            pkgs.arduino-cli
+            pkgs.bear
+            pkgs.container
+            pkgs.docker
+            pkgs.gcc-arm-embedded
+            pkgs.gitlab-ci-local
+            pkgs.picocom
+            pkgs.python3
+            pkgs.wireshark
+            pkgs.uv
+
+            # Shell & Prompt
+            pkgs.starship
             pkgs.zoxide
-            pkgs.zsh
             pkgs.zsh-autosuggestions
             pkgs.zsh-syntax-highlighting
             pkgs.zsh-vi-mode
+
+            # MacOS Utilities
+            pkgs.aerospace
+            pkgs.aldente
+            pkgs.bartender
+            pkgs.monitorcontrol
+            pkgs.spotify
+            pkgs.the-unarchiver
           ];
 
           fonts.packages = with pkgs; [
@@ -56,6 +86,30 @@
             nerd-fonts.symbols-only
             jetbrains-mono
           ];
+
+          homebrew = {
+            enable = true;
+            onActivation = {
+              cleanup = "zap"; # This will remove unspecified casks
+              autoUpdate = true;
+              upgrade = true;
+            };
+            brews = [
+              "mole"
+              "nobbmaestro/tap/lazyhis"
+            ];
+            casks = [
+              "alfred"
+              "dictionaries"
+              # "docker-desktop"
+              "karabiner-elements"
+              "logi-options+"
+              # "parallels"
+              "saleae-logic"
+              "segger-jlink"
+              "stremio"
+            ];
+          };
 
           # Necessary for using flakes on this system.
           nix.settings.experimental-features = "nix-command flakes";
