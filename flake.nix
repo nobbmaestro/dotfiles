@@ -115,7 +115,14 @@
           nix.settings.experimental-features = "nix-command flakes";
 
           # Enable alternative shell support in nix-darwin.
-          # programs.fish.enable = true;
+          programs.zsh = {
+            enable = true;
+            interactiveShellInit = ''
+              source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+              source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+              source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+            '';
+          };
 
           # Set Git commit hash for darwin-version.
           system.configurationRevision = self.rev or self.dirtyRev or null;
