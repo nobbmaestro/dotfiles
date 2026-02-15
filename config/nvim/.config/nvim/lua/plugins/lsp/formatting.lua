@@ -48,6 +48,9 @@ return {
                     -- extra_args = { "--tab-width", tab_width },
                 }),
 
+                -- nix
+                null_ls.builtins.formatting.nixfmt,
+
                 -- python
                 null_ls.builtins.formatting.ruff,
                 null_ls.builtins.formatting.djlint.with({
