@@ -124,6 +124,40 @@
             '';
           };
 
+          system.defaults = {
+            dock = {
+              autohide = true;
+              show-recents = false;
+
+              tilesize = 41;
+              largesize = 70;
+              magnification = true;
+              mru-spaces = false;
+            };
+
+            finder = {
+              _FXSortFoldersFirst = true;
+              AppleShowAllFiles = true;
+              FXPreferredViewStyle = "SCcf";
+              ShowPathbar = true;
+            };
+
+            NSGlobalDomain = {
+              AppleShowAllExtensions = true;
+              AppleInterfaceStyle = "Dark";
+              KeyRepeat = 2;
+            };
+
+            WindowManager.EnableStandardClickToShowDesktop = false;
+            loginwindow.GuestEnabled = false;
+          };
+
+          # Enable TouchID authentication on sudo
+          security.pam.services.sudo_local = {
+            touchIdAuth = true;
+            reattach = true;
+          };
+
           # Set Git commit hash for darwin-version.
           system.configurationRevision = self.rev or self.dirtyRev or null;
 
