@@ -102,7 +102,7 @@
               "alfred"
               "dictionaries"
               # "docker-desktop"
-              "karabiner-elements"
+              # "karabiner-elements"
               "logi-options+"
               # "parallels"
               "saleae-logic"
@@ -124,32 +124,38 @@
             '';
           };
 
-          system.defaults = {
-            dock = {
-              autohide = true;
-              show-recents = false;
+          system = {
+            defaults = {
+              dock = {
+                autohide = true;
+                show-recents = false;
 
-              tilesize = 41;
-              largesize = 70;
-              magnification = true;
-              mru-spaces = false;
+                tilesize = 41;
+                largesize = 70;
+                magnification = true;
+                mru-spaces = false;
+              };
+
+              finder = {
+                _FXSortFoldersFirst = true;
+                AppleShowAllFiles = true;
+                FXPreferredViewStyle = "SCcf";
+                ShowPathbar = true;
+              };
+
+              NSGlobalDomain = {
+                AppleShowAllExtensions = true;
+                AppleInterfaceStyle = "Dark";
+                KeyRepeat = 2;
+              };
+
+              WindowManager.EnableStandardClickToShowDesktop = false;
+              loginwindow.GuestEnabled = false;
             };
-
-            finder = {
-              _FXSortFoldersFirst = true;
-              AppleShowAllFiles = true;
-              FXPreferredViewStyle = "SCcf";
-              ShowPathbar = true;
+            keyboard = {
+              enableKeyMapping = true;
+              remapCapsLockToControl = true;
             };
-
-            NSGlobalDomain = {
-              AppleShowAllExtensions = true;
-              AppleInterfaceStyle = "Dark";
-              KeyRepeat = 2;
-            };
-
-            WindowManager.EnableStandardClickToShowDesktop = false;
-            loginwindow.GuestEnabled = false;
           };
 
           # Enable TouchID authentication on sudo
