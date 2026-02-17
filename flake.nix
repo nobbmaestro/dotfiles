@@ -4,9 +4,13 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-neovim.url = "github:NixOS/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
+
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -16,6 +20,7 @@
       nixpkgs,
       nixpkgs-neovim,
       nix-homebrew,
+      home-manager,
     }:
     let
       system = "aarch64-darwin";
@@ -25,13 +30,43 @@
         config.allowUnfree = true;
       };
 
+      # These are per-user preferences on macOS.
+      # We apply them via home-manager for EACH user.
+      sharedUserDefaults = {
+        NSGlobalDomain = {
+          AppleShowAllExtensions = true;
+          AppleInterfaceStyle = "Dark";
+          KeyRepeat = 2;
+        };
+
+        "com.apple.dock" = {
+          autohide = true;
+          "show-recents" = false;
+
+          tilesize = 41;
+          largesize = 70;
+          magnification = true;
+          "mru-spaces" = false;
+        };
+
+        "com.apple.finder" = {
+          _FXSortFoldersFirst = true;
+          AppleShowAllFiles = true;
+          FXPreferredViewStyle = "SCcf";
+          ShowPathbar = true;
+        };
+
+        # WindowManager.* lives in the "com.apple.WindowManager" domain
+        "com.apple.WindowManager" = {
+          EnableStandardClickToShowDesktop = false;
+        };
+      };
+
       configuration =
         { pkgs, config, ... }:
         {
           nixpkgs.config.allowUnfree = true;
 
-          # List packages installed in system profile. To search by name, run:
-          # $ nix-env -qaP | grep wget
           environment.systemPackages = [
             pinnedPkgs.neovim
             pkgs.curl
@@ -90,7 +125,7 @@
           homebrew = {
             enable = true;
             onActivation = {
-              cleanup = "zap"; # This will remove unspecified casks
+              cleanup = "zap";
               autoUpdate = true;
               upgrade = true;
             };
@@ -101,20 +136,25 @@
             casks = [
               "alfred"
               "dictionaries"
-              # "docker-desktop"
-              # "karabiner-elements"
               "logi-options+"
-              # "parallels"
               "saleae-logic"
               "segger-jlink"
               "stremio"
             ];
           };
 
-          # Necessary for using flakes on this system.
+          users.users.norbertbatiuk = {
+            home = "/Users/norbertbatiuk";
+            shell = pkgs.zsh;
+          };
+
+          users.users.work = {
+            home = "/Users/work";
+            shell = pkgs.zsh;
+          };
+
           nix.settings.experimental-features = "nix-command flakes";
 
-          # Enable alternative shell support in nix-darwin.
           programs.zsh = {
             enable = true;
             interactiveShellInit = ''
@@ -125,75 +165,67 @@
           };
 
           system = {
+            # Keep ONLY truly system-wide defaults here.
             defaults = {
-              dock = {
-                autohide = true;
-                show-recents = false;
-
-                tilesize = 41;
-                largesize = 70;
-                magnification = true;
-                mru-spaces = false;
-              };
-
-              finder = {
-                _FXSortFoldersFirst = true;
-                AppleShowAllFiles = true;
-                FXPreferredViewStyle = "SCcf";
-                ShowPathbar = true;
-              };
-
-              NSGlobalDomain = {
-                AppleShowAllExtensions = true;
-                AppleInterfaceStyle = "Dark";
-                KeyRepeat = 2;
-              };
-
-              WindowManager.EnableStandardClickToShowDesktop = false;
               loginwindow.GuestEnabled = false;
             };
+
             keyboard = {
               enableKeyMapping = true;
               remapCapsLockToControl = true;
             };
           };
 
-          # Enable TouchID authentication on sudo
           security.pam.services.sudo_local = {
             touchIdAuth = true;
             reattach = true;
           };
 
-          # Set Git commit hash for darwin-version.
           system.configurationRevision = self.rev or self.dirtyRev or null;
-
-          # Used for backwards compatibility, please read the changelog before changing.
-          # $ darwin-rebuild changelog
           system.stateVersion = 6;
-
-          # The platform the configuration will be used on.
           nixpkgs.hostPlatform = "aarch64-darwin";
 
           system.primaryUser = "norbertbatiuk";
         };
     in
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#simple
       darwinConfigurations."Norberts-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
+
           nix-homebrew.darwinModules.nix-homebrew
+          home-manager.darwinModules.home-manager
+
+          # nix-homebrew config
           {
             nix-homebrew = {
               enable = true;
               enableRosetta = true;
-              # User owning the Homebrew prefix
               user = "norbertbatiuk";
-
               autoMigrate = true;
             };
           }
+
+          # home-manager config for per-user defaults
+          (
+            { ... }:
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users.norbertbatiuk = {
+                home.username = "norbertbatiuk";
+                home.stateVersion = "24.11";
+                targets.darwin.defaults = sharedUserDefaults;
+              };
+
+              home-manager.users.work = {
+                home.username = "work";
+                home.stateVersion = "24.11";
+                targets.darwin.defaults = sharedUserDefaults;
+              };
+            }
+          )
         ];
       };
     };
