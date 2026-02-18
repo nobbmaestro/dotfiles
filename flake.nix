@@ -80,7 +80,6 @@
             pkgs.lazygit
             pkgs.nix-direnv
             pkgs.nixfmt
-            pkgs.obsidian
             pkgs.ripgrep
             pkgs.sshpass
             pkgs.stow
@@ -91,7 +90,6 @@
             # Dev Utilities
             pkgs.arduino-cli
             pkgs.bear
-            pkgs.container
             pkgs.docker
             pkgs.gcc-arm-embedded
             pkgs.gitlab-ci-local
@@ -109,11 +107,6 @@
 
             # MacOS Utilities
             pkgs.aerospace
-            pkgs.aldente
-            pkgs.bartender
-            pkgs.monitorcontrol
-            pkgs.spotify
-            pkgs.the-unarchiver
           ];
 
           fonts.packages = with pkgs; [
@@ -134,12 +127,18 @@
               "nobbmaestro/tap/lazyhis"
             ];
             casks = [
+              "aldente"
               "alfred"
               "dictionaries"
               "logi-options+"
+              "monitorcontrol"
+              "obsidian"
               "saleae-logic"
               "segger-jlink"
+              "spotify"
               "stremio"
+              "the-unarchiver"
+              "wireshark-app"
             ];
           };
 
@@ -200,7 +199,7 @@
           {
             nix-homebrew = {
               enable = true;
-              enableRosetta = true;
+              enableRosetta = false;
               user = "norbertbatiuk";
               autoMigrate = true;
             };
@@ -208,7 +207,7 @@
 
           # home-manager config for per-user defaults
           (
-            { ... }:
+            { pkgs, ... }:
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
@@ -217,12 +216,16 @@
                 home.username = "norbertbatiuk";
                 home.stateVersion = "24.11";
                 targets.darwin.defaults = sharedUserDefaults;
+
+                home.packages = [ ];
               };
 
               home-manager.users.work = {
                 home.username = "work";
                 home.stateVersion = "24.11";
                 targets.darwin.defaults = sharedUserDefaults;
+
+                home.packages = [ ];
               };
             }
           )
