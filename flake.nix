@@ -77,6 +77,9 @@
             pkgs.tmux
             pkgs.yazi
 
+            # LSP for Neovim
+            pkgs.lua-language-server
+
             # Dev Utilities
             pkgs.arduino-cli
             pkgs.bear
