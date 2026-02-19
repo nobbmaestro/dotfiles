@@ -1,7 +1,7 @@
-require("core.autocmds")
-require("core.commands")
-require("core.keymaps")
-require("core.options")
+require("config.autocmds")
+require("config.commands")
+require("config.keymaps")
+require("config.options")
 require("core.lazy")
 
 -- reference:
