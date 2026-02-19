@@ -8,19 +8,22 @@ on:
     - cron: "0 3 * * *" # Runs every night at 03:00
 
 jobs:
-  bootstrap:
+  flake:
     runs-on: macos-26
+
     steps:
       - uses: actions/checkout@v5
-        with:
-          set-safe-directory: false
-          persist-credentials: false
 
-      - name: Run install script
-        run: ./resources/install.sh all
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v16
 
-      - name: Run install macos config
-        run: ./resources/macos.sh all
+      - name: Enable flakes
+        run: |
+          mkdir -p ~/.config/nix
+          echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 
-      - name: Run stow
-        run: make all
+      - name: Flake check
+        run: nix flake check
+
+      - name: Build nix-darwin system
+        run: nix build .#darwinConfigurations.Norberts-MacBook-Pro.system

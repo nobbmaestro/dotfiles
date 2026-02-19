@@ -2,7 +2,10 @@ format = """
 $directory\
 $git_branch\
 $git_status\
-$fill\
+$line_break\
+$character"""
+
+right_format = """
 $python\
 $lua\
 $nodejs\
@@ -11,11 +14,10 @@ $haskell\
 $rust\
 $ruby\
 $aws\
+$nix_shell\
 $docker_context\
 $jobs\
-$cmd_duration\
-$line_break\
-$character"""
+$cmd_duration"""
 
 add_newline = true
 palette = "andromeda"
@@ -94,6 +96,10 @@ symbol = '󰏗 '
 symbol = ' '
 style = 'yellow'
 format = '[$symbol($profile )(\[$duration\] )]($style)'
+
+[nix_shell]
+symbol = '❄️ '
+format = 'via [$symbol$state( \($name\))]($style) '
 
 [docker_context]
 symbol = ' '
