@@ -8,7 +8,7 @@ local function sleuth_component()
 end
 
 local function lsp_client_component()
-    local buf_clients = vim.lsp.buf_get_clients()
+    local buf_clients = vim.lsp.get_clients()
     local null_ls_installed, null_ls = pcall(require, "null-ls")
     local buf_client_names = {}
     for _, client in pairs(buf_clients) do
