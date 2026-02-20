@@ -79,6 +79,7 @@
 
             # LSP for Neovim
             pkgs.lua-language-server
+            pkgs.stylua
 
             # Dev Utilities
             pkgs.arduino-cli
