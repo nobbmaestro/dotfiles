@@ -3,6 +3,9 @@ vim.lsp.enable({
     "lua_ls",
 })
 
+-- Prevent LSP from overwriting treesitter color settings
+vim.highlight.priorities.semantic_tokens = 95
+
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
     callback = function(event)
