@@ -79,6 +79,7 @@
 
             # LSP for Neovim
             pkgs.lua-language-server
+            pkgs.nil
             pkgs.stylua
 
             # Dev Utilities
