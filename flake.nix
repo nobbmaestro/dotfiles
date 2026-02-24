@@ -217,28 +217,25 @@
           # home-manager config for per-user defaults
           (
             { pkgs, ... }:
+            let
+              mkUser = username: {
+                home.username = username;
+                home.stateVersion = "24.11";
+                targets.darwin.defaults = sharedUserDefaults;
+                home.packages = [ ];
+              };
+            in
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
-              home-manager.users.norbertbatiuk = {
-                home.username = "norbertbatiuk";
-                home.stateVersion = "24.11";
-                targets.darwin.defaults = sharedUserDefaults;
-
-                home.packages = [ ];
-              };
-
-              home-manager.users.work = {
-                home.username = "work";
-                home.stateVersion = "24.11";
-                targets.darwin.defaults = sharedUserDefaults;
-
-                home.packages = [ ];
-              };
+              home-manager.users.norbertbatiuk = mkUser "norbertbatiuk";
+              home-manager.users.work = mkUser "work";
             }
           )
+
         ];
+
       };
     };
 }
