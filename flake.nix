@@ -3,8 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-neovim.url = "github:NixOS/nixpkgs/e89cf1c932006531f454de7d652163a9a5c86668";
-
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -18,18 +16,10 @@
       self,
       nix-darwin,
       nixpkgs,
-      nixpkgs-neovim,
       nix-homebrew,
       home-manager,
     }:
     let
-      system = "aarch64-darwin";
-
-      pinnedPkgs = import nixpkgs-neovim {
-        inherit system;
-        config.allowUnfree = true;
-      };
-
       # These are per-user preferences on macOS.
       # We apply them via home-manager for EACH user.
       sharedUserDefaults = {
@@ -68,7 +58,7 @@
           nixpkgs.config.allowUnfree = true;
 
           environment.systemPackages = [
-            pinnedPkgs.neovim
+            # pkgs.neovim
             pkgs.curl
             pkgs.direnv
             pkgs.eza
@@ -79,7 +69,6 @@
             pkgs.kitty
             pkgs.lazygit
             pkgs.nix-direnv
-            pkgs.nixfmt
             pkgs.ripgrep
             pkgs.sshpass
             pkgs.stow
@@ -218,11 +207,42 @@
           (
             { pkgs, ... }:
             let
+              nvimLangTools = with pkgs; {
+                bash = [
+                  shellcheck
+                  shfmt
+                ];
+                c = [
+                  clang-tools
+                ];
+                go = [
+                  gopls
+                ];
+                nix = [
+                  nil
+                  nixfmt
+                ];
+                py = [
+                  pyright
+                  ruff
+                ];
+                lua = [
+                  lua-language-server
+                  stylua
+                ];
+              };
+
               mkUser = username: {
                 home.username = username;
                 home.stateVersion = "24.11";
                 targets.darwin.defaults = sharedUserDefaults;
+
                 home.packages = [ ];
+
+                programs.neovim = {
+                  enable = true;
+                  extraPackages = builtins.concatLists (builtins.attrValues nvimLangTools);
+                };
               };
             in
             {
