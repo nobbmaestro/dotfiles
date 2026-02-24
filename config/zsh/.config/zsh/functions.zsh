@@ -61,5 +61,10 @@ function truecolor-test() {
 
 function nvim() {
 	local socket="/tmp/nvim-server-$(tmux display-message -p '#S').sock"
-	command nvim --listen $socket "$@"
+
+	if [[ ! -S "$socket" ]]; then
+		command nvim --listen "$socket" "$@"
+	else
+		command nvim "$@"
+	fi
 }
