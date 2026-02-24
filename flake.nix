@@ -58,7 +58,7 @@
           nixpkgs.config.allowUnfree = true;
 
           environment.systemPackages = [
-            pkgs.neovim
+            # pkgs.neovim
             pkgs.curl
             pkgs.direnv
             pkgs.eza
@@ -69,18 +69,12 @@
             pkgs.kitty
             pkgs.lazygit
             pkgs.nix-direnv
-            pkgs.nixfmt
             pkgs.ripgrep
             pkgs.sshpass
             pkgs.stow
             pkgs.tldr
             pkgs.tmux
             pkgs.yazi
-
-            # LSP for Neovim
-            pkgs.lua-language-server
-            pkgs.nil
-            pkgs.stylua
 
             # Dev Utilities
             pkgs.arduino-cli
@@ -213,11 +207,42 @@
           (
             { pkgs, ... }:
             let
+              nvimLangTools = with pkgs; {
+                bash = [
+                  shellcheck
+                  shfmt
+                ];
+                c = [
+                  clang-tools
+                ];
+                go = [
+                  gopls
+                ];
+                nix = [
+                  nil
+                  nixfmt
+                ];
+                py = [
+                  pyright
+                  ruff
+                ];
+                lua = [
+                  lua-language-server
+                  stylua
+                ];
+              };
+
               mkUser = username: {
                 home.username = username;
                 home.stateVersion = "24.11";
                 targets.darwin.defaults = sharedUserDefaults;
+
                 home.packages = [ ];
+
+                programs.neovim = {
+                  enable = true;
+                  extraPackages = builtins.concatLists (builtins.attrValues nvimLangTools);
+                };
               };
             in
             {
