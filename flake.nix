@@ -105,7 +105,6 @@
           ];
 
           homebrew = {
-            enable = true;
             onActivation = {
               cleanup = "zap";
               autoUpdate = true;
@@ -119,7 +118,7 @@
               "aldente"
               "alfred"
               "dictionaries"
-              "logi-options+"
+              # "logi-options+"
               "monitorcontrol"
               "obsidian"
               "saleae-logic"
@@ -197,7 +196,7 @@
           {
             nix-homebrew = {
               enable = true;
-              enableRosetta = false;
+              enableRosetta = true;
               user = "norbertbatiuk";
               autoMigrate = true;
             };
