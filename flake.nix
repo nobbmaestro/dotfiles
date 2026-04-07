@@ -237,6 +237,67 @@
                 home.stateVersion = "24.11";
                 targets.darwin.defaults = sharedUserDefaults;
 
+                home.file = {
+                  ".config/aerospace" = {
+                    source = ./config/aerospace/.config/aerospace;
+                    recursive = true;
+                  };
+
+                  ".config/direnv" = {
+                    source = ./config/direnv/.config/direnv;
+                    recursive = true;
+                  };
+
+                  ".config/git" = {
+                    source = ./config/git/.config/git;
+                    recursive = true;
+                  };
+
+                  ".config/lazygit" = {
+                    source = ./config/lazygit/.config/lazygit;
+                    recursive = true;
+                  };
+
+                  ".config/lazyhis" = {
+                    source = ./config/lazyhis/.config/lazyhis;
+                    recursive = true;
+                  };
+
+                  ".config/nvim" = {
+                    source = ./config/nvim/.config/nvim;
+                    recursive = true;
+                  };
+
+                  ".config/starship" = {
+                    source = ./config/starship/.config/starship;
+                    recursive = true;
+                  };
+
+                  ".config/tmux" = {
+                    source = ./config/tmux/.config/tmux;
+                    recursive = true;
+                  };
+
+                  ".config/yazi" = {
+                    source = ./config/yazi/.config/yazi;
+                    recursive = true;
+                  };
+
+                  ".config/zsh" = {
+                    source = ./config/zsh/.config/zsh;
+                    recursive = true;
+                  };
+
+                  ".zshenv" = {
+                    source = ./config/zsh/.zshenv;
+                  };
+
+                  ".local/bin" = {
+                    source = ./config/tmux/.local/bin;
+                    recursive = true;
+                  };
+                };
+
                 home.packages = [ ];
 
                 programs.neovim = {
@@ -253,9 +314,7 @@
               home-manager.users.work = mkUser "work";
             }
           )
-
         ];
-
       };
     };
 }
