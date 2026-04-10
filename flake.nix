@@ -239,52 +239,52 @@
 
                 home.file = {
                   ".config/aerospace" = {
-                    source = ./config/aerospace/.config/aerospace;
+                    source = ./config/aerospace;
                     recursive = true;
                   };
 
                   ".config/direnv" = {
-                    source = ./config/direnv/.config/direnv;
+                    source = ./config/direnv;
                     recursive = true;
                   };
 
                   ".config/git" = {
-                    source = ./config/git/.config/git;
+                    source = ./config/git;
                     recursive = true;
                   };
 
                   ".config/lazygit" = {
-                    source = ./config/lazygit/.config/lazygit;
+                    source = ./config/lazygit;
                     recursive = true;
                   };
 
                   ".config/lazyhis" = {
-                    source = ./config/lazyhis/.config/lazyhis;
+                    source = ./config/lazyhis;
                     recursive = true;
                   };
 
                   ".config/nvim" = {
-                    source = ./config/nvim/.config/nvim;
+                    source = ./config/nvim;
                     recursive = true;
-                  };
+                  }; # FIXME: LazyNvim breaks due to read-only permissions
 
                   ".config/starship" = {
-                    source = ./config/starship/.config/starship;
+                    source = ./config/starship;
                     recursive = true;
                   };
 
                   ".config/tmux" = {
-                    source = ./config/tmux/.config/tmux;
+                    source = ./config/tmux;
                     recursive = true;
                   };
 
                   ".config/yazi" = {
-                    source = ./config/yazi/.config/yazi;
+                    source = ./config/yazi;
                     recursive = true;
                   };
 
                   ".config/zsh" = {
-                    source = ./config/zsh/.config/zsh;
+                    source = ./config/zsh;
                     recursive = true;
                   };
 
@@ -293,7 +293,7 @@
                   };
 
                   ".local/bin" = {
-                    source = ./config/tmux/.local/bin;
+                    source = ./bin;
                     recursive = true;
                   };
                 };
