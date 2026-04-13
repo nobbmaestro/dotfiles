@@ -57,48 +57,6 @@
         {
           nixpkgs.config.allowUnfree = true;
 
-          environment.systemPackages = [
-            # pkgs.neovim
-            pkgs.curl
-            pkgs.direnv
-            pkgs.eza
-            pkgs.fzf
-            pkgs.git
-            pkgs.gitflow
-            pkgs.htop
-            pkgs.kitty
-            pkgs.lazygit
-            pkgs.nix-direnv
-            pkgs.ripgrep
-            pkgs.sshpass
-            pkgs.stow
-            pkgs.tldr
-            pkgs.tmux
-            pkgs.yazi
-
-            # Dev Utilities
-            pkgs.arduino-cli
-            pkgs.bear
-            pkgs.docker
-            pkgs.gcc-arm-embedded
-            pkgs.gitlab-ci-local
-            pkgs.picocom
-            pkgs.python3
-            pkgs.wireshark
-            pkgs.uv
-
-            # Shell & Prompt
-            pkgs.starship
-            pkgs.zoxide
-            pkgs.zsh-autosuggestions
-            pkgs.zsh-syntax-highlighting
-            pkgs.zsh-vi-mode
-
-            # MacOS Utilities
-            pkgs.aerospace
-            pkgs.keepassxc
-          ];
-
           fonts.packages = with pkgs; [
             nerd-fonts.jetbrains-mono
             nerd-fonts.symbols-only
@@ -192,6 +150,8 @@
 
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
+
+          ./modules/darwin/packages.nix
 
           # nix-homebrew config
           {
