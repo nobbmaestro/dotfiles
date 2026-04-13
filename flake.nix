@@ -63,25 +63,6 @@
             jetbrains-mono
           ];
 
-          users.knownUsers = [
-            "norbertbatiuk"
-            "work"
-          ];
-
-          users.users.norbertbatiuk = {
-            home = "/Users/norbertbatiuk";
-            shell = pkgs.zsh;
-            uid = 501;
-          };
-
-          users.users.work = {
-            home = "/Users/work";
-            shell = pkgs.zsh;
-            createHome = true;
-            isHidden = false;
-            uid = 502;
-          };
-
           nix.settings.experimental-features = "nix-command flakes";
 
           system = {
@@ -104,8 +85,6 @@
           system.configurationRevision = self.rev or self.dirtyRev or null;
           system.stateVersion = 6;
           nixpkgs.hostPlatform = "aarch64-darwin";
-
-          system.primaryUser = "norbertbatiuk";
         };
     in
     {
@@ -118,6 +97,7 @@
 
           ./modules/darwin/packages.nix
           ./modules/darwin/homebrew.nix
+          ./modules/darwin/users.nix
           ./modules/darwin/zsh.nix
 
           # nix-homebrew config
