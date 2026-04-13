@@ -96,6 +96,7 @@
 
             # MacOS Utilities
             pkgs.aerospace
+            pkgs.keepassxc
           ];
 
           fonts.packages = with pkgs; [
