@@ -27,29 +27,18 @@
       mkUser = import ./modules/home/mkUser.nix {
         inherit sharedUserDefaults;
       };
-
-      configuration =
-        { ... }:
-        {
-          fonts.packages = with pkgs; [
-            nerd-fonts.jetbrains-mono
-            nerd-fonts.symbols-only
-            jetbrains-mono
-          ];
-        };
     in
     {
       darwinConfigurations."Norberts-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         inherit system;
 
         modules = [
-          configuration
-
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
 
           ./modules/darwin/packages.nix
           ./modules/darwin/homebrew.nix
+          ./modules/darwin/fonts.nix
           ./modules/darwin/system.nix
           ./modules/darwin/users.nix
           ./modules/darwin/zsh.nix
