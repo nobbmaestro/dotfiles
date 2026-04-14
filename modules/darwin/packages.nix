@@ -23,9 +23,11 @@
     bear
     docker
     gcc-arm-embedded
+    git-fame
     gitlab-ci-local
     picocom
     python3
+    speedtest-cli
     wireshark
     uv
 
