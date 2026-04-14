@@ -20,43 +20,17 @@
       home-manager,
     }:
     let
-      # These are per-user preferences on macOS.
-      # We apply them via home-manager for EACH user.
-      sharedUserDefaults = {
-        NSGlobalDomain = {
-          AppleShowAllExtensions = true;
-          AppleInterfaceStyle = "Dark";
-          KeyRepeat = 2;
-        };
+      system = "aarch64-darwin";
 
-        "com.apple.dock" = {
-          autohide = true;
-          "show-recents" = false;
+      sharedUserDefaults = import ./modules/home/shared-defaults.nix;
 
-          tilesize = 41;
-          largesize = 70;
-          magnification = true;
-          "mru-spaces" = false;
-        };
-
-        "com.apple.finder" = {
-          _FXSortFoldersFirst = true;
-          AppleShowAllFiles = true;
-          FXPreferredViewStyle = "SCcf";
-          ShowPathbar = true;
-        };
-
-        # WindowManager.* lives in the "com.apple.WindowManager" domain
-        "com.apple.WindowManager" = {
-          EnableStandardClickToShowDesktop = false;
-        };
+      mkUser = import ./modules/home/mkUser.nix {
+        inherit sharedUserDefaults;
       };
 
       configuration =
-        { pkgs, config, ... }:
+        { ... }:
         {
-          nixpkgs.config.allowUnfree = true;
-
           fonts.packages = with pkgs; [
             nerd-fonts.jetbrains-mono
             nerd-fonts.symbols-only
@@ -66,6 +40,8 @@
     in
     {
       darwinConfigurations."Norberts-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        inherit system;
+
         modules = [
           configuration
 
@@ -89,116 +65,13 @@
           }
 
           # home-manager config for per-user defaults
-          (
-            { pkgs, ... }:
-            let
-              nvimLangTools = with pkgs; {
-                bash = [
-                  shellcheck
-                  shfmt
-                ];
-                c = [
-                  clang-tools
-                ];
-                go = [
-                  gopls
-                ];
-                nix = [
-                  nil
-                  nixfmt
-                ];
-                py = [
-                  pyright
-                  ruff
-                ];
-                lua = [
-                  lua-language-server
-                  stylua
-                ];
-              };
+          ({
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-              mkUser = username: {
-                home.username = username;
-                home.stateVersion = "24.11";
-                targets.darwin.defaults = sharedUserDefaults;
-
-                home.file = {
-                  ".config/aerospace" = {
-                    source = ./config/aerospace;
-                    recursive = true;
-                  };
-
-                  ".config/direnv" = {
-                    source = ./config/direnv;
-                    recursive = true;
-                  };
-
-                  ".config/git" = {
-                    source = ./config/git;
-                    recursive = true;
-                  };
-
-                  ".config/lazygit" = {
-                    source = ./config/lazygit;
-                    recursive = true;
-                  };
-
-                  ".config/lazyhis" = {
-                    source = ./config/lazyhis;
-                    recursive = true;
-                  };
-
-                  ".config/nvim" = {
-                    source = ./config/nvim;
-                    recursive = true;
-                  }; # FIXME: LazyNvim breaks due to read-only permissions
-
-                  ".config/starship" = {
-                    source = ./config/starship;
-                    recursive = true;
-                  };
-
-                  ".config/tmux" = {
-                    source = ./config/tmux;
-                    recursive = true;
-                  };
-
-                  ".config/yazi" = {
-                    source = ./config/yazi;
-                    recursive = true;
-                  };
-
-                  ".config/zsh" = {
-                    source = ./config/zsh;
-                    recursive = true;
-                  };
-
-                  ".zshenv" = {
-                    source = ./config/zsh/.zshenv;
-                  };
-
-                  ".local/bin" = {
-                    source = ./bin;
-                    recursive = true;
-                  };
-                };
-
-                home.packages = [ ];
-
-                programs.neovim = {
-                  enable = true;
-                  extraPackages = builtins.concatLists (builtins.attrValues nvimLangTools);
-                };
-              };
-            in
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.users.norbertbatiuk = mkUser "norbertbatiuk";
-              home-manager.users.work = mkUser "work";
-            }
-          )
+            home-manager.users.norbertbatiuk = mkUser "norbertbatiuk";
+            home-manager.users.work = mkUser "work";
+          })
         ];
       };
     };
