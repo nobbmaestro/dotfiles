@@ -62,29 +62,6 @@
             nerd-fonts.symbols-only
             jetbrains-mono
           ];
-
-          nix.settings.experimental-features = "nix-command flakes";
-
-          system = {
-            # Keep ONLY truly system-wide defaults here.
-            defaults = {
-              loginwindow.GuestEnabled = false;
-            };
-
-            keyboard = {
-              enableKeyMapping = true;
-              remapCapsLockToControl = true;
-            };
-          };
-
-          security.pam.services.sudo_local = {
-            touchIdAuth = true;
-            reattach = true;
-          };
-
-          system.configurationRevision = self.rev or self.dirtyRev or null;
-          system.stateVersion = 6;
-          nixpkgs.hostPlatform = "aarch64-darwin";
         };
     in
     {
@@ -97,6 +74,7 @@
 
           ./modules/darwin/packages.nix
           ./modules/darwin/homebrew.nix
+          ./modules/darwin/system.nix
           ./modules/darwin/users.nix
           ./modules/darwin/zsh.nix
 
