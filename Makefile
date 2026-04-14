@@ -1,29 +1,12 @@
-TARGET ?= ${HOME}
-
-STOW_FLAGS := --verbose --target=$(TARGET)
-ifeq ($(CI),true)
-  STOW_FLAGS += --ignore="(^|/)\.gitconfig$$"
-endif
-
-STOW	:= stow --restow $(STOW_FLAGS)
-UNSTOW	:= stow --delete $(STOW_FLAGS)
-
 HNAME := $(shell scutil --get LocalHostName 2>/dev/null)
 
-.PHONY: all stow-all clean
+.PHONY: all
 
-all: stow-all
+all: switch
 
-install-nix:
+install:
 	@echo "Installing Nix Package Manager..."
 	@curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh
-
-build:
-	@echo "Rebuild for host: $(HNAME)"
-	@sudo nix run nix-darwin \
-		--extra-experimental-features "nix-command flakes" \
-		-- switch \
-		--flake .#$(HNAME)
 
 uninstall:
 	@echo "Uninstalling Nix Package Manager..."
@@ -32,10 +15,22 @@ uninstall:
 		run \
 		nix-darwin#darwin-uninstaller
 
-stow-all:
-	@echo "Creating symlinks..."
-	@(cd config && $(STOW) */)
+switch:
+	@echo "Rebuild for host: $(HNAME)"
+	@if command -v darwin-rebuild >/dev/null 2>&1; then \
+		sudo darwin-rebuild switch --flake .#$(HNAME); \
+	else \
+		echo "darwin-rebuild not found, bootstrapping..." && \
+		sudo nix run nix-darwin \
+			--extra-experimental-features "nix-command flakes" \
+			-- switch \
+			--flake .#$(HNAME); \
+	fi
+
+update:
+	@echo "Updating flake..."
+	@nix flake update
 
 clean:
-	@echo "Cleaning up..."
-	@(cd config && $(UNSTOW) */)
+	@echo "Collecting garbage..."
+	@nix-store --gc
