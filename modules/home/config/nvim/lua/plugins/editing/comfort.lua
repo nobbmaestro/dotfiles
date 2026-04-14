@@ -15,6 +15,7 @@ return {
                 python = { "ruff" },
                 nix = { "nixfmt" },
                 bash = { "shfmt" },
+                markdown = { "prettier" },
             },
         })
     end,

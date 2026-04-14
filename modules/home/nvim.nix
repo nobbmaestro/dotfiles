@@ -23,6 +23,9 @@ let
       lua-language-server
       stylua
     ];
+    js = [
+      nodePackages.prettier
+    ];
   };
 in
 {
