@@ -24,7 +24,7 @@ let
       stylua
     ];
     js = [
-      nodePackages.prettier
+      prettier
     ];
   };
 in
