@@ -2,40 +2,63 @@
 
 [![macOS Build](https://github.com/nobbmaestro/dotfiles/actions/workflows/build.yml/badge.svg)](https://github.com/nobbmaestro/dotfiles/actions/workflows/build.yml)
 
-Dotfiles and automations that should make my life easier (or rather harder?).
+My macOS development environment, now fully managed with [nix-darwin](https://github.com/nix-darwin/nix-darwin).
 
-- [AeroSpace](https://github.com/nikitabobko/AeroSpace) AeroSpace is an i3-like tiling window manager for macOS
-- [Homebrew](https://github.com/Homebrew/brew) The Missing Package Manager for MacOS (or Linux).
-- [Neovim](https://github.com/neovim/neovim) A Modern, ground up rewrite of Vim.
-- [Starship](https://github.com/starship/starship) The minimal, blazing-fast, and infinitely customizable prompt for any shell!
-- [Tmux](https://github.com/tmux/tmux) Create, split, save, move terminal tabs easily all within one window.
-- [Zsh](https://www.zsh.org) Zsh is a shell designed for interactive use, although it is also a powerful scripting language.
+This repository defines a **reproducible, declarative macOS system configuration** using Nix flakes.
+
+## What's included
+
+### System (nix-darwin)
+
+- macOS defaults
+- system-level packages
+- shell configuration
+
+### Development tools
+
+- Neovim
+- Git + LazyGit
+- Tmux
+- Starship prompt
+- Zsh environment
+
+### Window management
+
+- AeroSpace (i3-like tiling WM for macOS)
+
+### Package management
+
+- Nix
+- Homebrew
 
 ## Getting started
 
-### Bootstrap
-
-Check out [install.sh](resources/install.sh). You may either run `./resources/install.sh all` or pick whatever you find interesting.
-
-The script won't run anything unless argument is passed. Once you pass decired argument, the `install.sh` execute associated function.
-
-The `./resources/install.sh all` command will:
-
-- install Homebrew & dependencies,
-- install Xcode and CLI components,
-- install Tmux [tpm](https://github.com/tmux-plugins/tpm) and plugins
-- and more
-
-### Stow dotfiles
-
-Symlinks are managed by [gnu-stow](https://www.gnu.org/software/stow/). To initialize gnu-stow, simply run
+### 1. Install nix
 
 ```sh
-make all
+sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
+```
+
+or
+
+```sh
+make install
+```
+
+### 2. Build the system
+
+```sh
+make build
+```
+
+This runs:
+
+```sh
+darwin-rebuild switch --flake .#<hostname>
 ```
 
 ## Final Words
 
-This very repository is intended for **_my personal usage_**. Breaking changes, change of utilities, or pattern may accure at any point.
+This very repository is intended for **_my personal usage_**. Breaking changes, change of utilities, or pattern may occur at any point.
 
 Enjoy!
