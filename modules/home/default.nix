@@ -6,6 +6,7 @@ username:
 
   imports = [
     ./nvim.nix
+    ./config/git
   ];
 
   home.file = {
@@ -16,11 +17,6 @@ username:
 
     ".config/direnv" = {
       source = ./config/direnv;
-      recursive = true;
-    };
-
-    ".config/git" = {
-      source = ./config/git;
       recursive = true;
     };
 
