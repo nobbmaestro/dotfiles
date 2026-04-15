@@ -22,11 +22,7 @@
     let
       system = "aarch64-darwin";
 
-      sharedUserDefaults = import ./modules/home/shared-defaults.nix;
-
-      mkUser = import ./modules/home/mkUser.nix {
-        inherit sharedUserDefaults;
-      };
+      mkUser = import ./modules/home/mkUser.nix;
     in
     {
       darwinConfigurations."Norberts-MacBook-Pro" = nix-darwin.lib.darwinSystem {

@@ -1,18 +1,44 @@
 {
+  nixpkgs.hostPlatform = "aarch64-darwin";
+  system.stateVersion = 6;
+
   nix.settings.experimental-features = "nix-command flakes";
-
-  system.defaults.loginwindow.GuestEnabled = false;
-
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToControl = true;
-  };
 
   security.pam.services.sudo_local = {
     touchIdAuth = true;
     reattach = true;
   };
 
-  nixpkgs.hostPlatform = "aarch64-darwin";
-  system.stateVersion = 6;
+  system.keyboard = {
+    enableKeyMapping = true;
+    remapCapsLockToControl = true;
+  };
+
+  system.defaults = {
+    loginwindow.GuestEnabled = false;
+
+    NSGlobalDomain = {
+      AppleInterfaceStyle = "Dark";
+      AppleShowAllExtensions = true;
+      KeyRepeat = 2;
+    };
+
+    dock = {
+      autohide = true;
+      magnification = true;
+      mru-spaces = false;
+      show-recents = false;
+      largesize = 70;
+      tilesize = 41;
+    };
+
+    finder = {
+      _FXSortFoldersFirst = true;
+      AppleShowAllFiles = true;
+      FXPreferredViewStyle = "SCcf";
+      ShowPathbar = true;
+    };
+
+    WindowManager.EnableStandardClickToShowDesktop = false;
+  };
 }
