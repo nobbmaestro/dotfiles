@@ -1,4 +1,13 @@
+username:
+{ ... }:
 {
+  home.username = username;
+  home.stateVersion = "24.11";
+
+  imports = [
+    ./nvim.nix
+  ];
+
   home.file = {
     ".config/aerospace" = {
       source = ./config/aerospace;

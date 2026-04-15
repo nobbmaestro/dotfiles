@@ -21,8 +21,7 @@
     }:
     let
       system = "aarch64-darwin";
-
-      mkUser = import ./modules/home/mkUser.nix;
+      mkUser = import ./modules/home;
     in
     {
       darwinConfigurations."Norberts-MacBook-Pro" = nix-darwin.lib.darwinSystem {
