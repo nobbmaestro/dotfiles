@@ -1,5 +1,17 @@
 { pkgs, ... }:
 {
+  # Fix for zsh compinit "insecure directories" error affecting non-primary users
+  system.activationScripts.postActivation.text = ''
+    chown root:wheel /nix/var/nix/profiles/default/share/zsh
+    chown root:wheel /nix/var/nix/profiles/default/share/zsh/site-functions
+    chown root:wheel /nix/var/nix/profiles/default/share/zsh/site-functions/_nix
+    chown root:wheel /nix/var/nix/profiles/default/share/zsh/site-functions/run-help-nix
+    chmod 755 /nix/var/nix/profiles/default/share/zsh
+    chmod 755 /nix/var/nix/profiles/default/share/zsh/site-functions
+    chmod 644 /nix/var/nix/profiles/default/share/zsh/site-functions/_nix
+    chmod 644 /nix/var/nix/profiles/default/share/zsh/site-functions/run-help-nix
+  '';
+
   programs.zsh = {
     enable = true;
     interactiveShellInit = ''
