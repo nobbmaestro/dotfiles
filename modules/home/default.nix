@@ -5,8 +5,8 @@ username:
   home.stateVersion = "24.11";
 
   imports = [
-    ./nvim.nix
     ./config/git
+    ./config/nvim
   ];
 
   home.file = {
@@ -34,11 +34,6 @@ username:
       source = ./config/kitty;
       recursive = true;
     };
-
-    ".config/nvim" = {
-      source = ./config/nvim;
-      recursive = true;
-    }; # FIXME: LazyNvim breaks due to read-only permissions
 
     ".config/starship" = {
       source = ./config/starship;
