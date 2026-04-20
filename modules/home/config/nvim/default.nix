@@ -53,7 +53,7 @@ in
 
   home.file = {
     ".config/nvim" = {
-      source = ./.;
+      source = ./src;
       recursive = true;
     }; # FIXME: LazyVim breaks due to read-only permissions
   };
