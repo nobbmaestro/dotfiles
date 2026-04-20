@@ -1,6 +1,8 @@
+{ ... }:
 {
   programs.lazygit = {
     enable = true;
+
     settings = {
       gui = {
         border = "rounded";
@@ -33,5 +35,9 @@
         open = "tmux-nvim-open {{filename}}";
       };
     };
+  };
+
+  home.shellAliases = {
+    lzg = "lazygit";
   };
 }

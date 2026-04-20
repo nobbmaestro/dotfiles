@@ -36,6 +36,21 @@ in
     withRuby = true;
   };
 
+  programs.zsh.shellAliases = {
+    vim = "nvim";
+  };
+
+  programs.zsh.initContent = ''
+    function nvim() {
+      local socket="/tmp/nvim-server-$(tmux display-message -p '#S').sock"
+      if [[ ! -S "$socket" ]]; then
+        command nvim --listen "$socket" "$@"
+      else
+        command nvim "$@"
+      fi
+    }
+  '';
+
   home.file = {
     ".config/nvim" = {
       source = ./.;
