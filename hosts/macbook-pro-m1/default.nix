@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-  users.knownUsers = [
-    "norbertbatiuk"
-    "work"
+  imports = [
+    ./../../modules/base
+    ./../../modules/darwin
   ];
 
   users.users.norbertbatiuk = {

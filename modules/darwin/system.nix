@@ -1,8 +1,6 @@
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-  nix.settings.experimental-features = "nix-command flakes";
-
   security.pam.services.sudo_local = {
     touchIdAuth = true;
     reattach = true;

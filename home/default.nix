@@ -1,4 +1,3 @@
-username:
 { ... }:
 {
   xdg.enable = true;
@@ -23,8 +22,6 @@ username:
   ];
 
   home = {
-    username = username;
-
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
     };

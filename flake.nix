@@ -21,7 +21,6 @@
     }:
     let
       system = "aarch64-darwin";
-      mkUser = import ./home;
     in
     {
       darwinConfigurations."Norberts-MacBook-Pro" = nix-darwin.lib.darwinSystem {
@@ -31,12 +30,7 @@
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
 
-          ./modules/darwin/packages.nix
-          ./modules/darwin/homebrew.nix
-          ./modules/darwin/fonts.nix
-          ./modules/darwin/system.nix
-          ./modules/darwin/users.nix
-          ./modules/darwin/zsh.nix
+          ./hosts/macbook-pro-m1/default.nix
 
           # nix-homebrew config
           {
@@ -53,8 +47,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.norbertbatiuk = mkUser "norbertbatiuk";
-            home-manager.users.work = mkUser "work";
+            home-manager.users.norbertbatiuk = import ./home;
+            home-manager.users.work = import ./home;
           })
         ];
       };
