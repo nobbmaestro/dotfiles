@@ -1,13 +1,7 @@
 username:
 { ... }:
 {
-  home.username = username;
-  home.stateVersion = "24.11";
   xdg.enable = true;
-
-  home.sessionVariables = {
-    PATH = "$HOME/.local/bin:$PATH";
-  };
 
   imports = [
     ./bin
@@ -28,4 +22,13 @@ username:
     ./config/zsh
   ];
 
+  home = {
+    username = username;
+
+    sessionVariables = {
+      PATH = "$HOME/.local/bin:$PATH";
+    };
+
+    stateVersion = "24.11";
+  };
 }
