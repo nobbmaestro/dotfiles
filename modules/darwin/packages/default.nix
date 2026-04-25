@@ -41,5 +41,6 @@
     # macOS
     aerospace
     keepassxc
+    lazyhis
   ];
 }

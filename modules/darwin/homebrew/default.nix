@@ -7,7 +7,6 @@
     };
     brews = [
       "mole"
-      "nobbmaestro/tap/lazyhis"
     ];
     casks = [
       "aldente"

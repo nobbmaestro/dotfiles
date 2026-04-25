@@ -17,15 +17,21 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lazyhis = {
+      url = "github:nobbmaestro/lazyhis";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nix-darwin,
       nixpkgs,
       nix-homebrew,
       home-manager,
+      lazyhis,
     }:
     {
       darwinConfigurations = {
@@ -36,6 +42,7 @@
             nix-homebrew.darwinModules.nix-homebrew
             home-manager.darwinModules.home-manager
             ./hosts/macbook-pro-m1/default.nix
+            { nixpkgs.overlays = import ./overlays { inherit inputs; }; }
           ];
         };
       };
