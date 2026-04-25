@@ -5,6 +5,8 @@
     ./../../modules/darwin
   ];
 
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
   networking = {
     hostName = "macbook-pro-m1";
     localHostName = "macbook-pro-m1";
@@ -40,4 +42,6 @@
   };
 
   system.primaryUser = "norbertbatiuk";
+
+  system.stateVersion = 6;
 }

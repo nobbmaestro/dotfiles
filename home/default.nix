@@ -3,22 +3,22 @@
   xdg.enable = true;
 
   imports = [
-    ./bin
-    ./config/aerospace
-    ./config/direnv
-    ./config/exa
-    ./config/fzf
-    ./config/git
-    ./config/kitty
-    ./config/lazydocker
-    ./config/lazygit
-    ./config/lazyhis
-    ./config/nvim
-    ./config/starship
-    ./config/tmux
-    ./config/yazi
-    ./config/zoxide
-    ./config/zsh
+    ./scripts
+    ./programs/aerospace
+    ./programs/direnv
+    ./programs/exa
+    ./programs/fzf
+    ./programs/git
+    ./programs/kitty
+    ./programs/lazydocker
+    ./programs/lazygit
+    ./programs/lazyhis
+    ./programs/nvim
+    ./programs/starship
+    ./programs/tmux
+    ./programs/yazi
+    ./programs/zoxide
+    ./programs/zsh
   ];
 
   home = {

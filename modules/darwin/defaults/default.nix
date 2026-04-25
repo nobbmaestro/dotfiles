@@ -1,17 +1,5 @@
 {
-  nixpkgs.hostPlatform = "aarch64-darwin";
-
-  security.pam.services.sudo_local = {
-    touchIdAuth = true;
-    reattach = true;
-  };
-
   system = {
-    keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToControl = true;
-    };
-
     defaults = {
       loginwindow.GuestEnabled = false;
 
@@ -39,7 +27,5 @@
 
       WindowManager.EnableStandardClickToShowDesktop = false;
     };
-
-    stateVersion = 6;
   };
 }

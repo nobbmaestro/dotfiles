@@ -1,8 +1,10 @@
 {
   imports = [
-    ./packages.nix
-    ./homebrew.nix
-    ./system.nix
-    ./zsh.nix
+    ./defaults
+    ./homebrew
+    ./keyboard
+    ./packages
+    ./security
+    ./zsh
   ];
 }
