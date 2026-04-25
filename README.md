@@ -35,11 +35,13 @@ This repository defines a **reproducible, declarative macOS system configuration
 
 ### 1. Install nix
 
+Install nix from the offical installer:
+
 ```sh
 sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install)
 ```
 
-or
+or, simply run:
 
 ```sh
 make install
@@ -47,15 +49,19 @@ make install
 
 ### 2. Build the system
 
+Following command will build and apply the full macOS configuration using nix-darwin:
+
 ```sh
-make build
+make switch
 ```
 
-This runs:
+This is equivalent to:
 
 ```sh
 darwin-rebuild switch --flake .#<hostname>
 ```
+
+The hostname must match a valid configuration in `flake.nix`.
 
 ## Final Words
 
