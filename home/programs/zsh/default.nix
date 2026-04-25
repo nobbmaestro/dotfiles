@@ -4,11 +4,6 @@
     enable = true;
     dotDir = config.xdg.configHome + "/zsh";
 
-    sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
-
     history = {
       save = 0;
       size = 0;
@@ -23,6 +18,8 @@
     };
 
     initContent = ''
+      export EDITOR=nvim
+      export VISUAL=nvim
       function benchmark_zsh() {
         shell=''${1-$SHELL}
         for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
