@@ -1,36 +1,43 @@
 {
-  description = "Nobbmaestros nix-darwin system flake";
+  description = "Declarative macOS system configuration using nix-darwin and home-manager";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    inputs@{
+    {
       self,
       nix-darwin,
       nixpkgs,
       nix-homebrew,
       home-manager,
     }:
-    let
-      system = "aarch64-darwin";
-    in
     {
-      darwinConfigurations."macbook-pro-m1" = nix-darwin.lib.darwinSystem {
-        inherit system;
+      darwinConfigurations = {
+        macbook-pro-m1 = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
 
-        modules = [
-          nix-homebrew.darwinModules.nix-homebrew
-          home-manager.darwinModules.home-manager
-          ./hosts/macbook-pro-m1/default.nix
-        ];
+          modules = [
+            nix-homebrew.darwinModules.nix-homebrew
+            home-manager.darwinModules.home-manager
+            ./hosts/macbook-pro-m1/default.nix
+          ];
+        };
       };
     };
 }
