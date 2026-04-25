@@ -23,7 +23,7 @@
       system = "aarch64-darwin";
     in
     {
-      darwinConfigurations."Norberts-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."macbook-pro-m1" = nix-darwin.lib.darwinSystem {
         inherit system;
 
         modules = [

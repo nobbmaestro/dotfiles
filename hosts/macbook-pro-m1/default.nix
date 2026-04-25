@@ -5,6 +5,11 @@
     ./../../modules/darwin
   ];
 
+  networking = {
+    hostName = "macbook-pro-m1";
+    localHostName = "macbook-pro-m1";
+  };
+
   users.users.norbertbatiuk = {
     home = "/Users/norbertbatiuk";
     shell = pkgs.zsh;

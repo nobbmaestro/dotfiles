@@ -26,4 +26,4 @@ jobs:
         run: nix flake check
 
       - name: Build nix-darwin system
-        run: nix build .#darwinConfigurations.Norberts-MacBook-Pro.system
+        run: nix build .#darwinConfigurations.macbook-pro-m1.system

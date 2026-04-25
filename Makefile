@@ -1,4 +1,4 @@
-HNAME := $(shell scutil --get LocalHostName 2>/dev/null)
+HNAME := macbook-pro-m1
 
 .PHONY: all
 
