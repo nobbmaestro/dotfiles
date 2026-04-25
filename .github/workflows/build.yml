@@ -17,11 +17,6 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v16
 
-      - name: Enable flakes
-        run: |
-          mkdir -p ~/.config/nix
-          echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
-
       - name: Flake check
         run: nix flake check
 
