@@ -3,7 +3,6 @@
   xdg.enable = true;
 
   imports = [
-    ./scripts
     ./programs/aerospace
     ./programs/direnv
     ./programs/exa
@@ -24,6 +23,13 @@
   home = {
     sessionVariables = {
       PATH = "$HOME/.local/bin:$PATH";
+    };
+
+    file = {
+      ".local/bin" = {
+        source = ./scripts;
+        recursive = true;
+      };
     };
 
     stateVersion = "24.11";
