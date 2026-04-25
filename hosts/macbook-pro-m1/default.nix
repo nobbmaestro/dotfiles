@@ -19,5 +19,20 @@
     uid = 502;
   };
 
+  nix-homebrew = {
+    enable = true;
+    enableRosetta = true;
+    user = "norbertbatiuk";
+    autoMigrate = true;
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+
+    users.norbertbatiuk = import ./../../home;
+    users.work = import ./../../home;
+  };
+
   system.primaryUser = "norbertbatiuk";
 }

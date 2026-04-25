@@ -29,27 +29,7 @@
         modules = [
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
-
           ./hosts/macbook-pro-m1/default.nix
-
-          # nix-homebrew config
-          {
-            nix-homebrew = {
-              enable = true;
-              enableRosetta = true;
-              user = "norbertbatiuk";
-              autoMigrate = true;
-            };
-          }
-
-          # home-manager config for per-user defaults
-          ({
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.norbertbatiuk = import ./home;
-            home-manager.users.work = import ./home;
-          })
         ];
       };
     };
