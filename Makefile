@@ -27,6 +27,10 @@ switch:
 			--flake .#$(HNAME); \
 	fi
 
+check:
+	@echo "Checking flake..."
+	@nix flake check
+
 update:
 	@echo "Updating flake..."
 	@nix flake update
