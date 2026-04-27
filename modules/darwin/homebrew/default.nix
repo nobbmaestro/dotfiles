@@ -20,6 +20,7 @@
       "spotify"
       "stremio"
       "the-unarchiver"
+      "whatsapp"
       "wireshark-app"
     ];
   };

@@ -201,6 +201,10 @@
           run = "move-node-to-workspace chat";
         }
         {
+          "if".app-id = "net.whatsapp.WhatsApp";
+          run = "move-node-to-workspace chat";
+        }
+        {
           "if".app-id = "com.apple.mail";
           run = "move-node-to-workspace mail";
         }
