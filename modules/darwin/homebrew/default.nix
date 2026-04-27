@@ -12,7 +12,7 @@
       "aldente"
       "alfred"
       "dictionaries"
-      # "logi-options+"
+      "logi-options+"
       "monitorcontrol"
       "obsidian"
       "saleae-logic"
