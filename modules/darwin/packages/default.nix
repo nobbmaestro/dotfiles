@@ -21,6 +21,7 @@
     # Dev
     arduino-cli
     bear
+    claude-code
     docker
     gcc-arm-embedded
     git-fame
