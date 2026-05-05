@@ -12,7 +12,7 @@ return {
                 c = { "clang-format" },
                 go = { "goimports", "golines", "gofmt" },
                 lua = { "stylua" },
-                python = { "ruff" },
+                python = { "ruff_format" },
                 nix = { "nixfmt" },
                 bash = { "shfmt" },
                 markdown = { "prettier" },
