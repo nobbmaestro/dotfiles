@@ -3,7 +3,13 @@ return {
     opts = {},
     config = function()
         vim.keymap.set("n", "<leader>f", function()
-            require("conform").format({ lsp_format = "fallback" })
+            local ok = require("conform").format({ lsp_format = "fallback" })
+
+            if ok then
+                vim.notify("Formatting done...", vim.log.levels.INFO, { title = "conform.nvim" })
+            else
+                vim.notify("Failed to format", vim.log.levels.ERROR, { title = "conform.nvim" })
+            end
         end, { desc = "Format buffer" })
 
         require("conform").setup({
