@@ -15,13 +15,18 @@ return {
         require("conform").setup({
             formatters_by_ft = {
                 arduino = { "clang-format" },
+                bash = { "shfmt" },
                 c = { "clang-format" },
                 go = { "goimports", "golines", "gofmt" },
                 lua = { "stylua" },
-                python = { "ruff_format" },
                 nix = { "nixfmt" },
-                bash = { "shfmt" },
+                python = { "ruff_format" },
+
                 markdown = { "prettier" },
+                javascript = { "prettier" },
+                javascriptreact = { "prettier" },
+                typescript = { "prettier" },
+                typescriptreact = { "prettier" },
             },
         })
     end,
