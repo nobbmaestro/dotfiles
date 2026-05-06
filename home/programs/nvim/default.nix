@@ -2,6 +2,7 @@
 let
   nvimLangTools = with pkgs; {
     bash = [
+      bash-language-server
       shellcheck
       shfmt
     ];
