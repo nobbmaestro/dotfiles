@@ -32,13 +32,13 @@ in
 {
   programs.neovim = {
     enable = true;
+
+    viAlias = true;
+    vimAlias = true;
+
     extraPackages = builtins.concatLists (builtins.attrValues nvimLangTools);
     withPython3 = true;
     withRuby = true;
-  };
-
-  programs.zsh.shellAliases = {
-    vim = "nvim";
   };
 
   programs.zsh.initContent = ''
