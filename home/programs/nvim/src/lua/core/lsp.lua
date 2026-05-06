@@ -3,6 +3,7 @@ vim.lsp.enable({
     "lua_ls",
     "nil_ls",
     "pyright",
+    "ts_ls",
 })
 
 -- Prevent LSP from overwriting treesitter color settings
