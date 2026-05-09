@@ -12,16 +12,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    brew-nix = {
-      url = "github:BatteredBunny/brew-nix";
-      inputs.nix-darwin.follows = "nix-darwin";
-      inputs.brew-api.follows = "brew-api";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    brew-api = {
-      url = "github:BatteredBunny/brew-api";
-      flake = false;
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
     };
   };
 
