@@ -29,9 +29,7 @@
 
   nix-homebrew = {
     enable = true;
-    enableRosetta = true;
     user = "norbertbatiuk";
-    autoMigrate = true;
   };
 
   home-manager = {
