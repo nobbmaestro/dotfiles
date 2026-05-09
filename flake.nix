@@ -20,6 +20,11 @@
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
     };
+
+    lazyhis = {
+      url = "github:nobbmaestro/lazyhis";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
