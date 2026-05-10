@@ -30,6 +30,8 @@ EOF
 }
 
 EXEC=""
+FORCE=""
+PANE_EXISTS=""
 ARGS=()
 KEYS=()
 

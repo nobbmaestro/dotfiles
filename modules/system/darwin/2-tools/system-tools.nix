@@ -19,6 +19,7 @@
       lazydocker
       lazygit
       nvim
+      tmux
     ];
   };
 }
