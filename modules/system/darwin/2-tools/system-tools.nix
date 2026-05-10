@@ -16,6 +16,7 @@
       direnv
       fzf
       git
+      lazydocker
     ];
   };
 }
