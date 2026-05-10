@@ -13,6 +13,7 @@
     imports = with inputs.self.modules.homeManager; [
       system-shell
 
+      direnv
       git
     ];
   };
