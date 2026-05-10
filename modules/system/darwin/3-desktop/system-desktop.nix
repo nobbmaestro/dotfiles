@@ -14,6 +14,7 @@
       system-tools
 
       aerospace
+      kitty
     ];
   };
 }
