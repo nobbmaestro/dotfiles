@@ -12,6 +12,8 @@
   flake.modules.homeManager.system-tools = {
     imports = with inputs.self.modules.homeManager; [
       system-shell
+
+      git
     ];
   };
 }

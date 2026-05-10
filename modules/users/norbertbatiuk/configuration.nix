@@ -21,13 +21,23 @@ in
         uid = 501;
       };
 
-      user = {
-        work = {
+      programs.zsh.enable = true;
+    };
+
+  flake.modules.homeManager."${username}" =
+    { ... }:
+    {
+      imports = with inputs.self.modules.homeManager; [
+        system-desktop
+      ];
+      home.username = "${username}";
+
+      programs.git = {
+        enable = true;
+        settings.user = {
           name = "Norbert Batiuk";
           email = "norbert@batiuk.se";
         };
       };
-
-      programs.zsh.enable = true;
     };
 }
