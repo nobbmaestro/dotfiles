@@ -4,17 +4,41 @@
 }:
 {
   flake.modules.darwin.system-desktop = {
+    nixpkgs.config.segger-jlink.acceptLicense = true;
+
     imports = with inputs.self.modules.darwin; [
       system-tools
     ];
-  };
 
-  flake.modules.homeManager.system-desktop = {
-    imports = with inputs.self.modules.homeManager; [
-      system-tools
-
-      aerospace
-      kitty
+    homebrew.casks = [
+      "aldente"
+      "alfred"
+      "dictionaries"
+      "logi-options+"
+      "monitorcontrol"
+      "obsidian"
+      "saleae-logic"
+      "spotify"
+      "stremio"
+      "the-unarchiver"
+      "whatsapp"
     ];
   };
+
+  flake.modules.homeManager.system-desktop =
+    { pkgs, ... }:
+    {
+      imports = with inputs.self.modules.homeManager; [
+        system-tools
+
+        aerospace
+        kitty
+      ];
+
+      home.packages = with pkgs; [
+        keepassxc
+        segger-jlink
+        wireshark
+      ];
+    };
 }

@@ -11,6 +11,7 @@
     {
       imports = with inputs.self.modules.darwin; [
         home-manager
+        homebrew
       ];
 
       nix.settings.experimental-features = [
