@@ -17,6 +17,7 @@
       fzf
       git
       lazydocker
+      lazygit
     ];
   };
 }
