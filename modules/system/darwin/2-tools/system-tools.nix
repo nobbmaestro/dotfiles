@@ -20,6 +20,7 @@
       lazygit
       nvim
       tmux
+      yazi
     ];
   };
 }
