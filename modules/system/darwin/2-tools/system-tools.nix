@@ -18,6 +18,7 @@
       git
       lazydocker
       lazygit
+      nvim
     ];
   };
 }
