@@ -9,6 +9,15 @@
       ...
     }:
     {
+      imports = with inputs.self.modules.darwin; [
+        home-manager
+      ];
+
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+
       nixpkgs.config.allowUnfree = true;
 
       system.stateVersion = 6;
@@ -27,7 +36,6 @@
         darwin-version
         darwin-uninstaller
       ];
-
     };
 
   flake.modules.homeManager.system-base =
@@ -38,11 +46,14 @@
       ...
     }:
     {
+      xdg.enable = true;
+
       home.homeDirectory =
         if pkgs.stdenv.isDarwin then
           (lib.mkForce "/Users/${config.home.username}")
         else
           "/home/${config.home.username}";
+
       home.stateVersion = "23.05";
     };
 }
