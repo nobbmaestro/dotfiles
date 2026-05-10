@@ -14,6 +14,7 @@
       system-shell
 
       direnv
+      fzf
       git
     ];
   };
