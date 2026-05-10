@@ -19,6 +19,7 @@
       exa
       lazyhis
       starship
+      zoxide
       zsh
     ];
   };
