@@ -16,6 +16,7 @@
     imports = with inputs.self.modules.homeManager; [
       system-base
 
+      exa
       lazyhis
       starship
       zsh
