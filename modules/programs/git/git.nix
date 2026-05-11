@@ -1,12 +1,6 @@
 {
-  flake.modules.homeManager.git =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      programs.git = {
+  flake.modules.homeManager.git = {
+    programs.git = {
         enable = true;
 
         signing = {

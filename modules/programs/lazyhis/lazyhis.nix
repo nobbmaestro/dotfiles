@@ -41,6 +41,11 @@
       '';
     };
 
-    home.file.".config/lazyhis/lazyhis.yml".source = ./lazyhis.yml;
+    home.file = {
+      ".config/lazyhis" = {
+        source = ./etc;
+        recursive = true;
+      };
+    };
   };
 }

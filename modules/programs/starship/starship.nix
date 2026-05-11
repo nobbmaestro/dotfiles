@@ -1,12 +1,6 @@
 {
-  flake.modules.homeManager.starship =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      programs.starship = {
+  flake.modules.homeManager.starship = {
+    programs.starship = {
         enable = true;
 
         settings = {

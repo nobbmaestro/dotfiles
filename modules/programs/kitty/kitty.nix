@@ -1,12 +1,6 @@
 {
-  flake.modules.homeManager.kitty =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      programs.kitty = {
+  flake.modules.homeManager.kitty = {
+    programs.kitty = {
         enable = true;
 
         settings = {
@@ -59,7 +53,7 @@
 
       home.file = {
         ".config/kitty/themes" = {
-          source = ./themes;
+          source = ./etc/themes;
           recursive = true;
         };
       };

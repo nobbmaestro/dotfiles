@@ -1,24 +1,16 @@
 {
-  flake.modules.homeManager.lazydocker =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      programs.lazydocker = {
-        enable = false;
-      };
+  flake.modules.homeManager.lazydocker = {
+    programs.lazydocker.enable = true;
 
-      home.shellAliases = {
-        lzd = "lazydocker";
-      };
+    home.shellAliases = {
+      lzd = "lazydocker";
+    };
 
-      home.file = {
-        ".config/lazydocker" = {
-          source = ./.;
-          recursive = true;
-        };
+    home.file = {
+      ".config/lazydocker" = {
+        source = ./etc;
+        recursive = true;
       };
     };
+  };
 }

@@ -1,21 +1,15 @@
 {
-  flake.modules.homeManager.direnv =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      programs.direnv = {
-        enable = true;
-        enableZshIntegration = true;
-      };
+  flake.modules.homeManager.direnv = {
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
-      home.file = {
-        ".config/direnv" = {
-          source = ./.;
-          recursive = true;
-        };
+    home.file = {
+      ".config/direnv" = {
+        source = ./etc;
+        recursive = true;
       };
     };
+  };
 }

@@ -1,14 +1,8 @@
 {
-  flake.modules.homeManager.fzf =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      programs.fzf = {
-        enable = true;
-        enableZshIntegration = true;
-      };
+  flake.modules.homeManager.fzf = {
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
     };
+  };
 }

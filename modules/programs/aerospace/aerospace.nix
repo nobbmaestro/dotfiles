@@ -1,8 +1,6 @@
 {
-  flake.modules.homeManager.aerospace =
-    { pkgs, config, ... }:
-    {
-      programs.aerospace = {
+  flake.modules.homeManager.aerospace = {
+    programs.aerospace = {
         enable = true;
 
         launchd.enable = true;

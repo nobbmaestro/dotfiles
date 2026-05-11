@@ -1,22 +1,16 @@
 {
-  flake.modules.homeManager.yazi =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      programs.yazi = {
-        enable = true;
+  flake.modules.homeManager.yazi = {
+    programs.yazi = {
+      enable = true;
 
-        shellWrapperName = "y";
-      };
+      shellWrapperName = "y";
+    };
 
-      home.file = {
-        ".config/yazi" = {
-          source = ./etc;
-          recursive = true;
-        };
+    home.file = {
+      ".config/yazi" = {
+        source = ./etc;
+        recursive = true;
       };
     };
+  };
 }

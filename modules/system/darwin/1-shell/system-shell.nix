@@ -16,7 +16,7 @@
     imports = with inputs.self.modules.homeManager; [
       system-base
 
-      exa
+      eza
       lazyhis
       starship
       zoxide

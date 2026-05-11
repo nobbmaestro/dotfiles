@@ -1,12 +1,6 @@
 {
-  flake.modules.homeManager.lazygit =
-    {
-      pkgs,
-      config,
-      ...
-    }:
-    {
-      programs.lazygit = {
+  flake.modules.homeManager.lazygit = {
+    programs.lazygit = {
         enable = true;
 
         settings = {

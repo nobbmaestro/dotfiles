@@ -1,8 +1,6 @@
 {
-  flake.modules.darwin.system-desktop =
-    { ... }:
-    {
-      system = {
+  flake.modules.darwin.system-desktop = {
+    system = {
         defaults = {
           loginwindow.GuestEnabled = false;
 
