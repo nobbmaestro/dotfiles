@@ -7,6 +7,7 @@
     {
       programs.zsh = {
         enable = true;
+        enableGlobalCompInit = false;
         interactiveShellInit = ''
           source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
           source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
