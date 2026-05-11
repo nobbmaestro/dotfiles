@@ -38,3 +38,8 @@ update:
 clean:
 	@echo "Collecting garbage..."
 	@nix-store --gc
+
+# FIXME: This is for keeping the conf function while refactoring....
+old:
+	@echo "Using old nix-config..."
+	$(MAKE) -C .old switch
