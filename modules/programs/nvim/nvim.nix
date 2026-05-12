@@ -34,14 +34,6 @@
         prettier
       ];
 
-      tmux-nvim-open = pkgs.writeShellApplication {
-        name = "tmux-nvim-open";
-        runtimeInputs = with pkgs; [
-          tmux
-        ];
-        text = builtins.readFile ./bin/tmux-nvim-open;
-      };
-
       rsyncer = pkgs.writeShellApplication {
         name = "rsyncer";
         runtimeInputs = with pkgs; [
@@ -54,7 +46,6 @@
     {
       home.packages = [
         rsyncer
-        tmux-nvim-open
       ];
 
       programs.neovim = {

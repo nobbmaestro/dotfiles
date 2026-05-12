@@ -1,6 +1,24 @@
 {
-  flake.modules.homeManager.lazygit = {
-    programs.lazygit = {
+  flake.modules.homeManager.lazygit =
+    {
+      pkgs,
+      ...
+    }:
+    let
+      tmux-nvim-open = pkgs.writeShellApplication {
+        name = "tmux-nvim-open";
+        runtimeInputs = with pkgs; [
+          tmux
+        ];
+        text = builtins.readFile ./bin/tmux-nvim-open;
+      };
+    in
+    {
+      home.packages = [
+        tmux-nvim-open
+      ];
+
+      programs.lazygit = {
         enable = true;
 
         settings = {
