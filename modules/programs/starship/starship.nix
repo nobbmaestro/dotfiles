@@ -4,7 +4,8 @@
       enable = true;
 
       settings = {
-        format = "$directory$git_branch$git_status$fill$python$lua$nodejs$golang$haskell$rust$ruby$aws$docker_context$jobs$cmd_duration$line_break$character";
+        format = "$directory$git_branch$git_status$line_break$character";
+        right_format = "$python$lua$nodejs$golang$haskell$rust$ruby$nix_shell$docker_context$jobs$cmd_duration";
 
         add_newline = true;
         palette = "andromeda";
