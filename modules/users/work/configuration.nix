@@ -32,6 +32,11 @@ in
       ];
       home.username = "${username}";
 
+      home.packages = with pkgs; [
+        keepassxc
+        firefox
+      ];
+
       programs.git = {
         enable = true;
         settings.user = {

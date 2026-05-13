@@ -36,7 +36,6 @@
       ];
 
       home.packages = with pkgs; [
-        keepassxc
         segger-jlink
         wireshark
       ];
