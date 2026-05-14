@@ -26,6 +26,8 @@
     {
       imports = [ wlib.wrapperModules.neovim ];
       specs.general = with pkgs.vimPlugins; [
+        # utils
+        nvim-treesitter.withAllGrammars
       ];
       specs.lazy = {
         lazy = true;
