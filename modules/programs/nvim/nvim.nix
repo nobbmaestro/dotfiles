@@ -22,10 +22,24 @@
       ...
     }:
     let
+      nvim-andromeda = pkgs.vimUtils.buildVimPlugin {
+        name = "nvim-andromeda";
+        src = pkgs.fetchFromGitHub {
+          owner = "nobbmaestro";
+          repo = "nvim-andromeda";
+          rev = "363a0766713c1381b1b6b3a46d22ac6fd5664569";
+          hash = "sha256-O3h9+pAOG8G/nhbzDSWFX73JG8cuTmeIfwgvTYGUidM=";
+        };
+        doCheck = false;
+      };
     in
     {
       imports = [ wlib.wrapperModules.neovim ];
       specs.general = with pkgs.vimPlugins; [
+        # colorscheme
+        nvim-andromeda
+        colorbuddy-nvim
+
         # utils
         nvim-treesitter.withAllGrammars
       ];
