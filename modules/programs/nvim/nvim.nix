@@ -40,6 +40,17 @@
         nvim-andromeda
         colorbuddy-nvim
 
+        # navigation
+        telescope-nvim
+        telescope-fzf-native-nvim
+        telescope-ui-select-nvim
+        plenary-nvim
+        harpoon
+        neo-tree-nvim
+        vim-tmux-navigator
+        nvim-web-devicons
+        nui-nvim
+
         # utils
         nvim-treesitter.withAllGrammars
       ];
@@ -79,6 +90,9 @@
 
         # javascript
         prettier
+
+        # telescope
+        ripgrep
       ];
       settings.config_directory = ./src;
     };
