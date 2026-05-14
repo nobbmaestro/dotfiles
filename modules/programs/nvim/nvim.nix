@@ -1,12 +1,43 @@
 {
-  flake.modules.homeManager.nvim =
+  self,
+  inputs,
+  ...
+}:
+{
+  perSystem =
+    { pkgs, ... }:
     {
-      pkgs,
+      packages.neovim = inputs.wrapper-modules.lib.evalPackage [
+        self.modules.neovim.main
+        { inherit pkgs; }
+      ];
+    };
+
+  flake.modules.neovim.main =
+    {
       config,
+      wlib,
+      lib,
+      pkgs,
       ...
     }:
     let
-      nvimLangTools = with pkgs; [
+    in
+    {
+      imports = [ wlib.wrapperModules.neovim ];
+      specs.general = with pkgs.vimPlugins; [
+      ];
+      specs.lazy = {
+        lazy = true;
+        data = with pkgs.vimPlugins; [
+          # plugins which are not loaded until you vim.cmd.packadd them ...
+        ];
+      };
+      info = {
+        values = "for lua";
+        which = "will be placed in the generated info plugin for access";
+      };
+      extraPackages = with pkgs; [
         # bash
         bash-language-server
         shellcheck
@@ -33,48 +64,6 @@
         # javascript
         prettier
       ];
-
-      rsyncer = pkgs.writeShellApplication {
-        name = "rsyncer";
-        runtimeInputs = with pkgs; [
-          rsync
-          sshpass
-        ];
-        text = builtins.readFile ./bin/rsyncer;
-      };
-    in
-    {
-      home.packages = [
-        rsyncer
-      ];
-
-      programs.neovim = {
-        enable = true;
-
-        viAlias = true;
-        vimAlias = true;
-
-        extraPackages = nvimLangTools;
-        withPython3 = true;
-        withRuby = true;
-      };
-
-      programs.zsh.initContent = ''
-        function nvim() {
-          local socket="/tmp/nvim-server-$(tmux display-message -p '#S').sock"
-          if [[ ! -S "$socket" ]]; then
-            command nvim --listen "$socket" "$@"
-          else
-            command nvim "$@"
-          fi
-        }
-      '';
-
-      home.file = {
-        ".config/nvim" = {
-          source = ./src;
-          recursive = true;
-        }; # FIXME: LazyVim breaks due to read-only permissions
-      };
+      settings.config_directory = ./src;
     };
 }
