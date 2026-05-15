@@ -70,6 +70,9 @@
         rainbow-delimiters-nvim
 
         # utils
+        auto-session
+        vim-test
+        vimux
         nvim-treesitter.withAllGrammars
       ];
       specs.lazy = {
