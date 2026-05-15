@@ -1,9 +1,6 @@
-return {
-    { import = "plugins.colorschemes" },
-    { import = "plugins.git" },
-    -- { import = "plugins.lsp" },
-    { import = "plugins.navigation" },
-    { import = "plugins.ui" },
-    { import = "plugins.editing" },
-    { import = "plugins.utils" },
-}
+require("plugins.colorschemes")
+require("plugins.editing")
+require("plugins.git")
+require("plugins.navigation")
+require("plugins.ui")
+require("plugins.utils")
