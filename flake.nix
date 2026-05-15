@@ -21,6 +21,8 @@
       url = "github:zhaofengli/nix-homebrew";
     };
 
+    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+
     lazyhis = {
       url = "github:nobbmaestro/lazyhis";
       inputs.nixpkgs.follows = "nixpkgs";
