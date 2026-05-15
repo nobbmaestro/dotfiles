@@ -40,6 +40,9 @@
         nvim-andromeda
         colorbuddy-nvim
 
+        # git
+        gitsigns-nvim
+
         # navigation
         telescope-nvim
         telescope-fzf-native-nvim
