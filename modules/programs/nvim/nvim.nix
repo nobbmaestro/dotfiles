@@ -6,11 +6,42 @@
 {
   perSystem =
     { pkgs, ... }:
-    {
-      packages.neovim = inputs.wrapper-modules.lib.evalPackage [
+    let
+      nvim-base = inputs.wrapper-modules.lib.evalPackage [
         self.modules.neovim.main
         { inherit pkgs; }
       ];
+    in
+    let
+      mkWrapper =
+        name:
+        pkgs.writeShellApplication {
+          inherit name;
+          runtimeInputs = [ nvim-base ];
+          text = ''
+            if command -v tmux > /dev/null 2>&1; then
+              socket="/tmp/nvim-server-$(tmux display-message -p '#S').sock"
+            else
+              socket="/tmp/nvim-server-default.sock"
+            fi
+
+            if [[ ! -S "$socket" ]]; then
+              exec nvim --listen "$socket" "$@"
+            else
+              exec nvim "$@"
+            fi
+          '';
+        };
+    in
+    {
+      packages.neovim = pkgs.symlinkJoin {
+        name = "neovim-${pkgs.neovim-unwrapped.version}";
+        paths = [
+          (mkWrapper "neovim")
+          (mkWrapper "nvim")
+          (mkWrapper "vim")
+        ];
+      };
     };
 
   flake.modules.neovim.main =
@@ -84,16 +115,13 @@
         vimux
         nvim-treesitter.withAllGrammars
       ];
+
       specs.lazy = {
         lazy = true;
         data = with pkgs.vimPlugins; [
-          # plugins which are not loaded until you vim.cmd.packadd them ...
         ];
       };
-      info = {
-        values = "for lua";
-        which = "will be placed in the generated info plugin for access";
-      };
+
       extraPackages = with pkgs; [
         rsyncer
 
