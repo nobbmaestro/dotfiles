@@ -40,6 +40,16 @@
         nvim-andromeda
         colorbuddy-nvim
 
+        # editing
+        blink-cmp
+        comment-nvim
+        conform-nvim
+        friendly-snippets
+        lazydev-nvim
+        luasnip
+        undotree
+        vim-sleuth
+
         # git
         gitsigns-nvim
 
