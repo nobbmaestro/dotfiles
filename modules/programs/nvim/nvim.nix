@@ -64,6 +64,11 @@
         nvim-web-devicons
         nui-nvim
 
+        # ui
+        indent-blankline-nvim
+        lualine-nvim
+        rainbow-delimiters-nvim
+
         # utils
         nvim-treesitter.withAllGrammars
       ];
