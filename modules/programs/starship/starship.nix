@@ -91,6 +91,10 @@
           format = "[$symbol($profile )(\[$duration\] )]($style)";
         };
 
+        nix_shell = {
+          symbol = "❄ ";
+        };
+
         docker_context = {
           symbol = " ";
           style = "fg:#06969A";
