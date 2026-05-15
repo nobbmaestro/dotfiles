@@ -1,27 +1,15 @@
 {
   flake.modules.darwin.zsh =
-    {
-      pkgs,
-      ...
-    }:
+    { ... }:
     {
       programs.zsh = {
         enable = true;
         enableGlobalCompInit = false;
-        interactiveShellInit = ''
-          source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-          source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-          source ${pkgs.zsh-syntax-highlighting}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-        '';
       };
     };
 
   flake.modules.homeManager.zsh =
-    {
-      config,
-      pkgs,
-      ...
-    }:
+    { pkgs, config, ... }:
     {
       programs.zsh = {
         enable = true;
@@ -32,6 +20,24 @@
           rm = "rm -i";
           fman = "compgen -c | fzf --preview='man {}' | xargs man";
         };
+
+        plugins = [
+          {
+            name = "vi-mode";
+            src = pkgs.zsh-vi-mode;
+            file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+          }
+          {
+            name = "syntax-highlighting";
+            src = pkgs.zsh-syntax-highlighting;
+            file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh";
+          }
+          {
+            name = "autosuggestions";
+            src = pkgs.zsh-autosuggestions;
+            file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+          }
+        ];
 
         initContent = ''
           export EDITOR=nvim
