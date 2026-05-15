@@ -22,6 +22,15 @@
       ...
     }:
     let
+      rsyncer = pkgs.writeShellApplication {
+        name = "rsyncer";
+        runtimeInputs = with pkgs; [
+          rsync
+          sshpass
+        ];
+        text = builtins.readFile ./bin/rsyncer;
+      };
+
       nvim-andromeda = pkgs.vimUtils.buildVimPlugin {
         name = "nvim-andromeda";
         src = pkgs.fetchFromGitHub {
@@ -86,6 +95,8 @@
         which = "will be placed in the generated info plugin for access";
       };
       extraPackages = with pkgs; [
+        rsyncer
+
         # bash
         bash-language-server
         shellcheck
