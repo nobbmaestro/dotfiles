@@ -22,6 +22,7 @@
     };
 
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     lazyhis = {
       url = "github:nobbmaestro/lazyhis";
