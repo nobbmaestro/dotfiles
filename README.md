@@ -1,10 +1,15 @@
-# Nobbmaestro's dotfiles
+<h2 align="center">:snowflake: Nobbmaestro's Nix Config :snowflake:</h2>
 
-[![macOS Build](https://github.com/nobbmaestro/dotfiles/actions/workflows/build.yml/badge.svg)](https://github.com/nobbmaestro/dotfiles/actions/workflows/build.yml)
+<p align="center">
+  <a href="https://github.com/nobbmaestro/dotfiles/actions/workflows/build.yml">
+    <img alt="macOS Build" src="https://img.shields.io/github/actions/workflow/status/nobbmaestro/dotfiles/build.yml?style=for-the-badge&logo=github&color=A6DA95&logoColor=D9E0EE&labelColor=302D41&label=macOS%20Build"></a>
+  <a href="https://github.com/nix-darwin/nix-darwin">
+    <img src="https://img.shields.io/badge/nix--darwin-macOS-informational.svg?style=for-the-badge&logo=apple&color=F2CDCD&logoColor=D9E0EE&labelColor=302D41"></a>
+  <a href="https://nixos.org/">
+    <img src="https://img.shields.io/badge/nixpkgs-unstable-informational.svg?style=for-the-badge&logo=nixos&color=C9CBFF&logoColor=D9E0EE&labelColor=302D41"></a>
+</p>
 
-My macOS development environment, now fully managed with [nix-darwin](https://github.com/nix-darwin/nix-darwin).
-
-This repository defines a **reproducible, declarative macOS system configuration** using Nix flakes, organised with the [dendritic pattern](https://dendrix.oeiuwq.com/Dendritic.html) on top of [flake-parts](https://flake.parts/) and [import-tree](https://github.com/vic/import-tree).
+A fully declarative macOS development environment built on Nix flakes and [nix-darwin](https://github.com/nix-darwin/nix-darwin). Organised with the [dendritic pattern](https://dendrix.oeiuwq.com/Dendritic.html) on top of [flake-parts](https://flake.parts/) and [import-tree](https://github.com/vic/import-tree) — drop a `.nix` file in the right place and it's picked up automatically.
 
 ## What's included
 
