@@ -46,9 +46,7 @@
 
   flake.modules.neovim.main =
     {
-      config,
       wlib,
-      lib,
       pkgs,
       ...
     }:
@@ -82,7 +80,6 @@
 
         # editing
         blink-cmp
-        comment-nvim
         conform-nvim
         friendly-snippets
         lazydev-nvim

@@ -1,5 +1,4 @@
 require("plugins.editing.blink")
-require("plugins.editing.comment")
 require("plugins.editing.conform")
 require("plugins.editing.lazydev")
 require("plugins.editing.undotree")
