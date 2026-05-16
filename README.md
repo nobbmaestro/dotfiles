@@ -92,6 +92,14 @@ make switch HNAME=<hostname>
 
 The hostname must match a host defined under `modules/hosts/`.
 
+### 3. Install git hooks
+
+Run once after cloning to install the pre-commit formatter hook:
+
+```sh
+nix run .#install-hooks
+```
+
 ### Other useful targets
 
 ```sh

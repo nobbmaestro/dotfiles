@@ -23,6 +23,7 @@
 
     wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
     treefmt-nix.url = "github:numtide/treefmt-nix";
+    git-hooks-nix.url = "github:cachix/git-hooks.nix";
 
     lazyhis = {
       url = "github:nobbmaestro/lazyhis";
