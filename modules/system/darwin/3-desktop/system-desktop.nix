@@ -32,15 +32,12 @@
         system-tools
 
         aerospace
+        kitty
       ];
 
-      home.packages =
-        (with inputs.self.packages.${pkgs.system}; [
-          kitty
-        ])
-        ++ (with pkgs; [
-          segger-jlink
-          wireshark
-        ]);
+      home.packages = with pkgs; [
+        segger-jlink
+        wireshark
+      ];
     };
 }
