@@ -15,6 +15,16 @@ in
         imports = [ inputs.self.modules.homeManager."${username}" ];
       };
 
+      nix.settings.allowed-impure-host-deps = [
+        "/System/Library"
+        "/bin/sh"
+        "/dev"
+        "/usr/bin/codesign"
+        "/usr/bin/hdiutil"
+        "/usr/lib"
+        "/usr/sbin/bless"
+      ]; # This is system-wide nix config, but it is work user that needs it...
+
       users.users."${username}" = {
         name = "${username}";
         shell = pkgs.zsh;
