@@ -8,6 +8,10 @@
         key = "~/.ssh/id_ed25519.pub";
       };
 
+      settings = {
+        pull.rebase = true;
+      };
+
       ignores = [
         ".DS_Store"
         ".cache/"
