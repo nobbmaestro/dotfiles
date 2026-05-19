@@ -49,9 +49,16 @@ in
 
       programs.git = {
         enable = true;
-        settings.user = {
-          name = "Norbert Batiuk";
-          email = "norbert.batiuk@stagesmarts.com";
+
+        settings = {
+          user = {
+            name = "Norbert Batiuk";
+            email = "norbert.batiuk@stagesmarts.com";
+          };
+
+          "http \"https://git.intelitech.lv/\"" = {
+            sslVerify = false;
+          };
         };
       };
     };
