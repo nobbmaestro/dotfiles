@@ -46,7 +46,6 @@
           picocom
           python3
           speedtest-cli
-          wireshark
 
           # shell
           starship

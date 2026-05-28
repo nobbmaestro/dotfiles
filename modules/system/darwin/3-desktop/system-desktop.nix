@@ -22,6 +22,7 @@
       "stremio"
       "the-unarchiver"
       "whatsapp"
+      "wireshark"
     ];
   };
 
@@ -37,7 +38,6 @@
 
       home.packages = with pkgs; [
         segger-jlink
-        wireshark
       ];
     };
 }
