@@ -16,7 +16,7 @@ require("conform").setup({
         go = { "goimports", "golines", "gofmt" },
         lua = { "stylua" },
         nix = { "nixfmt" },
-        python = { "ruff_format" },
+        python = { "ruff_organize_imports", "ruff_format" },
 
         markdown = { "prettier" },
         javascript = { "prettier" },
