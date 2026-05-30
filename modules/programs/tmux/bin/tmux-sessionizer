@@ -1,5 +1,12 @@
-POINTER_ICON=" "
-PROMPT_ICON="  "
+#!/usr/bin/env bash
+#
+# Tmux Sessionizer
+#
+# This script will deploy fuzzy-find on selected root directory and search for repositories.
+# On selected repository, the script will open the target repo as a new session in tmux.
+
+POINTER_ICON=" "
+PROMPT_ICON="  "
 SEARCH_PATH="$HOME/repos"
 
 if [[ $# -eq 1 ]]; then
@@ -7,7 +14,7 @@ if [[ $# -eq 1 ]]; then
 else
     selected=$(
         find "$SEARCH_PATH" -mindepth 1 -maxdepth 1 -type d |
-            sed "s;$SEARCH_PATH/;;" |
+            sed "s;$SEARCH_PATH/;;" | # removes the ~/repos/ prefix
             sort |
             fzf --no-sort --cycle --track --exact --pointer="$POINTER_ICON" --prompt="$PROMPT_ICON"
     )
@@ -18,9 +25,9 @@ if [[ -z $selected ]]; then
 fi
 
 selected_path="$SEARCH_PATH/$selected"
-tmux_running=$(pgrep tmux || true)
+tmux_running=$(pgrep tmux)
 
-if [[ -z "${TMUX:-}" ]] && [[ -z "$tmux_running" ]]; then
+if [[ -z "$TMUX" ]] && [[ -z "$tmux_running" ]]; then
     tmux new-session -s "$selected" -c "$selected_path"
     exit 0
 fi
