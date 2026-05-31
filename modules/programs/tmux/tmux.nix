@@ -1,15 +1,16 @@
 {
+  inputs,
+  ...
+}:
+{
   flake.modules.homeManager.tmux =
-    { pkgs, config, ... }:
+    {
+      pkgs,
+      config,
+      ...
+    }:
     let
-      tmux-sessionizer = pkgs.writeShellApplication {
-        name = "tmux-sessionizer";
-        runtimeInputs = with pkgs; [
-          fzf
-          tmux
-        ];
-        text = builtins.readFile ./bin/tmux-sessionizer;
-      };
+      tmuxTether = inputs.tmux-tether.packages.${pkgs.system}.default;
 
       topen = pkgs.writeShellApplication {
         name = "topen";
@@ -22,7 +23,7 @@
     {
       home.packages = [
         pkgs.reattach-to-user-namespace
-        tmux-sessionizer
+        tmuxTether
         topen
       ];
 
@@ -84,7 +85,7 @@
           bind-key C-s send-prefix
 
           # Popup
-          bind-key -n C-f display-popup -w 85% -h 85% -E "tmux-sessionizer"
+          bind-key -n C-f display-popup -w 85% -h 85% -E "${tmuxTether}/bin/tt"
 
           # Splits
           bind h split-window -v -c "#{pane_current_path}"
