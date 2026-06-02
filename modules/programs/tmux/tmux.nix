@@ -29,8 +29,6 @@
       programs.tmux = {
         enable = true;
 
-        shell = "${pkgs.zsh}/bin/zsh"; # or "$SHELL" equivalent
-
         plugins = with pkgs.tmuxPlugins; [
           sensible
           yank
