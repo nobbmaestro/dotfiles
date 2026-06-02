@@ -85,7 +85,7 @@
           bind-key C-s send-prefix
 
           # Popup
-          bind-key -n C-f display-popup -w 85% -h 85% -E "${tmuxTether}/bin/tt"
+          bind-key -n C-f display-popup -T "#[fg=colour6,align=centre] Find Sessions" -w 50% -h 40% -E "${tmuxTether}/bin/tt"
 
           # Splits
           bind h split-window -v -c "#{pane_current_path}"
@@ -124,6 +124,9 @@
         ".config/tmux/themes" = {
           source = ./etc/themes;
           recursive = true;
+        };
+        ".config/tmux-tether" = {
+          source = ./etc/tmux-tether.yml;
         };
       };
     };

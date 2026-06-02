@@ -1,0 +1,19 @@
+git_command: ""
+session:
+    dirs:
+        - /Users/norbertbatiuk/repos
+    depth: 0
+    markers:
+        - .git
+    exclude: []
+
+switch:
+    markers:
+      - name: dev-nix-config
+        path: ~/repos/dev-nix-config/
+      - name: dev-lazyhis
+        path: ~/repos/dev-lazyhis/
+
+picker:
+    pointer: ' '
+    prompt: '  '
