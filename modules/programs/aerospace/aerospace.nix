@@ -201,7 +201,7 @@
               run = "move-node-to-workspace ${ws 3}";
             }
             {
-              "if".app-id = "org.mozilla.firefox";
+              "if".app-id = "org.mozilla.Firefox";
               run = "move-node-to-workspace ${ws 3}";
             }
             {
@@ -217,7 +217,7 @@
               run = "move-node-to-workspace ${ws 4}";
             }
             {
-              "if".app-id = "com.apple.${ws 5}";
+              "if".app-id = "com.apple.mail";
               run = "move-node-to-workspace ${ws 5}";
             }
             {
