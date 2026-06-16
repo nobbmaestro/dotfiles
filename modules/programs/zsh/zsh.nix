@@ -40,6 +40,8 @@
         ];
 
         initContent = ''
+          path=("$HOME/.local/bin" $path)
+          export PATH
           export EDITOR=nvim
           export VISUAL=nvim
           function benchmark_zsh() {
