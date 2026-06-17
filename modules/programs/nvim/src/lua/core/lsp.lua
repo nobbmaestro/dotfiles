@@ -6,6 +6,27 @@ vim.lsp.enable({
     "nil_ls",
     "pyright",
     "ts_ls",
+    "vue_ls",
+})
+
+vim.lsp.config("ts_ls", {
+    filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+    },
+    init_options = {
+        hostInfo = "neovim",
+        plugins = {
+            {
+                name = "@vue/typescript-plugin",
+                location = os.getenv("VUE_TYPESCRIPT_PLUGIN_PATH"),
+                languages = { "vue" },
+            },
+        },
+    },
 })
 
 -- Prevent LSP from overwriting treesitter color settings
