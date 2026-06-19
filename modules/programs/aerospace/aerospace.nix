@@ -19,8 +19,6 @@
       programs.aerospace = {
         enable = true;
 
-        launchd.enable = true;
-
         settings = {
           after-startup-command = [ "workspace ${ws 0}" ];
 
