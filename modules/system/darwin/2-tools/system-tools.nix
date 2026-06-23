@@ -34,6 +34,7 @@
           htop
           nix-direnv
           ripgrep
+          tio
           tldr
 
           # dev
