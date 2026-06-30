@@ -36,6 +36,7 @@
           ripgrep
           tio
           tldr
+          wget
 
           # dev
           arduino-cli
