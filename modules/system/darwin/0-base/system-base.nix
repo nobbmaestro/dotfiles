@@ -14,6 +14,9 @@
         homebrew
       ];
 
+      # Determinate Systems manages the Nix daemon; nix-darwin must not conflict
+      nix.enable = false;
+
       nixpkgs.config.allowUnfree = true;
 
       system.stateVersion = 6;
