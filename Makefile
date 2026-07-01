@@ -1,6 +1,6 @@
 HNAME := macbook-pro-m1
 
-.PHONY: all
+.PHONY: all install uninstall switch check update clean
 
 all: switch
 
@@ -21,10 +21,7 @@ switch:
 		sudo darwin-rebuild switch --flake .#$(HNAME); \
 	else \
 		echo "darwin-rebuild not found, bootstrapping..." && \
-		sudo nix run nix-darwin \
-			--extra-experimental-features "nix-command flakes" \
-			-- switch \
-			--flake .#$(HNAME); \
+		sudo nix run nix-darwin -- switch --flake .#$(HNAME); \
 	fi
 
 check:
