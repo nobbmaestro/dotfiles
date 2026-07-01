@@ -1,5 +1,5 @@
 {
-  description = "Nobbmaestro's macOS dotfiles";
+  description = "Nobbmaestro's Nix Config";
 
   inputs = {
     # packages
