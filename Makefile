@@ -1,19 +1,19 @@
 HNAME := macbook-pro-m1
 
-.PHONY: all
+.PHONY: all install uninstall switch check update clean
 
 all: switch
 
 install:
-	@echo "Installing Nix Package Manager..."
-	@curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install | sh
+	@echo "Installing Nix (Determinate Systems)..."
+	@curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
 uninstall:
-	@echo "Uninstalling Nix Package Manager..."
-	@sudo nix \
-		--extra-experimental-features "nix-command flakes" \
-		run \
-		nix-darwin#darwin-uninstaller
+	@echo "Step 1: Uninstall nix-darwin..."
+	@sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller
+	@echo "Step 2: Uninstall Nix (Determinate Systems)..."
+	@/nix/nix-installer uninstall
+
 
 switch:
 	@echo "Rebuild for host: $(HNAME)"
@@ -21,10 +21,7 @@ switch:
 		sudo darwin-rebuild switch --flake .#$(HNAME); \
 	else \
 		echo "darwin-rebuild not found, bootstrapping..." && \
-		sudo nix run nix-darwin \
-			--extra-experimental-features "nix-command flakes" \
-			-- switch \
-			--flake .#$(HNAME); \
+		sudo nix run nix-darwin -- switch --flake .#$(HNAME); \
 	fi
 
 check:
