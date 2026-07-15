@@ -17,6 +17,7 @@
       "logi-options+"
       "monitorcontrol"
       "obsidian"
+      "parallels"
       "saleae-logic"
       "spotify"
       "stremio"
