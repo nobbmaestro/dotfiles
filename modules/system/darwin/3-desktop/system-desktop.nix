@@ -14,6 +14,7 @@
       "aldente"
       "alfred"
       "dictionaries"
+      "figma"
       "logi-options+"
       "monitorcontrol"
       "obsidian"
